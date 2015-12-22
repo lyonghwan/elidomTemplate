@@ -7,7 +7,7 @@
  * # DatePickerCtrl
  */
 angular.module('ElidomTemplate')
-  .controller('DatePickerCtrl', function($scope,$filter) {
+  .controller('DatePickerCtrl', function($scope, $filter) {
 
     var disabledDates = [
       new Date(1437719836326),
@@ -16,8 +16,9 @@ angular.module('ElidomTemplate')
       new Date("08-14-2015"), //Short format
       new Date(1439676000000) //UNIX format
     ];
+
     var monthList = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
-    var today = new Date()
+    var today = new Date();
     $scope.inputDate =$filter('date')(today, 'yyyyMMdd');
 
     $scope.datepickerObjectModal = {
@@ -61,4 +62,5 @@ angular.module('ElidomTemplate')
         // console.log('Selected date showing : ',$scope.inputDate);
       }
     };
+    
   });

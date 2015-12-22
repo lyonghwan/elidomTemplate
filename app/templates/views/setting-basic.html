@@ -1,0 +1,30 @@
+<ion-view view-title="기본설정">
+
+    <ion-content ng-init="init()" ng-class="{expanded:isExpanded}" class="padding">
+        <div class="list">
+            <ion-toggle ng-model="autosignin" toggle-class="toggle-calm" ng-click="toggleAutosignin()">자동 로그인</ion-toggle>
+            <ion-toggle ng-model="allowPush" toggle-class="toggle-calm" ng-click="toggleReceivePush()">Push 허용</ion-toggle>
+        </div>
+    </ion-content>
+
+    <ion-footer-bar>
+        <div class="tabs tabs-dark tabs-icon-top static">
+            <a class="tab-item active" ui-sref="app.home" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-home"></i>홈
+            </a>
+            <a class="tab-item active" ui-sref="app.print" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-printer"></i>프린트
+            </a>
+            <a class="tab-item active" ui-sref="app.notice" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-email-unread"></i>공지사항
+            </a>
+            <a class="tab-item active" ui-sref="app.profile" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-android-people"></i>프로필
+            </a>
+            <a class="tab-item active" ui-sref="app.preference" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-gear-b"></i>설정
+            </a>
+        </div>
+    </ion-footer-bar>
+
+</ion-view>

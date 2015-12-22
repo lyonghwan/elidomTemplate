@@ -1,0 +1,55 @@
+<ion-view view-title="프로필">
+
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <div class="hero slide-up" style="background-image: url('images/profile-bg.jpg');">
+            <div class="content">
+                <div class="avatar" style="background-image: url('images/daenerys.jpg');"></div>
+                <h3><a class="light">Daenerys Targaryen</a></h3>
+                <h4>dragon_mommy</h4>
+            </div>
+        </div>
+
+        <h4 class="content padding double-padding-x">Following</h4>
+
+        <div class="list animate-fade-slide-in-right">
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img src="images/jon-snow.jpg">
+                <h2>Jon Snow</h2>
+                <p>Da illest illegitimate</p>
+                <i class="icon ion-chatbubble muted"></i>
+            </a>
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img src="images/sansa.jpg">
+                <h2>Sansa Stark</h2>
+                <p>&amp; Joffrey <strike>sitting</strike> sat in a tree</p>
+                <i class="icon ion-chatbubble muted"></i>
+            </a>
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img src="images/tyrion.jpg">
+                <h2>Tyrion Lannister</h2>
+                <p>B.A.M.F. imp</p>
+                <i class="icon ion-chatbubble muted"></i>
+            </a>
+        </div>
+    </ion-content>
+
+    <ion-footer-bar>
+        <div class="tabs tabs-dark tabs-icon-top static">
+            <a class="tab-item active" ui-sref="app.home" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-home"></i>홈
+            </a>
+            <a class="tab-item active" ui-sref="app.print" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-printer"></i>프린트
+            </a>
+            <a class="tab-item active" ui-sref="app.notice" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-email-unread"></i>공지사항
+            </a>
+            <a class="tab-item active" ui-sref="app.profile" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-android-people"></i>프로필
+            </a>
+            <a class="tab-item active" ui-sref="app.preference" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-gear-b"></i>설정
+            </a>
+        </div>
+    </ion-footer-bar>    
+</ion-view>

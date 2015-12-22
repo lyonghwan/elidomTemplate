@@ -8,116 +8,120 @@
  *
  * Main module of the application.
  */
+angular.module('ElidomTemplate', ['ionic', 'ngCordova', 'ngResource', 'LocalStorageModule', 'ionic-datepicker', 'ionic-material', 'ionMdInput', 'chart.js'])
 
+    .run(function($ionicPlatform, $rootScope, $location, $ionicHistory, $state, API_ENDPOINT) {
 
-angular.module('ElidomTemplate', ['ionic', 'ngCordova', 'ngResource','ionic-datepicker'])
+        $ionicPlatform.ready(function() {
+            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
+            if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+                API_ENDPOINT.isApp = true;
+                API_ENDPOINT.mode = 'PRODUCTION';
+                API_ENDPOINT.host = 'http://elidom.hatio.com';
+                API_ENDPOINT.port = $location.$$port;
+                API_ENDPOINT.path = '';
+                API_ENDPOINT.pageLimit = 10;
+                $rootScope.serverUrl = 'http://m.elidom.hatio.com';
+                
+            } else {
+                $rootScope.serverUrl = 'http://' + $location.host() + ':' + $location.$$port;
+            }
 
-  .run(function($ionicPlatform,$rootScope) {
+            if (window.StatusBar) {
+                // org.apache.cordova.statusbar required
+                StatusBar.styleDefault();
+            }
 
-    $ionicPlatform.ready(function() {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
-      if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      }
-      // if (window.StatusBar) {
-      //   // org.apache.cordova.statusbar required
-      //   StatusBar.styleLightContent();
-      // }
-      // save to use plugins here
-      var platform = ionic.Platform.platform();
-      console.log(platform);
+            var platform = ionic.Platform.platform();
+            if(platform == "android" || platform == "ios") {
+                $rootScope.isDivicePlatform = true;
+            }
+        });
 
-      if(platform=="android"){
-        $rootScope.isDivicePlatform = true;
-      }
+        /**
+         * hardware backbutton bnding
+         */
+        $ionicPlatform.registerBackButtonAction(function() {
+            if ($state.current.name == "app.signin" || $state.current.name == "app.home") {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: '앱 종료 안내',
+                    template: '앱을 종료하시겠습니까?'
+                });
+
+                confirmPopup.then(function(res) {
+                    if (res) {
+                        if (navigator.app) {
+                            navigator.app.exitApp();
+                        } else if (navigator.device) {
+                            navigator.device.exitApp();
+                        }
+                    } else {
+                        event.preventDefault();
+                    }
+                });
+            } else {
+                $rootScope.goBack();
+            }
+        }, 100);
+
+        /**
+         * 이전 화면으로 이동
+         */
+        $rootScope.goBack = function() {
+            var backView = $ionicHistory.backView();
+            if ($state.current.name != "app.signin" && $state.current.name != "app.home") {
+                if (backView) {
+                    $ionicHistory.goBack();
+                } else {
+                    $rootScope.goHome();
+                }
+            }
+        };
+
+        /**
+         * 홈 화면으로 이동
+         */
+        $rootScope.goHome = function() {
+            $ionicHistory.nextViewOptions({
+                disableBack: true,
+                historyRoot: true
+            });
+
+            $ionicHistory.clearCache();
+            $ionicHistory.clearHistory();
+            $state.go('app.home', {}, { reload: true });
+        };
+
+        /**
+         * 로그인 화면으로 이동
+         */
+        $rootScope.goSignin = function(message) {
+            $ionicHistory.nextViewOptions({
+                disableBack: true,
+                historyRoot: true
+            });
+
+            $ionicHistory.clearCache();
+            $ionicHistory.clearHistory();
+            $state.go('app.signin', { message : message }, { reload : true });
+        };
+
+        /**
+         * 필요한 화면으로 이동
+         */
+        $rootScope.goMenu = function(menuState, params) {
+            $state.go(menuState, { params: params }, { reload: true }, { notify: true });
+        };
+
+        /*if ($location.host() != '127.0.0.1') {
+            API_ENDPOINT.isApp = false;
+            API_ENDPOINT.needsAuth = false;
+            API_ENDPOINT.mode = 'DEV';
+            API_ENDPOINT.host = 'http://' + $location.host();
+            API_ENDPOINT.port = $location.$$port;
+            API_ENDPOINT.path = '';
+            API_ENDPOINT.pageLimit = 10;
+        }*/
+
     });
-
-    // add possible global event handlers here
-
-  })
-
-  .config(function($httpProvider, $stateProvider, $urlRouterProvider) {
-    // register $http interceptors, if any. e.g.
-    // $httpProvider.interceptors.push('interceptor-name');
-
-    // Application routing
-    $stateProvider
-      .state('app', {
-        url: '/app',
-        abstract: true,
-        templateUrl: 'templates/main.html',
-        controller: 'MainController'
-      })
-      .state('app.home', {
-        url: '/home',
-        cache: true,
-        views: {
-          'viewContent': {
-            templateUrl: 'templates/views/home.html',
-            controller: 'HomeController'
-          }
-        }
-      })
-      .state('app.settings', {
-        url: '/settings',
-        cache: true,
-        views: {
-          'viewContent': {
-            templateUrl: 'templates/views/settings.html',
-            controller: 'SettingsController'
-          }
-        }
-      })
-
- // setup an abstract state for the tabs directive
-  //   .state('tab', {
-  //   url: '/tab',
-  //   abstract: true,
-  //   templateUrl: 'templates/tabs.html'
-  // })
-
-  // Each tab has its own nav history stack:
-
-  .state('tab.dash', {
-    url: '/dash',
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/views/tab-dash.html',
-        controller: 'DashCtrl'
-      }
-    }
-  })
-
- //  .state('tab.chats', {
- //      url: '/chats',
- //      views: {
- //        'tab-chats': {
- //          templateUrl: 'templates/tab-chats.html',
- //          controller: 'ChatsCtrl'
- //        }
- //      }
- //    })
- //    .state('tab.chat-detail', {
- //      url: '/chats/:chatId',
- //      views: {
- //        'tab-chats': {
- //          templateUrl: 'templates/chat-detail.html',
- //          controller: 'ChatDetailCtrl'
- //        }
- //      }
- //    })
-
- //  .state('tab.account', {
- //    url: '/account',
- //    views: {
- //      'tab-account': {
- //        templateUrl: 'templates/tab-account.html',
- //        controller: 'AccountCtrl'
- //      }
- //    }
- //  });
-    // redirects to default route for undefined routes
-    $urlRouterProvider.otherwise('/app/home');
-  });
-
-

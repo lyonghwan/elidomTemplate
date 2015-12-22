@@ -6,68 +6,126 @@
  * @description
  * # ApiService
  * Retrieves correct api to make requests against.
- * Uses settings from API_ENDPOINT defined in /config/apiEndpoint.js
- *
- * Usage example: $http({
- *                      url: ApiService.me.getEndpoint() + '/things',
- *                      method: 'GET'
- *                 })
- *
+ * Uses settings from API_ENDPOINT defined in /config/Config.js
  */
 angular.module('ElidomTemplate')
-  .factory('ApiService', function($window, $http, $ionicPopup, $resource, API_ENDPOINT) {
-
-    var _api = API_ENDPOINT;
-    var endpoint = _api.port ? (_api.host + ':' + _api.port + _api.path) : (_api.host + _api.path);
+  .factory('ApiService', function($rootScope, $http, $ionicPopup, $resource, $cordovaKeyboard, API_ENDPOINT, localStorageService, ElidomUtils) {
 
     // activate for basic auth
-    if (_api.needsAuth) {
-      $http.defaults.headers.common.Authorization = 'Basic ' + $window.btoa(_api.username + ':' + _api.password);
+    if (API_ENDPOINT.needsAuth) {
+      $http.defaults.headers.common.Authorization = 'Basic ' + ElidomUtils.encodeBase64(API_ENDPOINT.username + ':' + API_ENDPOINT.password);
     }
 
     // public api
     return {
-      getEndpoint: function() { return endpoint; },
+      /**
+       * endpoint
+       */
+      getEndpoint: function() { 
+        return API_ENDPOINT.port ? (API_ENDPOINT.host + ':' + API_ENDPOINT.port + API_ENDPOINT.path) : (API_ENDPOINT.host + API_ENDPOINT.path); 
+      },
 
-      isSignedIn : function(callback) {
-        var me = this;
+      /**
+       * return full url
+       */
+      getFullUrl : function(url) { 
+        return this.getEndpoint() + url;
+      },
 
-        if(typeof login === 'undefined') {
-          callback({status : 401});
+      /**
+       * signin으로 이동 
+       */
+      goToSignin : function(msg) {
+        var message = msg ? msg : '세션이 유효하지 않습니다. 로그인 후 이용하세요.';
+        $rootScope.goSignin(message);
+      },
 
-        } else {
-          var rsc = $resource(me.getEndpoint()+'/users/' + login.id + '.json', {});
+      /**
+       * 조회 성공시 처리 
+       */
+      handleSuccess : function(dataSet, callback) {
+        $rootScope.$broadcast('search.complete');
 
-          rsc.get(null,
-            // good
-            function(data, response) {
-              callback(data, response);
-            // bad
-            }, function(response) {
-              callback(null, response);
-            });
+        if(callback) {
+          callback(dataSet);
         }
       },
 
+      /**
+       * 조회 실패시 처리 
+       */
+      handleFailure : function(dataSet, callback) {
+        $rootScope.$broadcast('search.complete');
+
+        if(dataSet && dataSet.status && dataSet.status == 401) {
+          this.goToSignin(dataSet.msg);
+        } else {
+          if(callback) {
+            callback(dataSet);
+          } else {
+            var msg = (dataSet && dataSet.msg && dataSet.msg.length < 50) ? dataSet.msg : '서버이상이 발생되었습니다.<br/>관리자에게 문의하세요.';
+            this.showErrorMessage(msg);
+          }
+        }
+      },
+
+      /**
+       * 서버 에러 발생시 에러 처리 
+       */
       handleError : function(response) {
+        $rootScope.$broadcast('search.complete');
+
         if(response && response.status && response.status == 401) {
-          this.goToSingin();
+          this.goToSignin();
         } else {
-          this.showErrorMessage(response);
+          var msg = (!response.status || response.status === 0 || response.status == 404) ? '서버 접속에 실패했습니다.<br/>관리자에게 문의하세요.' : ('Status : ' + response.status + ', ' + response.statusText);
+          this.showErrorMessage(msg);
         }
       },
 
-      showErrorMessage : function(response) {
-        if(status == 0) {
-          $ionicPopup.alert({
-              title: 'Error', 
-              template: "서버이상이 발생되었습니다. 서버상태를 확인 해주세요." });
+      /**
+       * show error message
+       */
+      showErrorMessage : function(msg) {
+        $ionicPopup.alert({ title : '오류', template : msg });
+      },
+
+      /**
+       * 공통 파라미터를 추가한다. 
+       */
+      addCommonParams : function(params) {
+        //모든 API 진행 전 Keyboard를 닫아 준다
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+          $cordovaKeyboard.close();
+        }
+
+        return params;
+      },
+
+      /**
+       * Headers For Get
+       */
+      getHeaders : function() {
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+          var userId = this.getEncodedUserId();
+          var checkAuto = localStorageService.get("autosignin") ? localStorageService.get("autosignin") : false;
+          return {'Accept' : 'application/json; charset=UTF-8', 'X-Check-Auto' : checkAuto, 'X-Auth' : userId };
         } else {
-          $ionicPopup.alert({
-              title: 'Error', 
-              template: 'Status : ' + response.status + ', ' + response.statusText });
+          return {'Accept' : 'application/json; charset=UTF-8' };
         }
       },
+
+      /**
+       * encoding된 userId를 리턴 
+       */
+      getEncodedUserId : function() {
+        var userId = localStorageService.get("user_id");
+        if(userId) {
+          return ElidomUtils.encodeBase64(userId);
+        } else {
+          return '';
+        }
+      },      
 
       /**
        * search list for pagination
@@ -75,8 +133,9 @@ angular.module('ElidomTemplate')
        * @url
        * @params
        * @callback
+       * @badcallback
        */
-      search : function(url, params, callback) {
+      search : function(url, params, callback, badcallback) {
          var me = this;
 
         if(params) {
@@ -85,19 +144,25 @@ angular.module('ElidomTemplate')
           params.limit = params.limit ? params.limit : 20;
         }
 
-        var rsc = $resource(me.getEndpoint()+url, params);
+        params = me.addCommonParams(params);
+        var rsc = $resource(me.getFullUrl(url), params, {get : {method : 'GET', headers : me.getHeaders()}});
 
         rsc.get(
-          // good
           function(dataSet, response) {
-            dataSet.start = params.start;
-            dataSet.limit = params.limit;
-            dataSet.page = Math.ceil(dataSet.start / dataSet.limit) + 1;
-            dataSet.total_page = (dataSet.total > params.limit) ? Math.ceil(dataSet.total / params.limit) : 1;
-            callback(dataSet);
-
-          // bad
-          }, function(response) {
+            // 1. good
+            if(dataSet.success) {
+              dataSet.start = params.start;
+              dataSet.limit = params.limit;
+              dataSet.page = Math.ceil(dataSet.start / dataSet.limit) + 1;
+              dataSet.totalPage = (dataSet.total > params.limit) ? Math.ceil(dataSet.total / params.limit) : 1;
+              me.handleSuccess(dataSet, callback);
+            // 2. bad
+            } else {
+              me.handleFailure(dataSet, badcallback);
+            }
+          // 3. error
+          }, 
+          function(response) {
             me.handleError(response);
           });
       },
@@ -108,179 +173,92 @@ angular.module('ElidomTemplate')
        * @url
        * @params
        * @callback
+       * @badcallback
        */
-      list : function(url, params, callback) {
+      list : function(url, params, callback, badcallback) {
         var me = this;
-        var rsc = $resource(me.getEndpoint()+url, params);
-
+        params = this.addCommonParams(params);
+        var rsc = $resource(me.getFullUrl(url), params, {get : {method : 'GET', headers : me.getHeaders()}});
 
         rsc.get(
-          // good
           function(dataSet, response) {
-            callback(dataSet.items);
-
-          // bad
-          }, function(response) {
+            // 1. good
+            if(dataSet.success) {
+              me.handleSuccess(dataSet, callback);
+            // 2. bad
+            } else {
+              me.handleFailure(dataSet, badcallback);
+            }
+          // 3. error
+          }, 
+          function(response) {
             me.handleError(response);
           });
       },
-      
+
       /**
        * find only one
        *
        * @url
        * @params
        * @callback
+       * @badcallback
        */
       get : function(url, params, callback, badcallback) {
         var me = this;
-        var rsc = $resource(me.getEndpoint()+url, params);
+        params = me.addCommonParams(params);
+        var rsc = $resource(me.getFullUrl(url), params, {get : {method : 'GET', headers : me.getHeaders()}});
 
         rsc.get(
-          // good
-          function(data, response) {
-            callback(data);
-
-          // bad
-          }, function(response) {
-            if(badcallback){
-              badcallback(response);
-            }else{
-              me.handleError(response);
+          function(dataSet, response) {
+            // 1. good
+            if(dataSet.success) {
+              me.handleSuccess(dataSet, callback);
+            // 2. bad
+            } else {
+              me.handleFailure(dataSet, badcallback);
             }
-          });
-      },
-
-      checkUnique : function(url, params, callback, existscallback, badcallback){
-        var me = this;
-
-        me.get(me.getEndpoint()+url, params,
-          function(data,response) {
-            existscallback(data);
+          // 3. error
           }, 
           function(response) {
-            if(response.status==404){
-              callback(response);
-            }else{
-              badcallback(response);
-            }
-          });
-      },
-
-      /**
-       * find only one by name
-       *
-       * @url
-       * @params
-       * @callback
-       */
-      getByName : function(url, params, callback) {
-        var me = this;
-        var rsc = $resource(me.getEndpoint()+url, params);
-
-        rsc.get(
-          // good
-          function(data, response) {
-            callback(data);
-
-          // bad
-          }, function(response) {
             me.handleError(response);
           });
       },
 
       /**
-       * create resource
-       * 
-       * @param  {string}
-       * @param  {object}
-       * @param  {object}
-       * @return N/A
+       * post 요청 
+       *
+       * @url
+       * @params
+       * @callback
+       * @badcallback
        */
-      create : function(url, params, entity) {
+      post : function(url, params, callback, badcallback) {
         var me = this;
-        var rsc = $resource(me.getEndpoint()+url, params, {
-          create: {
-            method: 'POST',
-            headers: { "Content-Type": "application/json;charset=UTF-8" },
-            transformRequest: function(data, headers) {
-              headers = angular.extend({}, headers, {'Accept' : '*/*', 'Content-Type': 'application/json;charset=UTF-8'});
-              return angular.toJson(entity);
+        var fullUrl = me.getFullUrl(url);
+        $http.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8';
+        //var checkAuto = localStorageService.get("autosignin");
+        //$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+        //$http.defaults.headers.post['X-Check-Auto'] = checkAuto;
+        //$http.defaults.headers.post['X-Auth'] = this.getEncodedUserId();
+
+        $http.post(fullUrl, params)
+          .success(function (dataSet, status) {
+            // 1. good
+            if(dataSet.success) {
+              me.handleSuccess(dataSet, callback);
+            // 2. bad
+            } else {
+              me.handleFailure(dataSet, badcallback);
             }
+          })
+          .error(function (data, status) {
+            me.handleError({data : data, status : status });
           }
-        });
-
-        return rsc.create();
-      },
-
-      /**
-       * update resource
-       * 
-       * @param  {string}
-       * @param  {object}
-       * @param  {object}
-       * @return N/A
-       */
-      update : function(url, params, entity) {
-        var me = this;
-        var rsc = $resource(me.getEndpoint()+url, params, {
-          update: {
-            method: 'PUT',
-            headers: {"Content-Type": "application/json;charset=UTF-8" },
-            transformRequest: function(data, headers) {
-              headers = angular.extend({}, headers, {'Accept' : '*/*', 'Content-Type': 'application/json;charset=UTF-8'});
-              return angular.toJson(entity);
-            }
-          }
-        });
-
-        return rsc.update();
-      },
-
-      /**
-       * update multiple resource
-       * 
-       * @param  {string}
-       * @param  {object}
-       * @param  {object}
-       * @return N/A
-       */
-      updateMultiple : function(url, params, entityList) {
-        var me = this;
-        var rsc = $resource(me.getEndpoint()+url, params, {
-          updateMultiple: {
-            method: 'POST',
-            headers: { "Accept" : "*/*", "Content-Type": "application/json;charset=UTF-8" },
-            transformRequest: function(data, headers) {
-              headers = angular.extend({}, headers, {'Accept' : '*/*', 'Content-Type': 'application/json;charset=UTF-8'});
-              return angular.toJson({ multiple_data : entityList });
-            }
-          }
-        });
-
-        return rsc.updateMultiple();
-      },
-
-      /**
-       * delete resource
-       * 
-       * @param  {string}
-       * @param  {object}
-       * @return N/A
-       */
-      delete : function(url, params) {
-        var me = this;
-        var rsc = $resource(me.getEndpoint()+url, {}, {
-          delete: {
-            method: 'DELETE',
-            headers: { "Accept" : "*/*", "Content-Type": "application/json;charset=UTF-8" }
-          }
-        });
-
-        return rsc.delete();
+        );
       }
 
+      // ------------------------------------------------------------------------------------------------
     };
 
   });
-

@@ -1,0 +1,62 @@
+<ion-view view-title="공지사항">
+
+    <ion-content ng-init="init()" class="scroll-content ionic-scroll">
+        <div class="item item-input-inset search-line">
+            <label class="item-input-wrapper">
+                <input type="text" placeholder="제목 입력" ng-enter="search()" ng-model="search.key" />
+            </label>
+            <button class="button button-small button-calm" ng-click="search()">조회</button>         
+        </div>
+
+        <div class="loader" ng-if="searching">
+            <ion-spinner></ion-spinner>
+        </div>
+
+        <div class="search-result inset-shadow" ng-if="!searching && totalCount >= 0">검색 결과 : <strong>총 {{totalCount | number}} 건</strong></div>
+
+        <ion-list>
+            <div ng-repeat="item in items" class="news-list">
+                <ion-item class="item-stable" ng-click="toggleItem(item)" ng-class="{active: item.active}">
+                <span class="news-subject">{{item.subject}}</span>
+                <span class="news-date">게시일자 : {{item.reg_dt}}</span>
+            </ion-item>
+
+            <div class="loader" ng-if="item.searching">
+                <ion-spinner></ion-spinner>
+            </div>
+
+            <ion-item class="item-accordion inset-shadow bg-lightgray" ng-show="item.active">
+                <div ng-bind-html="itemDetail" class="width-85p padding-rl10 align-jusity"></div>
+            </ion-item>
+            </div>
+
+            <!--ion-item ng-if="!searching && items.length == 0">
+                <no-data-view></no-data-view>
+            </ion-item-->
+        </ion-list>
+
+        <ion-infinite-scroll ng-if="hasMoreItems" on-infinite="loadMore()" distance="20%"/>
+
+    </ion-content>
+
+    <ion-footer-bar>
+        <div class="tabs tabs-dark tabs-icon-top static">
+            <a class="tab-item active" ui-sref="app.home" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-home"></i>홈
+            </a>
+            <a class="tab-item active" ui-sref="app.print" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-printer"></i>프린트
+            </a>
+            <a class="tab-item active" ui-sref="app.notice" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-email-unread"></i>공지사항
+            </a>
+            <a class="tab-item active" ui-sref="app.profile" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-android-people"></i>프로필
+            </a>
+            <a class="tab-item active" ui-sref="app.preference" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-gear-b"></i>설정
+            </a>
+        </div>
+    </ion-footer-bar>
+
+</ion-view>

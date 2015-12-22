@@ -14,7 +14,7 @@ angular.module('ElidomTemplate')
 
     var doAsync = function() {
       var deferred = $q.defer();
-      var a ="error"
+      var a ="error";
       deferred.resolve(a);
       console.log(a);
       return deferred.promise;
@@ -55,7 +55,7 @@ angular.module('ElidomTemplate')
                          console.log('headers : ' + headers);
                          console.log('config : ' + config);
                          console.log('data: ' + data);
-                         console.log('status:' + status)
+                         console.log('status:' + status);
                        });
 
       return response;

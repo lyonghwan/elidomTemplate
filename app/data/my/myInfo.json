@@ -1,0 +1,14 @@
+{
+    "status": 200,
+    "msg": "",
+    "success": true,    
+    "item": {
+        "id": "admin",        
+        "part": "IT",
+        "mail": "abc@def.com",
+        "grade": "A",
+        "tel": "010-1111-2222",
+        "title": "차장",
+        "name": "관리자"
+    }
+}
