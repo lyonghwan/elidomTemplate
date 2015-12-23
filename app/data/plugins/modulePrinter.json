@@ -1,0 +1,13 @@
+{
+    "success" : true,
+    "name" : "Elidom.Printer",
+    "module" : true,
+    "files" : [
+        "plugins/printer/PrinterPlugin.js",
+        "plugins/printer/config/PrinterConfig.js",
+        "plugins/printer/controllers/PrinterCtrl.js",
+        "plugins/printer/controllers/SettingPrinterCtrl.js",
+        "plugins/printer/templates/views/printer.html",
+        "plugins/printer/templates/views/setting-printer.html"
+    ]
+}

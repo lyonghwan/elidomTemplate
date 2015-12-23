@@ -1,0 +1,11 @@
+{
+    "success" : true,
+    "name" : "Elidom.File",
+    "module" : true,
+    "files" : [
+        "plugins/file/FilePlugin.js",
+        "plugins/file/config/FileConfig.js",
+        "plugins/file/controllers/SettingFileCtrl.js",
+        "plugins/file/templates/views/setting-file.html"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+	"success" : true,
+	"list" : [
+		"/data/plugins/modulePrinter.json",
+		"/data/plugins/moduleFile.json",
+		"/data/plugins/moduleSocket.json"
+	]
+}    

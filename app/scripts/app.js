@@ -1,5 +1,11 @@
 'use strict';
 
+// 1. Core Module
+angular.module('Elidom.Core', ['ionic', 'ngCordova', 'ngResource', 'oc.lazyLoad', 'LocalStorageModule', 'ionic-datepicker', 'ionic-material', 'ionMdInput', 'chart.js'])
+
+// 2. Base Module
+angular.module('Elidom.Base', ['Elidom.Core']);
+
 /**
  * @ngdoc overview
  * @name ElidomTemplate
@@ -8,24 +14,16 @@
  *
  * Main module of the application.
  */
-angular.module('ElidomTemplate', ['ionic', 'ngCordova', 'ngResource', 'LocalStorageModule', 'ionic-datepicker', 'ionic-material', 'ionMdInput', 'chart.js'])
+angular.module('ElidomTemplate', ['Elidom.Core', 'Elidom.Base'])
 
-    .run(function($ionicPlatform, $rootScope, $location, $ionicHistory, $state, API_ENDPOINT) {
+    .run(function($ionicPlatform, $rootScope, $location, $ionicHistory, $state, SettingService, DynamicLoadService, API_ENDPOINT) {
 
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
             if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 API_ENDPOINT.isApp = true;
-                API_ENDPOINT.mode = 'PRODUCTION';
-                API_ENDPOINT.host = 'http://elidom.hatio.com';
-                API_ENDPOINT.port = $location.$$port;
-                API_ENDPOINT.path = '';
-                API_ENDPOINT.pageLimit = 10;
-                $rootScope.serverUrl = 'http://m.elidom.hatio.com';
-                
-            } else {
-                $rootScope.serverUrl = 'http://' + $location.host() + ':' + $location.$$port;
+                API_ENDPOINT.mode = 'PRODUCTION';                
             }
 
             if (window.StatusBar) {
@@ -38,6 +36,11 @@ angular.module('ElidomTemplate', ['ionic', 'ngCordova', 'ngResource', 'LocalStor
                 $rootScope.isDivicePlatform = true;
             }
         });
+
+        /**
+         * 설정 메뉴에 표시될 항목들 최초 로딩
+         */
+        SettingService.loadDefaultSettings();
 
         /**
          * hardware backbutton bnding
@@ -114,6 +117,9 @@ angular.module('ElidomTemplate', ['ionic', 'ngCordova', 'ngResource', 'LocalStor
             $state.go(menuState, { params: params }, { reload: true }, { notify: true });
         };
 
+        // Server URL
+        $rootScope.serverUrl = 'http://' + $location.host() + ':' + $location.$$port;
+        
         /*if ($location.host() != '127.0.0.1') {
             API_ENDPOINT.isApp = false;
             API_ENDPOINT.needsAuth = false;
@@ -124,4 +130,8 @@ angular.module('ElidomTemplate', ['ionic', 'ngCordova', 'ngResource', 'LocalStor
             API_ENDPOINT.pageLimit = 10;
         }*/
 
+        /**
+         * 플러그 인 모듈을 동적 로딩한다.
+         */
+        DynamicLoadService.loadPluginModules();
     });

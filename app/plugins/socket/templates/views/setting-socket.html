@@ -1,0 +1,47 @@
+<ion-view view-title="소켓 설정">
+
+    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in padding">
+        <div class="list"> 
+            <label class="item item-input item-floating-label">
+                <span class="input-label">서버 포트</span>
+                <input type="number" placeholder="서버 포트" ng-model="settings.serverPort">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">클라이언트 IP</span>
+                <input type="text" placeholder="클라이언트 IP" ng-model="settings.clientIp">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">클라이언트 포트</span>
+                <input type="number" placeholder="클라이언트 포트" ng-model="settings.clientPort">
+            </label>
+            
+            <div class="loader" ng-if="processing">
+                <ion-spinner></ion-spinner>
+            </div>
+
+            <button class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="saveSettings()">Save</button>
+        </div>        
+    </ion-content>    
+
+    <ion-footer-bar>
+        <div class="tabs tabs-dark tabs-icon-top static">
+            <a class="tab-item active" ui-sref="app.home" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-home"></i>홈
+            </a>
+            <a class="tab-item active" ui-sref="app.print" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-printer"></i>프린트
+            </a>
+            <a class="tab-item active" ui-sref="app.notice" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-email-unread"></i>공지사항
+            </a>
+            <a class="tab-item active" ui-sref="app.profile" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-android-people"></i>프로필
+            </a>
+            <a class="tab-item active" ui-sref="app.preference" ui-sref-active="active" ui-sref-opts="{reload : true}">
+                <i class="icon ion-gear-b"></i>설정
+            </a>
+        </div>
+    </ion-footer-bar>
+</ion-view>

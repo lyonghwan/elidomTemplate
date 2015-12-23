@@ -1,77 +1,102 @@
 <ion-view view-title="홈">
 
-    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in padding">
         
         <!--date-picker date-model= "data_model"/-->
 
-        <div class="list half">
-            <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
-                <div class="ink dark-bg">
-                    <h2>Where's Elsa?</h2>
-                    <img class="full-image" src="images/sansa-snowcastle3.jpg">
+        <div class="list">
+            <div class="card card-gallery item item-text-wrap">
+                <div class="ink">
+                    <h2>Bar Chart</h2>
+                    <canvas id="barChart" 
+                        chart-legend = "true",
+                        class="chart chart-bar" 
+                        chart-data="barData" 
+                        chart-labels="barLabels" 
+                        chart-series="barSeries" 
+                        chart-colours="chartColor">
+                    </canvas>
                 </div>
+
                 <div class="item tabs tabs-secondary tabs-icon-left">
                     <a class="tab-item stable-bg assertive">
-                        <i class="icon ion-heart"></i>
-                        4
+                        <i class="icon ion-heart"></i>4
                     </a>
                     <a class="tab-item stable-bg positive-900">
-                        <i class="icon ion-chatbubbles"></i>
-                        2
+                        <i class="icon ion-chatbubbles"></i>2
                     </a>
                 </div>
             </div>
-            <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
-                <div class="ink dark-bg">
-                    <h2>Hmm. Hope nobody destroys this!</h2>
-                    <img class="full-image" src="images/sansa-snowcastle.png">
+            
+            <div class="card card-gallery item item-text-wrap">
+                <div class="ink">
+                    <h2>Line Chart</h2>
+                    <canvas id="lineChart" 
+                        chart-legend = "true",
+                        class="chart chart-line" 
+                        chart-data="lineData" 
+                        chart-labels="lineLabels" 
+                        chart-series="lineSeries" 
+                        chart-options="lineOptions" 
+                        chart-colours="chartColor">
+                    </canvas>
                 </div>
+
                 <div class="item tabs tabs-secondary tabs-icon-left">
                     <a class="tab-item stable-bg assertive">
-                        <i class="icon ion-heart"></i>
-                        6
+                        <i class="icon ion-heart"></i>3
                     </a>
                     <a class="tab-item stable-bg positive-900">
-                        <i class="icon ion-chatbubbles"></i>
-                        1
+                        <i class="icon ion-chatbubbles"></i>6
                     </a>
                 </div>
             </div>
+
+            <div class="card card-gallery item item-text-wrap">
+                <div class="ink">
+                    <h2>Doughnut Chart</h2>
+                    <canvas id="doughnutChart" 
+                        chart-legend = "true",
+                        class="chart chart-doughnut"
+                        chart-data="doughnutData" 
+                        chart-labels="doughnutLabels">
+                    </canvas>
+                </div>
+
+                <div class="item tabs tabs-secondary tabs-icon-left">
+                    <a class="tab-item stable-bg assertive">
+                        <i class="icon ion-heart"></i>5
+                    </a>
+                    <a class="tab-item stable-bg positive-900">
+                        <i class="icon ion-chatbubbles"></i>3
+                    </a>
+                </div>
+            </div>
+
+            <div class="card card-gallery item item-text-wrap">
+                <div class="ink">
+                    <h2>Radar Chart</h2>
+                    <canvas id="radarChart" 
+                        chart-legend = "true",
+                        class="chart chart-radar"
+                        chart-data="radarData" 
+                        chart-series="radarSeries" 
+                        chart-labels="radarLabels">
+                    </canvas>
+                </div>
+
+                <div class="item tabs tabs-secondary tabs-icon-left">
+                    <a class="tab-item stable-bg assertive">
+                        <i class="icon ion-heart"></i>5
+                    </a>
+                    <a class="tab-item stable-bg positive-900">
+                        <i class="icon ion-chatbubbles"></i>3
+                    </a>
+                </div>
+            </div>
+
         </div>
-        <div class="list half">
-            <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
-                <div class="ink dark-bg">
-                    <h2>Making Olaf a House</h2>
-                    <img class="full-image" src="images/sansa-snowcastle2.jpg">
-                </div>
-                <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item stable-bg assertive">
-                        <i class="icon ion-heart"></i>
-                        22
-                    </a>
-                    <a class="tab-item stable-bg positive-900">
-                        <i class="icon ion-chatbubbles"></i>
-                        9
-                    </a>
-                </div>
-            </div>
-            <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
-                <div class="ink dark-bg">
-                    <h2>ohai!</h2>
-                    <img class="full-image" src="images/sansa-snowcastle4.jpg">
-                </div>
-                <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item stable-bg assertive">
-                        <i class="icon ion-heart"></i>
-                        8
-                    </a>
-                    <a class="tab-item stable-bg positive-900">
-                        <i class="icon ion-chatbubbles"></i>
-                        0
-                    </a>
-                </div>
-            </div>
-        </div>
+
     </ion-content>
 
     <ion-footer-bar>

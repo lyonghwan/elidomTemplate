@@ -1,0 +1,11 @@
+{
+    "success" : true,
+    "name" : "Elidom.Socket",
+    "module" : true,
+    "files" : [
+        "plugins/socket/SocketPlugin.js",
+        "plugins/socket/config/SocketConfig.js",
+        "plugins/socket/controllers/SettingSocketCtrl.js",
+        "plugins/socket/templates/views/setting-socket.html"
+    ]
+}

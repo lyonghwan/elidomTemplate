@@ -3,10 +3,6 @@
     "state" : "app.home",
     "icon" : "ion-home"
   }, {
-    "name" : "프린트",
-    "state" : "app.print",
-    "icon" : "ion-printer"
-  }, {
     "name" : "공지사항",
     "state" : "app.notice",
     "icon" : "ion-email-unread"
@@ -18,5 +14,9 @@
     "name" : "설정",
     "state" : "app.preference",
     "icon" : "ion-gear-b"
+  }, {
+    "name" : "프린트",
+    "state" : "app.print",
+    "icon" : "ion-printer"
   }
 ]
