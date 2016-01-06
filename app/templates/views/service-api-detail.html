@@ -1,0 +1,63 @@
+<ion-view view-title="서비스 API 상세">
+
+    <ion-content ng-init="init()" class="padding">
+        <div class="list"> 
+            <label class="item item-input item-floating-label">
+                <span class="input-label">API 명</span>
+                <input type="text" placeholder="API 명" ng-model="item.name">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">API 설명</span>
+                <input type="text" placeholder="API 설명" ng-model="item.description">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Method</span>
+                <input type="text" placeholder="Method" ng-model="item.method">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">URL</span>
+                <input type="text" placeholder="URL" ng-model="item.url">
+            </label>
+            
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Parameter</span>
+                <textarea placeholder="Input" ng-model="item.inputParams" rows="4"></textarea>
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Return</span>
+                <textarea placeholder="Output" ng-model="item.outputParams" rows="4"></textarea>
+            </label>            
+
+            <div class="loader" ng-if="processing">
+                <ion-spinner></ion-spinner>
+            </div>
+        </div>
+        
+        <button class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="invoke()">Invoke</button>
+
+        <h4 class="content padding double-padding-x">Input List</h4>
+
+        <div class="list">
+            <a class="item item-avatar item-icon-right" ng-repeat="item in item.inputList">
+                <h2>{{item.name}}</h2>
+                <span class="badge badge-calm">{{item.type}}</span>
+            </a>
+        </div>
+
+        <h4 class="content padding double-padding-x">Output List</h4>
+
+        <div class="list">
+            <a class="item item-avatar item-icon-right" ng-repeat="item in item.outputList">
+                <h2>{{item.name}}</h2>
+                <span class="badge badge-positive">{{item.type}}</span>
+            </a>
+        </div>
+    </ion-content>    
+
+    <elidom-footer-bar></elidom-footer-bar>
+    
+</ion-view>

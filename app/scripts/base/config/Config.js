@@ -28,12 +28,34 @@ angular.module('Elidom.Base')
     // Application routing
     $stateProvider
 
-      .state('app.gallery', {
-        url: '/gallery',
+      .state('app.service', {
+        url: '/service',
         views: {
           'viewContent': {
-            templateUrl: 'templates/views/gallery.html',
-            controller: 'GalleryCtrl'
+            templateUrl: 'templates/views/service.html',
+            controller: 'ServiceCtrl'
+          }
+        }
+      })
+
+      .state('app.service-detail', {
+        url: '/service-detail',
+        params : { id : '' },
+        views: {
+          'viewContent': {
+            templateUrl: 'templates/views/service-detail.html',
+            controller: 'ServiceDetailCtrl'
+          }
+        }
+      })
+
+      .state('app.service-api-detail', {
+        url: '/service-api-detail',
+        params : { id : '' },
+        views: {
+          'viewContent': {
+            templateUrl: 'templates/views/service-api-detail.html',
+            controller: 'ServiceApiDetailCtrl'
           }
         }
       })

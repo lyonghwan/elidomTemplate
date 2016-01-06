@@ -10,52 +10,18 @@
         </ion-nav-bar>
 
         <ion-nav-view name="viewContent">
-            <ion-footer-bar>
-                <div class="tabs tabs-dark tabs-icon-top static">
-                    <a class="tab-item active" ui-sref="app.home" ui-sref-active="active" ui-sref-opts="{reload : true}">
-                        <i class="icon ion-home"></i>홈
-                    </a>
-                    <a class="tab-item active" ui-sref="app.print" ui-sref-active="active" ui-sref-opts="{reload : true}">
-                        <i class="icon ion-printer"></i>프린트
-                    </a>
-                    <a class="tab-item active" ui-sref="app.notice" ui-sref-active="active" ui-sref-opts="{reload : true}">
-                        <i class="icon ion-email-unread"></i>공지사항
-                    </a>
-                    <a class="tab-item active" ui-sref="app.profile" ui-sref-active="active" ui-sref-opts="{reload : true}">
-                        <i class="icon ion-android-people"></i>프로필
-                    </a>
-                    <a class="tab-item active" ui-sref="app.preference" ui-sref-active="active" ui-sref-opts="{reload : true}">
-                        <i class="icon ion-gear-b"></i>설정
-                    </a>
-                </div>
-            </ion-footer-bar>
+            <elidom-footer-bar></elidom-footer-bar>
         </ion-nav-view>
     </ion-side-menu-content>
 
     <ion-side-menu side="right">
         <ion-header-bar class="dark-bg expanded">
             <span class="avatar" style="background: url('images/crown.jpg'); background-size: cover;"></span>
-            <h2>Thronester</h2>
+            <h2>Elidom</h2>
         </ion-header-bar>
 
         <ion-content class="stable-bg has-expanded-header">
-            <ion-list>
-                <ion-item nav-clear menu-close ui-sref="app.home">
-                    <i class="icon ion-home"></i> 홈
-                </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.print">
-                    <i class="icon ion-printer"></i> 프린트
-                </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.notice">
-                    <i class="icon ion-email-unread"></i> 공지사항
-                </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.profile">
-                    <i class="icon ion-android-people"></i> 프로필
-                </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.preference">
-                    <i class="icon ion-gear-b"></i> 설정
-                </ion-item-->
-            </ion-list>
+            <elidom-menu-bar></elidom-menu-bar>
         </ion-content>
     </ion-side-menu>
 </ion-side-menus>

@@ -7,7 +7,7 @@
  * # Printer Controller
  */
 angular.module('Elidom.Printer')
-    .controller('PrinterCtrl', function($scope, $ionicPopup, $timeout, ionicMaterialInk, ionicMaterialMotion, MenuService, ApiService, ElidomUtils) {
+    .controller('PrinterCtrl', function($scope, $ionicPopup, $timeout, ionicMaterialInk, ionicMaterialMotion, localStorageService, MenuService, ApiService, ElidomUtils) {
 
     /**
      * 메뉴 

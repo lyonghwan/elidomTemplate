@@ -1,0 +1,44 @@
+<ion-view view-title="서비스 상세">
+
+    <ion-content ng-init="init()" class="padding">
+        <div class="list"> 
+            <label class="item item-input item-floating-label">
+                <span class="input-label">서비스 명</span>
+                <input type="text" placeholder="서비스 명" ng-model="item.name">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">서비스 설명</span>
+                <input type="text" placeholder="서비스 설명" ng-model="item.description">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">서비스 ID</span>
+                <input type="text" placeholder="서비스 ID" ng-model="item.id">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">서비스 클래스</span>
+                <input type="text" placeholder="서비스 클래스" ng-model="item.beanClassName">
+            </label>
+            
+            <div class="loader" ng-if="processing">
+                <ion-spinner></ion-spinner>
+            </div>
+        </div>
+
+        <h4 class="content padding double-padding-x">API List</h4>
+
+        <div class="list">
+            <a class="item item-avatar item-icon-right" ng-repeat="item in item.apiList" ng-click="goApiDetail(item)">
+                <h2>{{item.name}}</h2>
+                <p>{{item.description}}</p>
+                <p>{{item.url}}</p>
+                <span class="badge badge-{{item.method | method_color}}">{{item.method}}</span>
+            </a>
+        </div>
+    </ion-content>    
+
+    <elidom-footer-bar></elidom-footer-bar>
+    
+</ion-view>

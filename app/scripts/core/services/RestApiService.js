@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name core.services.ApiService
+ * @name core.services.RestApiService
  * @description
  * # ApiService
  */
 angular.module('Elidom.Core')
-  .factory('ApiService', function($rootScope, $http, $ionicPopup, $resource, $cordovaKeyboard, API_ENDPOINT, localStorageService, ElidomUtils) {
+  .factory('RestApiService', function($rootScope, $http, $resource, $ionicPopup, $cordovaKeyboard, API_ENDPOINT, localStorageService, ElidomUtils) {
 
     // activate for basic auth
     if (API_ENDPOINT.needsAuth) {
@@ -77,9 +77,20 @@ angular.module('Elidom.Core')
         if(response && response.status && response.status == 401) {
           this.goToSignin();
         } else {
-          var msg = (!response.status || response.status === 0 || response.status == 404) ? '서버 접속에 실패했습니다.<br/>관리자에게 문의하세요.' : ('Status : ' + response.status + ', ' + response.statusText);
-          this.showErrorMessage(msg);
+          if(response.data) {
+            this.showDetailErrorMessage(response.data);
+          } else {
+            var msg = (!response.status || response.status === 0 || response.status == 404) ? '서버 접속에 실패했습니다.<br/>관리자에게 문의하세요.' : ('Status : ' + response.status + ', ' + response.statusText);
+            this.showErrorMessage(msg);
+          }
         }
+      },
+
+      /**
+       * Show Detail Error Message
+       */
+      showDetailErrorMessage : function(errorData) {
+        $ionicPopup.alert({ title : '오류 (' + errorData.code + ')', template : 'status : ' + errorData.status + '<br/> message : ' + errorData.msg });
       },
 
       /**
@@ -108,9 +119,9 @@ angular.module('Elidom.Core')
         if (window.cordova && window.cordova.plugins.Keyboard) {
           var userId = this.getEncodedUserId();
           var checkAuto = localStorageService.get("autosignin") ? localStorageService.get("autosignin") : false;
-          return {'Accept' : 'application/json; charset=UTF-8', 'X-Check-Auto' : checkAuto, 'X-Auth' : userId };
+          return {'Content-Type' : 'application/json; charset=UTF-8', 'Accept' : 'application/json; charset=UTF-8', 'X-Check-Auto' : checkAuto, 'X-Auth' : userId };
         } else {
-          return {'Accept' : 'application/json; charset=UTF-8' };
+          return {'Content-Type' : 'application/json; charset=UTF-8', 'Accept' : 'application/json; charset=UTF-8' };
         }
       },
 
@@ -124,7 +135,55 @@ angular.module('Elidom.Core')
         } else {
           return '';
         }
-      },      
+      },
+
+      /**
+       * Success
+       */
+      invokeSuccess : function(dataSet, callback, badcallback) {
+        var me = this;
+        // 1. good
+        if(dataSet.success) {
+          me.handleSuccess(dataSet, callback);
+        // 2. bad
+        } else {
+          me.handleFailure(dataSet, badcallback);
+        }
+      },
+
+      /**
+       * Error
+       */
+      invokeError : function(status, data, errorcallback) {
+        if(errorcallback) {
+          errorcallback(status, data);
+        } else {
+          this.handleError({data : data, status : status });
+        }
+      },
+
+      /**
+       * find only one
+       *
+       * @url
+       * @params
+       * @callback
+       * @badcallback
+       */
+      get : function(url, params, callback, badcallback, errorcallback) {
+        var me = this;
+        params = me.addCommonParams(params);
+        var url = me.getFullUrl(url);
+        var config = { headers : { 'Content-Type' : 'application/json;charset=UTF-8' } };
+
+        $http.get(url, { params : params }, config)
+          .success(function(dataSet, status, headers, config)  {
+            me.invokeSuccess(dataSet, callback, badcallback);
+          })
+          .error(function(data, status, headers, config) {
+            me.invokeError(status, data, errorcallback);
+          });
+      },
 
       /**
        * search list for pagination
@@ -144,10 +203,11 @@ angular.module('Elidom.Core')
         }
 
         params = me.addCommonParams(params);
-        var rsc = $resource(me.getFullUrl(url), params, {get : {method : 'GET', headers : me.getHeaders()}});
+        var url = me.getFullUrl(url);
+        var config = { headers : { 'Content-Type' : 'application/json;charset=UTF-8' } };
 
-        rsc.get(
-          function(dataSet, response) {
+        $http.get(url, { params : params }, config)
+          .success(function(dataSet, status, headers, config)  {
             // 1. good
             if(dataSet.success) {
               dataSet.start = params.start;
@@ -159,72 +219,10 @@ angular.module('Elidom.Core')
             } else {
               me.handleFailure(dataSet, badcallback);
             }
-          // 3. error
-          }, 
-          function(response) {
-            me.handleError(response);
-          });
-      },
-
-      /**
-       * find list
-       *
-       * @url
-       * @params
-       * @callback
-       * @badcallback
-       */
-      list : function(url, params, callback, badcallback, errorCallback) {
-        var me = this;
-        params = this.addCommonParams(params);
-        var rsc = $resource(me.getFullUrl(url), params, {get : {method : 'GET', headers : me.getHeaders()}});
-
-        rsc.get(
-          function(dataSet, response) {
-            // 1. good
-            if(dataSet.success) {
-              me.handleSuccess(dataSet, callback);
-            // 2. bad
-            } else {
-              me.handleFailure(dataSet, badcallback);
-            }
-          // 3. error
-          }, 
-          function(response) {
-            if(errorCallback) {
-              errorCallback(response);
-            } else {
-              me.handleError(response);
-            }
-          });
-      },
-
-      /**
-       * find only one
-       *
-       * @url
-       * @params
-       * @callback
-       * @badcallback
-       */
-      get : function(url, params, callback, badcallback) {
-        var me = this;
-        params = me.addCommonParams(params);
-        var rsc = $resource(me.getFullUrl(url), params, {get : {method : 'GET', headers : me.getHeaders()}});
-
-        rsc.get(
-          function(dataSet, response) {
-            // 1. good
-            if(dataSet.success) {
-              me.handleSuccess(dataSet, callback);
-            // 2. bad
-            } else {
-              me.handleFailure(dataSet, badcallback);
-            }
-          // 3. error
-          }, 
-          function(response) {
-            me.handleError(response);
+          })
+            // 3. error
+          .error(function(data, status, headers, config) {
+            me.invokeError(status, data, errorcallback);
           });
       },
 
@@ -235,30 +233,68 @@ angular.module('Elidom.Core')
        * @params
        * @callback
        * @badcallback
+       * @errorcallback
        */
-      post : function(url, params, callback, badcallback) {
+      post : function(url, params, callback, badcallback, errorcallback) {
         var me = this;
         var fullUrl = me.getFullUrl(url);
         $http.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8';
-        //var checkAuto = localStorageService.get("autosignin");
-        //$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-        //$http.defaults.headers.post['X-Check-Auto'] = checkAuto;
-        //$http.defaults.headers.post['X-Auth'] = this.getEncodedUserId();
 
         $http.post(fullUrl, params)
           .success(function (dataSet, status) {
-            // 1. good
-            if(dataSet.success) {
-              me.handleSuccess(dataSet, callback);
-            // 2. bad
-            } else {
-              me.handleFailure(dataSet, badcallback);
-            }
+            me.invokeSuccess(dataSet, callback, badcallback);
           })
           .error(function (data, status) {
-            me.handleError({data : data, status : status });
+            me.invokeError(status, data, errorcallback);
           }
         );
+      },
+
+      /**
+       * put 요청 
+       *
+       * @url
+       * @params
+       * @callback
+       * @badcallback
+       * @errorcallback
+       */
+      put : function(url, params, callback, badcallback, errorcallback) {
+        var me = this;
+        var fullUrl = me.getFullUrl(url);
+        $http.defaults.headers.put['Content-Type'] = 'application/json; charset=UTF-8';
+
+        $http.put(fullUrl, params)
+          .success(function (dataSet, status) {
+            me.invokeSuccess(dataSet, callback, badcallback);
+          })
+          .error(function (data, status) {
+            me.invokeError(status, data, errorcallback);
+          }
+        );
+      },
+
+      /**
+       * delete 요청 
+       *
+       * @url
+       * @params
+       * @callback
+       * @badcallback
+       */
+      delete : function(url, params, callback, badcallback) {
+        var me = this;
+        var fullUrl = me.getFullUrl(url);
+        $http.defaults.headers.delete['Content-Type'] = 'application/json; charset=UTF-8';
+
+        $http.delete(fullUrl, params)
+          .success(function (dataSet, status) {
+            me.invokeSuccess(dataSet, callback, badcallback);
+          })
+          .error(function (data, status) {
+            me.invokeError(status, data, errorcallback);
+          }
+        );        
       }
 
       // ------------------------------------------------------------------------------------------------

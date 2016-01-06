@@ -108,4 +108,18 @@ angular.module('Elidom.Core')
 		return function(input) {
 			return (input === undefined || input === null || input === '') ? '-' : input;
 		};
+	})
+
+	.filter('method_color', function($filter) {
+		return function(input) {
+			if(!input || input == 'GET' || input == 'HEADER') {
+				return 'calm';
+			} else if(input == 'POST' || input == 'PUT' || input == 'PATCH') {
+				return 'positive';
+			} else if(input == 'DELETE') {
+				return 'assertive';
+			} else {
+				return 'calm';
+			}
+		};
 	});
