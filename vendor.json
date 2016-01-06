@@ -5,8 +5,9 @@
     "bower_components/ngCordova/dist/ng-cordova.js",
 	"bower_components/angular-local-storage/dist/angular-local-storage.min.js",    
     "bower_components/ionic-datepicker/dist/ionic-datepicker.bundle.min.js",
-    "bower_components/ionic-material/dist/ionic.material.js",
+    "bower_components/Chart.js/Chart.min.js",
+    "bower_components/ionic-material/dist/ionic.material.min.js",
     "bower_components/ion-md-input/js/ion-md-input.min.js",
-    "bower_components/Chart.js/Chart.js",
-    "bower_components/angular-chart.js/dist/angular-chart.js"
+    "bower_components/angular-chart.js/dist/angular-chart.min.js",
+    "bower_components/oclazyload/dist/ocLazyLoad.min.js"
 ]
