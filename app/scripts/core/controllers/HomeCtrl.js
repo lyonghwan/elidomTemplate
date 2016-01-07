@@ -7,12 +7,95 @@
  * # HomeController
  */
 angular.module('Elidom.Core')
-  .controller('HomeCtrl', function($scope, MenuService, ApiService, ionicMaterialInk, ionicMaterialMotion) {
+  .controller('HomeCtrl', function($scope, $http, MenuService, RestApiService, ionicMaterialInk, ionicMaterialMotion) {
 
     /**
      * 메뉴 
      */
     MenuService.setSideMenu('main');
+
+    /**
+     * Application information
+     */
+    $scope.info = null;
+    /**
+     * Metrics
+     */
+    $scope.metrics = null;
+
+    /**
+     * Total Memory
+     */
+    $scope.totalMemoryTitle = "Total";
+    $scope.totalMemoryLabels = ["Used", "Unused"];
+    $scope.totalMemoryData = [0, 0];
+
+    /**
+     * Heap Memory
+     */
+    $scope.heapMemoryTitle = "Heap";
+    $scope.heapMemoryLabels = ["Used", "Unused"];
+    $scope.heapMemoryData = [0, 0];
+
+    /**
+     * Get application information
+     */
+    $scope.getAppInfo = function() {
+        var url = RestApiService.getFullUrl('/info');
+        $scope.invokeHttpGet(url, null, 
+            function(dataSet) {
+                $scope.info = dataSet;
+            });
+    };
+
+    /**
+     * Get metrics
+     */
+    $scope.getMetrics = function() {
+        var url = RestApiService.getFullUrl('/metrics');
+        $scope.invokeHttpGet(url, null, 
+            function(dataSet) {
+                $scope.metrics = dataSet;
+                $scope.setTotalMemory();
+                $scope.setHeapMemory();
+            });
+    };
+
+    /**
+     * Invoke http get
+     */
+    $scope.invokeHttpGet = function(url, params, callback, errorcallback) {
+        var config = { headers : { 'Content-Type' : 'application/json;charset=UTF-8' } };
+        $http.get(url, { params : params }, config)
+          .success(function(dataSet, status, headers, config)  {
+            callback(dataSet);
+          })
+          .error(function(data, status, headers, config) {
+            RestApiService.invokeError(status, data, errorcallback);
+          });
+    };
+
+    $scope.setTotalMemory = function() {
+        var total = Math.ceil($scope.metrics.mem / 1000);
+        var free = Math.ceil($scope.metrics['mem.free'] / 1000);
+        var used = total - free;
+        $scope.totalMemoryTitle = "Total (" + total + "M)";
+        $scope.totalMemoryLabels = ["Used", "Unused"];
+        $scope.totalMemoryData = [used, free];
+    };
+
+    $scope.setHeapMemory = function() {
+        var total = Math.ceil($scope.metrics['heap.committed'] / 1000);
+        var used = Math.ceil($scope.metrics['heap.used'] / 1000);
+        var free = total - used;
+        $scope.heapMemoryTitle = "Heap (" + total + "M)";
+        $scope.heapMemoryLabels = ["Used", "Unused"];
+        $scope.heapMemoryData = [used, free];
+        $scope.metrics.heap = Math.ceil($scope.metrics.heap / 1000) + ' M';
+        $scope.metrics['heap.init'] = Math.ceil($scope.metrics['heap.init'] / 1000) + ' M';
+        $scope.metrics['gc.ps_scavenge.time'] = $scope.metrics['gc.ps_scavenge.time'] + ' ms';
+        $scope.metrics['gc.ps_marksweep.time'] = $scope.metrics['gc.ps_marksweep.time'] + ' ms';
+    };    
 
     $scope.lineLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
     $scope.lineSeries = ['Series A', 'Series B'];
@@ -38,9 +121,6 @@ angular.module('Elidom.Core')
         [28, 48, 40, 19, 86, 27, 90]
     ];
 
-    $scope.doughnutLabels = ["Series A", "Series B", "Series C"];
-    $scope.doughnutData = [300, 500, 100];
-
     $scope.radarLabels =["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"];
     $scope.radarSeries = ['Series A', 'Series B'];
     $scope.radarData = [
@@ -48,7 +128,9 @@ angular.module('Elidom.Core')
         [28, 48, 40, 19, 96, 27, 100]
     ];    
 
-    // Activate ink for controller
+    /**
+     * Activate ink for controller
+     */
     ionicMaterialInk.displayEffect();
 
     ionicMaterialMotion.pushDown({
@@ -57,5 +139,13 @@ angular.module('Elidom.Core')
     ionicMaterialMotion.fadeSlideInRight({
         selector: '.animate-fade-slide-in .item'
     });
+
+    /**
+     * initialize
+     */
+    $scope.init = function() {
+        $scope.getAppInfo();
+        $scope.getMetrics();
+    }
 
   });

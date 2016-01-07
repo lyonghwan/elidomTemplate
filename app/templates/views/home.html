@@ -1,33 +1,139 @@
 <ion-view view-title="홈">
 
-    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in padding">
+    <ion-content ng-init="init()" ng-class="{expanded:isExpanded}" class="animate-fade-slide-in padding">
         
-        <!--date-picker date-model= "data_model"/-->
+        <div class="list"> 
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Application 이름</span>
+                <input type="text" placeholder="Application 이름" ng-model="info.name">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Application 버전</span>
+                <input type="text" placeholder="Application 버전" ng-model="info.version">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Stage</span>
+                <input type="text" placeholder="Stage" ng-model="info.stage">
+            </label>
+
+            <div class="loader" ng-if="processing">
+                <ion-spinner></ion-spinner>
+            </div>
+        </div>
+
+        <h4 class="content padding double-padding-x">Memory</h4>
 
         <div class="list">
             <div class="card card-gallery item item-text-wrap">
                 <div class="ink">
-                    <h2>Bar Chart</h2>
-                    <canvas id="barChart" 
+                    <h2>{{totalMemoryTitle}}</h2>
+                    <canvas id="memoryChart" 
                         chart-legend = "true",
-                        class="chart chart-bar" 
-                        chart-data="barData" 
-                        chart-labels="barLabels" 
-                        chart-series="barSeries" 
+                        class="chart chart-doughnut"
+                        chart-data="totalMemoryData" 
+                        chart-labels="totalMemoryLabels"
                         chart-colours="chartColor">
                     </canvas>
                 </div>
 
                 <div class="item tabs tabs-secondary tabs-icon-left">
                     <a class="tab-item stable-bg assertive">
-                        <i class="icon ion-heart"></i>4
+                        <i class="icon ion-heart"></i>{{totalMemoryData[0]}}
                     </a>
                     <a class="tab-item stable-bg positive-900">
-                        <i class="icon ion-chatbubbles"></i>2
+                        <i class="icon ion-chatbubbles"></i>{{totalMemoryData[1]}}
                     </a>
                 </div>
             </div>
-            
+
+            <div class="card card-gallery item item-text-wrap">
+                <div class="ink">
+                    <h2>{{heapMemoryTitle}}</h2>
+                    <canvas id="memoryChart" 
+                        chart-legend = "true",
+                        class="chart chart-pie"
+                        chart-data="heapMemoryData" 
+                        chart-labels="heapMemoryLabels"
+                        chart-colours="chartColor">
+                    </canvas>
+                </div>
+
+                <div class="item tabs tabs-secondary tabs-icon-left">
+                    <a class="tab-item stable-bg assertive">
+                        <i class="icon ion-heart"></i>{{heapMemoryData[0]}}
+                    </a>
+                    <a class="tab-item stable-bg positive-900">
+                        <i class="icon ion-chatbubbles"></i>{{heapMemoryData[1]}}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Initial Heap (-Xms)</span>
+                <input type="text" placeholder="Initial Heap (-Xms)" ng-model="metrics['heap.init']">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Maximum Heap (-Xms)</span>
+                <input type="text" placeholder="Maximum Heap (-Xms)" ng-model="metrics.heap">
+            </label>
+        </div>
+
+        <h4 class="content padding double-padding-x">Garbage Collection</h4>
+
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Marksweep GC Count</span>
+                <input type="text" placeholder="Marksweep GC Count" ng-model="metrics['gc.ps_marksweep.count']">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Marksweep GC Time</span>
+                <input type="text" placeholder="Marksweep GC Time" ng-model="metrics['gc.ps_marksweep.time']">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Scavenge GC Count</span>
+                <input type="text" placeholder="Scavenge GC Count" ng-model="metrics['gc.ps_scavenge.count']">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Scavenge GC Time</span>
+                <input type="text" placeholder="Scavenge GC Time" ng-model="metrics['gc.ps_scavenge.time']">
+            </label>
+        </div>
+
+        <h4 class="content padding double-padding-x">Datasources</h4>
+
+        <div class="card card-gallery item item-text-wrap">
+            <div class="ink">
+                <h2>Bar Chart</h2>
+                <canvas id="barChart" 
+                    chart-legend = "true",
+                    class="chart chart-bar" 
+                    chart-data="barData" 
+                    chart-labels="barLabels" 
+                    chart-series="barSeries" 
+                    chart-colours="chartColor">
+                </canvas>
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item stable-bg assertive">
+                    <i class="icon ion-heart"></i>4
+                </a>
+                <a class="tab-item stable-bg positive-900">
+                    <i class="icon ion-chatbubbles"></i>2
+                </a>
+            </div>
+        </div>
+
+        <h4 class="content padding double-padding-x">JVM</h4>
+
+        <div class="list">
             <div class="card card-gallery item item-text-wrap">
                 <div class="ink">
                     <h2>Line Chart</h2>
@@ -54,27 +160,6 @@
 
             <div class="card card-gallery item item-text-wrap">
                 <div class="ink">
-                    <h2>Doughnut Chart</h2>
-                    <canvas id="doughnutChart" 
-                        chart-legend = "true",
-                        class="chart chart-doughnut"
-                        chart-data="doughnutData" 
-                        chart-labels="doughnutLabels">
-                    </canvas>
-                </div>
-
-                <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item stable-bg assertive">
-                        <i class="icon ion-heart"></i>5
-                    </a>
-                    <a class="tab-item stable-bg positive-900">
-                        <i class="icon ion-chatbubbles"></i>3
-                    </a>
-                </div>
-            </div>
-
-            <div class="card card-gallery item item-text-wrap">
-                <div class="ink">
                     <h2>Radar Chart</h2>
                     <canvas id="radarChart" 
                         chart-legend = "true",
@@ -94,7 +179,6 @@
                     </a>
                 </div>
             </div>
-
         </div>
 
     </ion-content>
