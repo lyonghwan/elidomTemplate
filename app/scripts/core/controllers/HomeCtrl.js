@@ -22,6 +22,19 @@ angular.module('Elidom.Core')
      * Metrics
      */
     $scope.metrics = null;
+    /**
+     * Chart Color
+     */
+    $scope.chartColor = [ {
+        strokeColor: "rgba(255,50,0,0.5)",
+        fillColor: "rgba(255,153,102,0.2)",
+        highlightFill: "rgba(151,187,205,0.75)",
+        highlightStroke: "rgba(151,187,205,1)",
+        pointColor: "rgba(255,50,0,1)",            
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)"
+    } ];    
 
     /**
      * Total Memory
@@ -36,6 +49,13 @@ angular.module('Elidom.Core')
     $scope.heapMemoryTitle = "Heap";
     $scope.heapMemoryLabels = ["Used", "Unused"];
     $scope.heapMemoryData = [0, 0];
+
+    /**
+     * Thread
+     */
+    $scope.threadLabels = ['Current', 'Deamon', 'Peak', 'Total Started'];
+    $scope.threadSeries = ['Count'];
+    $scope.threadData = [[0, 0, 0, 0]];
 
     /**
      * Get application information
@@ -58,6 +78,7 @@ angular.module('Elidom.Core')
                 $scope.metrics = dataSet;
                 $scope.setTotalMemory();
                 $scope.setHeapMemory();
+                $scope.setThreads();
             });
     };
 
@@ -95,28 +116,22 @@ angular.module('Elidom.Core')
         $scope.metrics['heap.init'] = Math.ceil($scope.metrics['heap.init'] / 1000) + ' M';
         $scope.metrics['gc.ps_scavenge.time'] = $scope.metrics['gc.ps_scavenge.time'] + ' ms';
         $scope.metrics['gc.ps_marksweep.time'] = $scope.metrics['gc.ps_marksweep.time'] + ' ms';
-    };    
+    };
 
-    $scope.lineLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+    $scope.setThreads = function() {
+        $scope.threadData = [[
+            $scope.metrics['threads.peak'],
+            $scope.metrics['threads.daemon'],
+            $scope.metrics['threads.totalStarted'],
+            $scope.metrics['threads']
+        ]];
+
+        $scope.metrics['httpsessions.max'] = $scope.metrics['httpsessions.max'] < 0 ? 'Unlimited' : $scope.metrics['httpsessions.max'];
+    };
+
+    /*$scope.lineLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
     $scope.lineSeries = ['Series A', 'Series B'];
     $scope.lineData = [
-        [65, 59, 80, 81, 56, 55, 40],
-        [28, 48, 40, 19, 86, 27, 90]
-    ];
-    $scope.chartColor = [ {
-        strokeColor: "rgba(255,50,0,0.5)",
-        fillColor: "rgba(255,153,102,0.2)",
-        highlightFill: "rgba(151,187,205,0.75)",
-        highlightStroke: "rgba(151,187,205,1)",
-        pointColor: "rgba(255,50,0,1)",            
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(220,220,220,1)"
-    } ];
-
-    $scope.barLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-    $scope.barSeries = ['Series A', 'Series B'];
-    $scope.barData = [
         [65, 59, 80, 81, 56, 55, 40],
         [28, 48, 40, 19, 86, 27, 90]
     ];
@@ -126,16 +141,23 @@ angular.module('Elidom.Core')
     $scope.radarData = [
         [65, 59, 90, 81, 56, 55, 40],
         [28, 48, 40, 19, 96, 27, 100]
-    ];    
+    ];*/
 
     /**
      * Activate ink for controller
      */
     ionicMaterialInk.displayEffect();
 
+    /**
+     * animation
+     */
     ionicMaterialMotion.pushDown({
         selector: '.push-down'
     });
+
+    /**
+     * animation
+     */
     ionicMaterialMotion.fadeSlideInRight({
         selector: '.animate-fade-slide-in .item'
     });

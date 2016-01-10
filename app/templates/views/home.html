@@ -106,34 +106,68 @@
             </label>
         </div>
 
-        <h4 class="content padding double-padding-x">Datasources</h4>
-
-        <div class="card card-gallery item item-text-wrap">
-            <div class="ink">
-                <h2>Bar Chart</h2>
-                <canvas id="barChart" 
-                    chart-legend = "true",
-                    class="chart chart-bar" 
-                    chart-data="barData" 
-                    chart-labels="barLabels" 
-                    chart-series="barSeries" 
-                    chart-colours="chartColor">
-                </canvas>
-            </div>
-
-            <div class="item tabs tabs-secondary tabs-icon-left">
-                <a class="tab-item stable-bg assertive">
-                    <i class="icon ion-heart"></i>4
-                </a>
-                <a class="tab-item stable-bg positive-900">
-                    <i class="icon ion-chatbubbles"></i>2
-                </a>
-            </div>
-        </div>
-
         <h4 class="content padding double-padding-x">JVM</h4>
 
         <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Total loaded Classes</span>
+                <input type="text" placeholder="Total loaded Classes" ng-model="metrics.classes">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Current loaded Classes</span>
+                <input type="text" placeholder="Current loaded Classes" ng-model="metrics['classes.loaded']">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Unloaded Classes</span>
+                <input type="text" placeholder="Unloaded Classes" ng-model="metrics['classes.unloaded']">
+            </label>
+        </div>
+
+        <div class="card card-gallery item item-text-wrap">
+            <h2 align="center">Threads</h2>
+            <div class="ink">
+                <canvas id="barChart" 
+                    chart-legend = "true",
+                    class="chart chart-bar" 
+                    chart-data="threadData" 
+                    chart-labels="threadLabels" 
+                    chart-series="threadSeries" 
+                    chart-colours="chartColor">
+                </canvas>
+            </div>
+        </div>
+
+        <h4 class="content padding double-padding-x">Datasources</h4>
+
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Datasource Primary Active</span>
+                <input type="text" placeholder="Datasource Primary Active" ng-model="metrics['datasource.primary.active']">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Datasource Primary Usage</span>
+                <input type="text" placeholder="Datasource Primary Usage" ng-model="metrics['datasource.primary.usage']">
+            </label>
+        </div>
+
+        <h4 class="content padding double-padding-x">Servlet Container</h4>
+
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Http sessions Maximum</span>
+                <input type="text" placeholder="Http sessions Maximum" ng-model="metrics['httpsessions.max']">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Http sessions Active</span>
+                <input type="text" placeholder="Http sessions Active" ng-model="metrics['httpsessions.active']">
+            </label>
+        </div>
+
+        <!--div class="list">
             <div class="card card-gallery item item-text-wrap">
                 <div class="ink">
                     <h2>Line Chart</h2>
@@ -179,7 +213,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div-->
 
     </ion-content>
 
