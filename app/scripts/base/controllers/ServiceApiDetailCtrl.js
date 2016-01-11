@@ -32,8 +32,86 @@ angular.module('Elidom.Base')
 			RestApiService.get(serviceUrl, params,
 				function(dataSet) {
 					$scope.item = dataSet.item;
-					$scope.item.inputParams = "{\n}";
+					$scope.item.inputParams = $scope.makeInputParams($scope.item.inputList);
 				});
+		};
+
+		/**
+		 * JSON형태의 Input Parameter 문자열을 만든다.
+		 */
+		$scope.makeInputParams = function(inputList) {
+			if(!inputList || inputList.length == 0) {
+				return "{\n}";
+			} else {
+				var inputParams = {};
+				for(var i = 0 ; i < inputList.length ; i++) {
+					var input = inputList[i];
+					var name = input.name;
+					var type = input.type;
+
+					if($scope.isBoolType(type)) {
+						inputParams[name] = false;
+					} else if($scope.isNumberType(type)) {
+						inputParams[name] = 0;
+					} else if($scope.isPrimitiveType(type)) {
+						inputParams[name] = '';
+					} else if($scope.isArrayType(type)) {
+						inputParams[name] = [];
+					} else {
+						inputParams[name] = {};
+					}
+				}
+
+				return JSON.stringify(inputParams, null, "\t");
+			}
+		};
+
+		/**
+		 * Boolean type 인지 체크 
+		 */
+		$scope.isBoolType = function(type) {
+			if(type == 'java.lang.Boolean' || type == 'boolean') {
+				return true;
+			} else {
+				return false;
+			}
+		};
+
+		/**
+		 * Number type 인지 체크 
+		 */
+		$scope.isNumberType = function(type) {
+			if(type == 'java.lang.Integer' || type == 'java.lang.Long' || type == 'java.lang.Double' || type == 'java.lang.Short') {
+				return true;
+			} else if(type == 'int' || type == 'long' || type == 'short' || type == 'double') {
+				return true;
+			} else {
+				return false;
+			}
+		};
+
+		/**
+		 * Primitive type 인지 체크 
+		 */
+		$scope.isPrimitiveType = function(type) {
+			if(type.indexOf('.') < 0) {
+				return true;
+			} else if(type == 'java.lang.String' || type == 'java.lang.Integer' || type == 'java.lang.Long' || type == 'java.lang.Double' || type == 'java.lang.Short' || type == 'java.lang.Boolean' || type == 'java.util.Date') {
+				return true;
+			} else {
+				return false;
+			}
+		};
+
+		/**
+		 * Array type 인지 체크 
+		 */
+		$scope.isArrayType = function(type) {
+			if(type == 'java.util.List' || type == 'java.util.ArrayList' || type == 'java.util.Collection') {
+				return true;
+			} else {
+				return false;
+			}
 		};
 
 		/**
@@ -63,8 +141,7 @@ angular.module('Elidom.Base')
 		 * invoke success
 		 */
 		$scope.invokeSuccess = function(dataSet) {
-			// $ionicPopup.alert({ title : 'Success to Invoke' });
-			$scope.item.outputParams = JSON.stringify(dataSet);
+			$scope.item.outputParams = JSON.stringify(dataSet, null, "\t");
 		},
 
 		/**
@@ -97,7 +174,9 @@ angular.module('Elidom.Base')
 		 * 초기화 
 		 */
 		$scope.init = function() {
-			$scope.findServiceApiDetail();
+			if($stateParams.id) {
+				$scope.findServiceApiDetail();
+			}
 		};
 
         /**

@@ -46,7 +46,9 @@ angular.module('Elidom.Base')
 		 * 초기화 
 		 */
 		$scope.init = function() {
-			$scope.findServiceDetail();
+			if($stateParams.id) {
+				$scope.findServiceDetail();
+			}
 		};
 
         /**
