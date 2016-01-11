@@ -27,8 +27,8 @@ angular.module('Elidom.Core')
        * return full url
        */
       getFullUrl : function(url) { 
-        //return this.getEndpoint() + url;
-        return 'http://localhost:8080' + url;
+        return this.getEndpoint() + url;
+        //return 'http://localhost:8080' + url;
       },
 
       /**
@@ -193,7 +193,7 @@ angular.module('Elidom.Core')
        * @callback
        * @badcallback
        */
-      search : function(url, params, callback, badcallback) {
+      search : function(url, params, callback, badcallback, errorcallback) {
          var me = this;
 
         if(params) {
@@ -243,6 +243,45 @@ angular.module('Elidom.Core')
         $http.post(fullUrl, params)
           .success(function (dataSet, status) {
             me.invokeSuccess(dataSet, callback, badcallback);
+          })
+          .error(function (data, status) {
+            me.invokeError(status, data, errorcallback);
+          }
+        );
+      },
+
+      /**
+       * post 요청으로 검색  
+       *
+       * @url
+       * @params
+       * @callback
+       * @badcallback
+       * @errorcallback
+       */
+      searchBypost : function(url, params, callback, badcallback, errorcallback) {
+        var me = this;
+        var fullUrl = me.getFullUrl(url);
+        $http.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8';
+        if(params) {
+          params.page = params.page ? params.page : 1;
+          params.start = params.start ? params.start : 0;
+          params.limit = params.limit ? params.limit : 20;
+        }
+
+        $http.post(fullUrl, params)
+          .success(function (dataSet, status) {
+            // 1. good
+            if(dataSet.success) {
+              dataSet.start = params.start;
+              dataSet.limit = params.limit;
+              dataSet.page = Math.ceil(dataSet.start / dataSet.limit) + 1;
+              dataSet.totalPage = (dataSet.total > params.limit) ? Math.ceil(dataSet.total / params.limit) : 1;
+              me.handleSuccess(dataSet, callback);
+            // 2. bad
+            } else {
+              me.handleFailure(dataSet, badcallback);
+            }
           })
           .error(function (data, status) {
             me.invokeError(status, data, errorcallback);

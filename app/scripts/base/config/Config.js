@@ -28,6 +28,16 @@ angular.module('Elidom.Base')
     // Application routing
     $stateProvider
 
+      .state('app.channel', {
+        url: '/channel',
+        views: {
+          'viewContent': {
+            templateUrl: 'templates/views/channel.html',
+            controller: 'ChannelCtrl'
+          }
+        }
+      })
+
       .state('app.service', {
         url: '/service',
         views: {
