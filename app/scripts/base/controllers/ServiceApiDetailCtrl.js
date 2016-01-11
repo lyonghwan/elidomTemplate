@@ -7,7 +7,7 @@
  * # Service API Detail Controller
  */
 angular.module('Elidom.Base')
-	.controller('ServiceApiDetailCtrl', function($rootScope, $scope, $state, $stateParams, $ionicPopup, API_ENDPOINT, MenuService, ApiService, RestApiService) {
+	.controller('ServiceApiDetailCtrl', function($rootScope, $scope, $state, $stateParams, $ionicPopup, API_ENDPOINT, MenuService, ApiService, RestApiService, WebSocketService) {
 
 		/**
 		 * 서비스 상세 
@@ -115,9 +115,19 @@ angular.module('Elidom.Base')
 		};
 
 		/**
-		 * API 상세로 이동 
+		 * API Invoke (Web Socket)
 		 */
-		$scope.invoke = function() {
+		$scope.invokeWebSocket = function() {
+			var item = $scope.item;
+			var params = $scope.isValid(item.inputParams);
+			WebSocketService.send(item.wsUrl, params);
+		};
+
+
+		/**
+		 * API Invoke (Http)
+		 */
+		$scope.invokeHttp = function() {
 			var item = $scope.item;
 			var params = $scope.isValid(item.inputParams);
 

@@ -12,6 +12,7 @@ angular.module('Elidom.Core')
   .constant('API_ENDPOINT', {
     isApp: false,
     mode: 'DEV',
+    protocol: 'http',
     host: '',
     port: 0,
     path: '',

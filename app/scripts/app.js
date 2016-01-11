@@ -16,7 +16,7 @@ angular.module('Elidom.Base', ['Elidom.Core']);
  */
 angular.module('ElidomTemplate', ['Elidom.Core', 'Elidom.Base'])
 
-    .run(function($ionicPlatform, $rootScope, $location, $ionicHistory, $state, SettingService, DynamicLoadService, API_ENDPOINT) {
+    .run(function($ionicPlatform, $rootScope, $location, $ionicHistory, $state, SettingService, localStorageService, DynamicLoadService, API_ENDPOINT) {
 
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
@@ -119,16 +119,15 @@ angular.module('ElidomTemplate', ['Elidom.Core', 'Elidom.Base'])
 
         // Server URL
         $rootScope.serverUrl = 'http://' + $location.host() + ':' + $location.$$port;
-        
-        /*if ($location.host() != '127.0.0.1') {
-            API_ENDPOINT.isApp = false;
-            API_ENDPOINT.needsAuth = false;
-            API_ENDPOINT.mode = 'DEV';
-            API_ENDPOINT.host = 'http://' + $location.host();
-            API_ENDPOINT.port = $location.$$port;
-            API_ENDPOINT.path = '';
-            API_ENDPOINT.pageLimit = 10;
-        }*/
+        // API END_POINT 정보
+        API_ENDPOINT.isApp = false;
+        API_ENDPOINT.needsAuth = false;
+        API_ENDPOINT.mode = 'DEV';
+        API_ENDPOINT.path = '';
+        API_ENDPOINT.pageLimit = 10;
+        API_ENDPOINT.protocol = localStorageService.get('server-protocol') ? localStorageService.get('server-protocol') : 'http';
+        API_ENDPOINT.host = localStorageService.get('server-host') ? localStorageService.get('server-host') : $location.host();
+        API_ENDPOINT.port = localStorageService.get('server-port') ? localStorageService.get('server-port') : $location.$$port;
 
         /**
          * 플러그 인 모듈을 동적 로딩한다.

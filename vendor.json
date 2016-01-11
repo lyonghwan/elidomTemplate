@@ -9,5 +9,7 @@
     "bower_components/ionic-material/dist/ionic.material.min.js",
     "bower_components/ion-md-input/js/ion-md-input.min.js",
     "bower_components/angular-chart.js/dist/angular-chart.min.js",
-    "bower_components/oclazyload/dist/ocLazyLoad.min.js"
+    "bower_components/oclazyload/dist/ocLazyLoad.min.js",
+    "bower_components/sockjs/sockjs.js",
+    "bower_components/stomp-websocket/lib/stomp.js"
 ]

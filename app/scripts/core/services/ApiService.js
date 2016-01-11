@@ -20,7 +20,7 @@ angular.module('Elidom.Core')
        * endpoint
        */
       getEndpoint: function() { 
-        return API_ENDPOINT.port ? (API_ENDPOINT.host + ':' + API_ENDPOINT.port + API_ENDPOINT.path) : (API_ENDPOINT.host + API_ENDPOINT.path); 
+        return API_ENDPOINT.port ? (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + ':' + API_ENDPOINT.port + API_ENDPOINT.path) : (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + API_ENDPOINT.path); 
       },
 
       /**
@@ -28,7 +28,6 @@ angular.module('Elidom.Core')
        */
       getFullUrl : function(url) { 
         return this.getEndpoint() + url;
-        //return 'http://localhost:8080' + url;
       },
 
       /**

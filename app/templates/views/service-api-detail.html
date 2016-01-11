@@ -18,8 +18,13 @@
             </label>
 
             <label class="item item-input item-floating-label">
-                <span class="input-label">URL</span>
-                <input type="text" placeholder="URL" ng-model="item.url">
+                <span class="input-label">Http URL</span>
+                <input type="text" placeholder="Http URL" ng-model="item.url">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">WebSocket URL</span>
+                <input type="text" placeholder="WebSocket URL" ng-model="item.wsUrl">
             </label>
             
             <label class="item item-input item-floating-label">
@@ -37,7 +42,10 @@
             </div>
         </div>
         
-        <button class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="invoke()">Invoke</button>
+        <div class="item">
+            <button class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="invokeHttp()">Invoke (Http)</button>
+            <button class="button button-block button-positive ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="invokeWebSocket()">Invoke (Web Socket)</button>
+        </div>
 
         <h4 class="content padding double-padding-x">Input List</h4>
 
