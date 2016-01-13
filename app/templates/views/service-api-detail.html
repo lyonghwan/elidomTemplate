@@ -34,7 +34,7 @@
 
             <label class="item item-input item-floating-label">
                 <span class="input-label">Return</span>
-                <textarea placeholder="Output" ng-model="item.outputParams" rows="4"></textarea>
+                <textarea placeholder="Return" ng-model="item.outputParams" rows="4"></textarea>
             </label>            
 
             <div class="loader" ng-if="processing">
@@ -42,12 +42,16 @@
             </div>
         </div>
         
-        <div class="item">
-            <button class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="invokeHttp()">Invoke (Http)</button>
-            <button class="button button-block button-positive ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="invokeWebSocket()">Invoke (Web Socket)</button>
+        <h4 class="content double-padding-x">Invoke</h4>
+
+        <div class="button-bar">
+            <button class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="invokeHttp()">Http</button>
+            <button class="button button-block button-positive ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="invokeWebSocket()">Web Socket</button>
+            <!--button class="button button-block button-assertive ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="invokeStomp()">Stomp</button-->
         </div>
 
-        <h4 class="content padding double-padding-x">Input List</h4>
+
+        <h4 class="content double-padding-x">Input List</h4>
 
         <div class="list">
             <a class="item item-avatar item-icon-right" ng-repeat="item in item.inputList">
@@ -56,7 +60,7 @@
             </a>
         </div>
 
-        <h4 class="content padding double-padding-x">Output List</h4>
+        <h4 class="content double-padding-x">Output List</h4>
 
         <div class="list">
             <a class="item item-avatar item-icon-right" ng-repeat="item in item.outputList">

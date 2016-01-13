@@ -7,7 +7,7 @@
  * # Profile Controller
  */
 angular.module('Elidom.Core')
-	.controller('ProfileCtrl', function($rootScope, $scope, $timeout, ionicMaterialInk, ionicMaterialMotion, AuthService, MenuService, ApiService, API_ENDPOINT, localStorageService) {
+	.controller('ProfileCtrl', function($rootScope, $scope, $timeout, ionicMaterialInk, ionicMaterialMotion, AuthService, MenuService, ApiService, API_ENDPOINT, localStorageService, StompWebSocketService) {
 
 	    /**
 	     * 사이드 메뉴 구성 
@@ -73,7 +73,7 @@ angular.module('Elidom.Core')
 	     * Initializer
 	     */
 	    $scope.init = function() {
-	        $scope.getMyInfo();
+	        //$scope.getMyInfo();
 	    };
 
 	});

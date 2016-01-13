@@ -38,6 +38,17 @@ angular.module('Elidom.Base')
         }
       })
 
+      .state('app.channel-detail', {
+        url: '/channel-detail',
+        params : { id : '' },
+        views: {
+          'viewContent': {
+            templateUrl: 'templates/views/channel-detail.html',
+            controller: 'ChannelDetailCtrl'
+          }
+        }
+      })
+
       .state('app.service', {
         url: '/service',
         views: {

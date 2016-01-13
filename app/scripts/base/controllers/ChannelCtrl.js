@@ -54,7 +54,11 @@ angular.module('Elidom.Base')
          * 서비스 디테일로 이동 
          */
         $scope.goDetail = function(item) {
-            $state.go('app.channel-detail', { id : item.id });
+            if(item) {
+                $state.go('app.channel-detail', { id : item.id });
+            } else {
+                $state.go('app.channel-detail', { id : '' });
+            }
         };
 
         /**

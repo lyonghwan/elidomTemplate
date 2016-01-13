@@ -7,65 +7,46 @@
  *  # WebSocket 서비스
  */
 angular.module('Elidom.Core')
-    .factory('WebSocketService', function($q, $timeout) {
+    .factory('WebSocketService', function($rootScope, $ionicPopup, API_ENDPOINT) {
 
-    var service = {};
-    var listener = $q.defer();
-    var socket = { client: null, stomp: null };
-    var messageIds = [];
+    var ws = null, connected = false;
     
-    service.RECONNECT_TIMEOUT = 30000;
-    service.SOCKET_URL = "/";
-    service.CHAT_TOPIC = "/elidom/topic";
-    
-    service.receive = function() {
-        return listener.promise;
-    };
-    
-    service.send = function(url, message) {
-        var id = Math.floor(Math.random() * 1000000);
-        socket.stomp.send(url, {
-            priority: 9
-        }, JSON.stringify({
-            message: message,
-            id: id
-        }));
-        messageIds.push(id);
-    };
-    
-    var reconnect = function() {
-        $timeout(function() {
-            initialize();
-        }, this.RECONNECT_TIMEOUT);
-    };
-    
-    var getMessage = function(data) {
-        var message = JSON.parse(data), out = {};
-        out.message = message.message;
-        out.time = new Date(message.time);
-        if (_.contains(messageIds, message.id)) {
-            out.self = true;
-            messageIds = _.remove(messageIds, message.id);
+    return {
+        isConnected : function() {
+            return connected;
+        },
+
+        connect : function(url) {
+            var realUrl = url[0] == '/' ? url : '/' + url;
+            ws = new WebSocket('ws://' + API_ENDPOINT.host + ':' + API_ENDPOINT.port + realUrl);
+
+            ws.onopen = function () {
+                connected = true;
+                $rootScope.$emit('websocket.opened', url);
+            };
+            
+            ws.onmessage = function (event) {
+                $rootScope.$emit('websocket.onmessage', { data : event.data, wsUrl : url });
+            };
+            
+            ws.onclose = function () {
+                connected = false;
+                $rootScope.$emit('websocket.closed', url);
+            };
+        },
+
+        disconnect : function() {
+            if (ws != null) {
+                ws.close();
+                ws = null;
+            }
+
+            connected = false;
+        },
+
+        send : function(message) {
+            if(ws != null)
+                ws.send(message);
         }
-        
-        return out;
     };
-    
-    var startListener = function() {
-        alert('Connected');
-        socket.stomp.subscribe(service.CHAT_TOPIC, function(data) {
-            listener.notify(getMessage(data.body));
-        });
-    };
-    
-    var initialize = function() {
-      socket.client = new SockJS(service.SOCKET_URL);
-      socket.stomp = Stomp.over(socket.client);
-      socket.stomp.connect({}, startListener);
-      socket.stomp.onclose = reconnect;
-    };
-    
-    initialize();
-    return service;
-
 });

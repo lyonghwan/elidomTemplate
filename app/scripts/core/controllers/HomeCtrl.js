@@ -7,7 +7,7 @@
  * # HomeController
  */
 angular.module('Elidom.Core')
-  .controller('HomeCtrl', function($scope, $http, MenuService, RestApiService, ionicMaterialInk, ionicMaterialMotion) {
+  .controller('HomeCtrl', function($scope, $http, $ionicPopup, MenuService, RestApiService, ionicMaterialInk, ionicMaterialMotion) {
 
     /**
      * 메뉴 
@@ -168,6 +168,6 @@ angular.module('Elidom.Core')
     $scope.init = function() {
         $scope.getAppInfo();
         $scope.getMetrics();
-    }
+    };
 
   });

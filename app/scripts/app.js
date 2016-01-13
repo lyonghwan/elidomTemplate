@@ -16,7 +16,7 @@ angular.module('Elidom.Base', ['Elidom.Core']);
  */
 angular.module('ElidomTemplate', ['Elidom.Core', 'Elidom.Base'])
 
-    .run(function($ionicPlatform, $rootScope, $location, $ionicHistory, $state, SettingService, localStorageService, DynamicLoadService, API_ENDPOINT) {
+    .run(function($ionicPlatform, $rootScope, $location, $ionicHistory, $state, $ionicPopup, SettingService, localStorageService, DynamicLoadService, API_ENDPOINT, StompWebSocketService) {
 
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
@@ -35,6 +35,12 @@ angular.module('ElidomTemplate', ['Elidom.Core', 'Elidom.Base'])
             if(platform == "android" || platform == "ios") {
                 $rootScope.isDivicePlatform = true;
             }
+
+            /**
+             * Stomp Initialize
+             */
+            StompWebSocketService.initialize();
+
         });
 
         /**
@@ -133,4 +139,11 @@ angular.module('ElidomTemplate', ['Elidom.Core', 'Elidom.Base'])
          * 플러그 인 모듈을 동적 로딩한다.
          */
         DynamicLoadService.loadPluginModules();
+
+        /**
+         * 공지 사항 Subscribe
+         */
+        $rootScope.$on('/elidom/stomp/topic/notice', function(event, data) {
+            $ionicPopup.alert({ title : '공지사항', template : data });
+        });
     });

@@ -320,10 +320,10 @@ angular.module('Elidom.Core')
        * @callback
        * @badcallback
        */
-      delete : function(url, params, callback, badcallback) {
+      delete : function(url, params, callback, badcallback, errorcallback) {
         var me = this;
         var fullUrl = me.getFullUrl(url);
-        $http.defaults.headers.delete['Content-Type'] = 'application/json; charset=UTF-8';
+        $http.defaults.headers.delete = {'Content-Type' : 'application/json; charset=UTF-8'};
 
         $http.delete(fullUrl, params)
           .success(function (dataSet, status) {

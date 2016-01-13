@@ -7,7 +7,7 @@
  * # Service API Detail Controller
  */
 angular.module('Elidom.Base')
-	.controller('ServiceApiDetailCtrl', function($rootScope, $scope, $state, $stateParams, $ionicPopup, API_ENDPOINT, MenuService, ApiService, RestApiService, WebSocketService) {
+	.controller('ServiceApiDetailCtrl', function($rootScope, $scope, $state, $stateParams, $ionicPopup, API_ENDPOINT, MenuService, ApiService, RestApiService, WebSocketService, StompWebSocketService) {
 
 		/**
 		 * 서비스 상세 
@@ -115,14 +115,26 @@ angular.module('Elidom.Base')
 		};
 
 		/**
+		 * API Invoke (Stomp)
+		 */
+		$scope.invokeStomp = function() {
+			var params = $scope.isValid($scope.item.inputParams);
+			if(params !== false) {
+				$scope.item.outputParams = '';
+				StompWebSocketService.send($scope.item.wsUrl, $scope.item.inputParams);
+			}			
+		};
+
+		/**
 		 * API Invoke (Web Socket)
 		 */
 		$scope.invokeWebSocket = function() {
-			var item = $scope.item;
-			var params = $scope.isValid(item.inputParams);
-			WebSocketService.send(item.wsUrl, params);
+			var params = $scope.isValid($scope.item.inputParams);
+			if(params !== false) {
+				$scope.item.outputParams = '';
+				WebSocketService.connect($scope.item.wsUrl);
+			}
 		};
-
 
 		/**
 		 * API Invoke (Http)
@@ -132,6 +144,7 @@ angular.module('Elidom.Base')
 			var params = $scope.isValid(item.inputParams);
 
 			if(false !== params) {
+				$scope.item.outputParams = '';
 				var method = item.method;
 				var url = '/' + item.url;
 				
@@ -151,6 +164,7 @@ angular.module('Elidom.Base')
 		 * invoke success
 		 */
 		$scope.invokeSuccess = function(dataSet) {
+			//$ionicPopup.alert({ title : 'Success', template : '리턴값을 확인하세요' });
 			$scope.item.outputParams = JSON.stringify(dataSet, null, "\t");
 		},
 
@@ -158,6 +172,7 @@ angular.module('Elidom.Base')
 		 * invoke failed
 		 */
 		$scope.invokeFailure = function(dataSet) {
+			//$ionicPopup.alert({ title : 'Failure', template : '리턴값을 확인하세요' });
 			$scope.item.outputParams = JSON.stringify(dataSet);
 		},		
 
@@ -188,6 +203,46 @@ angular.module('Elidom.Base')
 				$scope.findServiceApiDetail();
 			}
 		};
+
+		/**
+		 * Web Socket Connected Listener
+		 */
+		var wsOpenListener = $rootScope.$on('websocket.opened', function(event, data) {
+			//$ionicPopup.alert({ title : 'WebSocket connection connected.' });
+			if($scope.item && $scope.item.wsUrl == data) {
+				WebSocketService.send($scope.item.inputParams);
+			}
+		});
+
+		/**
+		 * Web Socket OnMessage Listener
+		 */
+		var wsOnmessageListener = $rootScope.$on('websocket.onmessage', function(event, data) {
+			if($scope.item && $scope.item.wsUrl == data.wsUrl) {
+				$ionicPopup.alert({ title : 'Received Response', template : '리턴값을 확인하세요' });
+				WebSocketService.disconnect();
+				$scope.item.outputParams = data.data;
+			}
+		});
+
+		/**
+		 * Stomp OnMessage Listener
+		 */
+		/*var stompOnmessageListener = $rootScope.$on('/elidom/stomp/topic/service', function(event, data) {
+			if($scope.item) {
+				$ionicPopup.alert({ title : 'Received Response', template : '리턴값을 확인하세요' });
+				$scope.item.outputParams = data;
+			}
+		});*/
+
+		/**
+		 * Scope destroy시 timeout 제거
+		 */
+		$scope.$on('$destroy', function(event) {
+			wsOpenListener();
+			wsOnmessageListener();
+			//stompOnmessageListener();
+		});
 
         /**
          * 검색 종료 이벤트를 받아서 스피너 중단.
