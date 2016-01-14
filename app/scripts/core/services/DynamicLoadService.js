@@ -7,7 +7,7 @@
  *  # 플러그인 동적 로딩 서비스
  */
 angular.module('Elidom.Core')
-    .factory('DynamicLoadService', function($rootScope, $q, $ocLazyLoad, ApiService) {
+    .factory('DynamicLoadService', function($rootScope, $q, $ocLazyLoad, RestApiService) {
 
         return {
             /**
@@ -50,12 +50,16 @@ angular.module('Elidom.Core')
              */
             loadPluginModules : function() {
                 var me = this;
-                var url = '/data/plugins/uiModuleServiceList.json';
-                ApiService.list(url, null, 
+                var url = '/core/service/module/list.json';
+                RestApiService.get(url, null, 
                     function(dataSet) {
-                        var moduleList = dataSet.list;
+                        var moduleList = dataSet.items;
                         for(var i = 0 ; i < moduleList.length ; i++) {
-                            me.loadPluginModule(moduleList[i]);
+                            var module = moduleList[i];
+                            var urlToLoad = module.uiManifestUrl;
+                            if(urlToLoad && urlToLoad != '' && urlToLoad != 'none' && urlToLoad.length > 10) {
+                                me.loadPluginModule(urlToLoad);
+                            }
                         }
                     }, 
                     null, 
@@ -69,9 +73,28 @@ angular.module('Elidom.Core')
              */
             loadPluginModule : function(url) {
                 var me = this;
-                ApiService.get(url, null, function(moduleInfo) {
+                RestApiService.get(url, null, function(moduleInfo) {
+                    var moduleFileList = moduleInfo.list;
+                    for(var i = 0 ; i < moduleFileList.length ; i++) {
+                        var moduleFile = moduleFileList[i];
+                        me.loadPluginFiles(moduleFile);
+                    }
+                });
+            },
+
+            /**
+             * 플러그 인 모듈 동적 로드 
+             */
+            loadPluginFiles : function(url) {
+                var me = this;
+                RestApiService.get(url, null, function(moduleInfo) {
                     if(moduleInfo.files) {
-                        me.loadModule(moduleInfo.name, moduleInfo.files);
+                        var files = [];
+                        for(var i = 0 ; i < moduleInfo.files.length ; i++) {
+                            files.push(RestApiService.getFullUrl(moduleInfo.files[i]));
+                        }
+
+                        me.loadModule(moduleInfo.name, files);
                     }
                 });
             }

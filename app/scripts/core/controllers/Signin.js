@@ -11,7 +11,7 @@ angular.module('Elidom.Core')
         /**
          * 사용자 정보 바인딩 모델 
          */
-        $scope.user = { userid : '', password : '', autosignin : true };
+        $scope.user = { userid : '', password : '', autosignin : false };
         /**
          * 메시지 
          */

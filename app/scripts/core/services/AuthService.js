@@ -15,7 +15,7 @@ angular.module('Elidom.Core')
        * get end point
        */
       getEndpoint : function() { 
-        return API_ENDPOINT.port ? (API_ENDPOINT.host + ':' + API_ENDPOINT.port + API_ENDPOINT.path) : (API_ENDPOINT.host + API_ENDPOINT.path); 
+        return API_ENDPOINT.port ? (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + ':' + API_ENDPOINT.port + API_ENDPOINT.path) : (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + API_ENDPOINT.path); 
       },
 
       /**
@@ -25,16 +25,37 @@ angular.module('Elidom.Core')
         if(API_ENDPOINT.mode == 'PRODUCTION') {
           return 'https://newclip.nicednb.com:458/mobile/login/clipLogin.json';
         } else {
-          return this.getEndpoint() + '/login/clipLogin.json'; 
+          return this.getEndpoint() + '/login'; 
         }
       },
       
       /**
        * 서버 에러 발생시 에러 처리 
        */
-      handleError : function(data, status, headers, config) {
-        var msg = (!status || status === 0 || status == 404) ? '서버 접속에 실패했습니다.<br/>관리자에게 문의하세요.' : ('Status : ' + status + ', ' + data);
-        this.showErrorMessage(msg);
+      handleError : function(response) {
+        if(response && response.status && response.status == 401) {
+          $rootScope.goSignin("세션이 유효하지 않습니다. 로그인 후 이용하세요.");
+
+        } else {
+          if(!response) {
+            var msg = '서버 접속에 실패했습니다.<br/>관리자에게 문의하세요.';
+            this.showErrorMessage(msg);
+
+          } else if(response.data) {
+            this.showDetailErrorMessage(response.data);
+
+          } else {
+            var msg = (!response.status || response.status === 0 || response.status == 404) ? '서버 접속에 실패했습니다.<br/>관리자에게 문의하세요.' : ('Status : ' + response.status + ', ' + response.error);
+            this.showErrorMessage(msg);
+          }
+        }
+      },
+
+      /**
+       * Show Detail Error Message
+       */
+      showDetailErrorMessage : function(errorData) {
+        $ionicPopup.alert({ title : '오류 (' + errorData.code + ')', template : 'status : ' + errorData.status + '<br/> message : ' + errorData.msg });
       },
 
       /**
@@ -42,7 +63,7 @@ angular.module('Elidom.Core')
        */
       showErrorMessage : function(msg) {
         $ionicPopup.alert({ title : '오류', template : msg });
-      },      
+      },
 
       /**
        * signin
@@ -50,9 +71,12 @@ angular.module('Elidom.Core')
       signin : function(userId, passwd, autosignin, goodCallback, badCallback) {
         var me = this;
         var url = this.getSigininEndpoint();
-        var params = "user_id=" + userId + "&passwd=" + passwd;
+        //var params = "username=" + userId + "&password=" + passwd;
+        var params = "username=" + userId;
+        //var params = { email : userId, password: passwd };
         $http.defaults.headers.common['Accept'] = '*/*';
         $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+        //$http.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8';
 
         $http.post(url, params).
           success(function(data, status, headers, config) {
@@ -80,7 +104,7 @@ angular.module('Elidom.Core')
        * signout
        */
       signout : function(goodCallback, badCallback) {
-        var url = this.getEndpoint() + '/login/clipLogout.json';
+        var url = this.getEndpoint() + '/logout.json';
         $http.defaults.headers.common['Accept'] = '*/*';
         $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
