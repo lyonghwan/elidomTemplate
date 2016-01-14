@@ -26,8 +26,13 @@ angular.module('Elidom.Core')
       /**
        * return full url
        */
-      getFullUrl : function(url) { 
-        return this.getEndpoint() + url;
+      getFullUrl : function(url) {
+        var firstChar = url[0];
+        if(firstChar == '/') {
+          return this.getEndpoint() + url;
+        } else {
+          return this.getEndpoint() + '/' + url;
+        }
       },
 
       /**
@@ -61,7 +66,7 @@ angular.module('Elidom.Core')
           if(callback) {
             callback(dataSet);
           } else {
-            var msg = (dataSet && dataSet.msg && dataSet.msg.length < 50) ? dataSet.msg : '서버이상이 발생되었습니다.<br/>관리자에게 문의하세요.';
+            var msg = (dataSet && dataSet.msg && dataSet.msg.length < 50) ? dataSet.msg : '서버 이상이 발생되었습니다.<br/>관리자에게 문의하세요.';
             this.showErrorMessage(msg);
           }
         }

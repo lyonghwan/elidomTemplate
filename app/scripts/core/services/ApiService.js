@@ -27,7 +27,12 @@ angular.module('Elidom.Core')
        * return full url
        */
       getFullUrl : function(url) { 
-        return this.getEndpoint() + url;
+        var firstChar = url[0];
+        if(firstChar == '/') {
+          return this.getEndpoint() + url;
+        } else {
+          return this.getEndpoint() + '/' + url;
+        }
       },
 
       /**
