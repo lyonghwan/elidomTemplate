@@ -17,7 +17,8 @@
 
         <div class="list">
             <a class="item item-avatar item-icon-right" ng-repeat="item in items" ng-click="goDetail(item)">
-                <h2>{{item.name}}</h2>
+                <img ng-src="images/run.png" ng-if="item.status == 'RUN'">
+                <h2>{{item.name}} {{item.status | bracket}}</h2>
                 <p>{{item.description}}</p>
                 <h2>Channel : {{item.topic}}</h2>
                 <p>Listener : {{item.listener}}</p>

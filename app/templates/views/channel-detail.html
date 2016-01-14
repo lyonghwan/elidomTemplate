@@ -13,6 +13,11 @@
             </label>
 
             <label class="item item-input item-floating-label">
+                <span class="input-label">상태</span>
+                <input type="text" placeholder="상태" ng-model="item.status">
+            </label>            
+
+            <label class="item item-input item-floating-label">
                 <span class="input-label">토픽 타입</span>
                 <ion-radio ng-model="item.topicType" ng-value="'ChannelTopic'" icon="ion-closed-captioning">Channel Topic</ion-radio>
                 <ion-radio ng-model="item.topicType" ng-value="'PatternTopic'" icon="ion-nuclear">Pattern Topic</ion-radio>                
