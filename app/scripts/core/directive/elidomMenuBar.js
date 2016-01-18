@@ -19,6 +19,9 @@ angular.module('Elidom.Core')
                 '<ion-item nav-clear menu-close ui-sref="app.service">' + 
                     '<i class="icon ion-speakerphone"></i> 서비스' + 
                 '</ion-item>' + 
+                '<ion-item nav-clear menu-close ui-sref="app.dynamic-logic">' + 
+                    '<i class="icon ion-lock-combination"></i> Dynamic Logic' + 
+                '</ion-item>' +                 
                 '<ion-item nav-clear menu-close ui-sref="app.channel">' + 
                     '<i class="icon ion-social-rss"></i> 채널 관리' + 
                 '</ion-item>' +                 

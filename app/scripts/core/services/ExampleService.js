@@ -8,7 +8,7 @@
  */
 angular.module('Elidom.Core')
   // use factory for services
-  .factory('ExampleService', function($http, $timeout, $q, ApiService) {
+  .factory('ExampleService', function($http, $timeout, $q, RestApiService) {
 
     var kindOfPrivateVariable = 42;
 
@@ -24,9 +24,9 @@ angular.module('Elidom.Core')
         var config = { headers : {} };
         config.headers['Content-Type'] = 'application/json;charset=UTF-8';
 
-        var url = ApiService.getEndpoint() + '/dnb/service/user/register.json';
+        var url = RestApiService.makeFullUrl(RestApiService.getContextPathUrl(), '/dnb/service/user/register.json');
 
-        var dataParams= { param : 'Hello'};
+        var dataParams = { param : 'Hello'};
 
         var response = $http.get(url, dataParams, config)
           .success(function(data, status, headers, config)  {
@@ -41,7 +41,7 @@ angular.module('Elidom.Core')
 
     var postApi = function() {
       var config = { headers : {'Content-Type' : 'application/json;charset=UTF-8'} };
-      var url = ApiService.getEndpoint() + '/dnb/service/user/register.json';
+      var url = RestApiService.makeFullUrl(RestApiService.getContextPathUrl(), '/dnb/service/user/register.json');
       var params = {
          userId : "mw1106.kim",
          userNm : "Kim minwoo"
@@ -65,7 +65,7 @@ angular.module('Elidom.Core')
       var config = { headers : {} };
       config.headers['Content-Type'] = 'application/json;charset=UTF-8';
 
-      var url = ApiService.getEndpoint() + '/dnb/service/user/register.json';
+      var url = RestApiService.makeFullUrl(RestApiService.getContextPathUrl(), '/dnb/service/user/register.json');
 
       var dataParams= { param : 'Hello'};
 

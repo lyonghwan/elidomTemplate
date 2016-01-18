@@ -61,7 +61,9 @@ angular.module('Elidom.Core')
      * Get application information
      */
     $scope.getAppInfo = function() {
-        var url = RestApiService.getFullUrl('/info');
+        var serverUrl = RestApiService.getServerUrl();
+        var url = RestApiService.makeFullUrl(serverUrl, '/info');
+        
         $scope.invokeHttpGet(url, null, 
             function(dataSet) {
                 $scope.info = dataSet;
@@ -72,7 +74,9 @@ angular.module('Elidom.Core')
      * Get metrics
      */
     $scope.getMetrics = function() {
-        var url = RestApiService.getFullUrl('/metrics');
+        var serverUrl = RestApiService.getServerUrl();
+        var url = RestApiService.makeFullUrl(serverUrl, '/metrics');
+
         $scope.invokeHttpGet(url, null, 
             function(dataSet) {
                 $scope.metrics = dataSet;

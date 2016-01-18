@@ -16,6 +16,8 @@ angular.module('Elidom.Base')
 			serverProtocol : API_ENDPOINT.protocol,
 			serverHost : API_ENDPOINT.host,
 			serverPort : API_ENDPOINT.port,
+			contextPath : API_ENDPOINT.path,
+			urlPrefix : API_ENDPOINT.urlPrefix,
 			autosignin : localStorageService.get('autosignin') ? localStorageService.get('autosignin') : false,
 			allowPush : localStorageService.get('allow-push') ? localStorageService.get('allow-push') : false
 		};
@@ -70,9 +72,14 @@ angular.module('Elidom.Base')
 				API_ENDPOINT.protocol = $scope.settings.serverProtocol;
 				API_ENDPOINT.host = $scope.settings.serverHost;
 				API_ENDPOINT.port = $scope.settings.serverPort;
+				API_ENDPOINT.path = $scope.settings.contextPath;
+				API_ENDPOINT.urlPrefix = $scope.settings.urlPrefix;
+				
 				localStorageService.set('server-protocol', API_ENDPOINT.protocol);
 				localStorageService.set('server-host', API_ENDPOINT.host);
 				localStorageService.set('server-port', API_ENDPOINT.port);
+				localStorageService.set('context-path', API_ENDPOINT.path);
+				localStorageService.set('url-prefix', API_ENDPOINT.urlPrefix);
 				$ionicPopup.alert({ title : '저장되었습니다.' });
 			} else {
 				$ionicPopup.alert({ title : '설정값이 유효하지 않습니다.' });

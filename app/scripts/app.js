@@ -129,11 +129,12 @@ angular.module('ElidomTemplate', ['Elidom.Core', 'Elidom.Base'])
         API_ENDPOINT.isApp = false;
         API_ENDPOINT.needsAuth = false;
         API_ENDPOINT.mode = 'DEV';
-        API_ENDPOINT.path = '';
         API_ENDPOINT.pageLimit = 10;
         API_ENDPOINT.protocol = localStorageService.get('server-protocol') ? localStorageService.get('server-protocol') : 'http';
         API_ENDPOINT.host = localStorageService.get('server-host') ? localStorageService.get('server-host') : $location.host();
         API_ENDPOINT.port = localStorageService.get('server-port') ? localStorageService.get('server-port') : $location.$$port;
+        API_ENDPOINT.path = localStorageService.get('context-path') ? localStorageService.get('context-path') : '/';
+        API_ENDPOINT.urlPrefix = localStorageService.get('url-prefix') ? localStorageService.get('url-prefix') : '/core/service';
 
         /**
          * 플러그 인 모듈을 동적 로딩한다.

@@ -39,13 +39,13 @@ angular.module('Elidom.Base')
         /**
          * service url
          */
-        $scope.serviceUrl = '/core/service/channel/search.json';
+        var serviceUrl = '/channel/search.json';
         /**
          * 검색
          */
         $scope.search = function() {
             $scope.searching = true;
-            RestApiService.searchBypost($scope.serviceUrl, $scope.searchData, function(dataSet) {
+            RestApiService.searchBypost(serviceUrl, $scope.searchData, function(dataSet) {
                 $scope.items = dataSet.items;
             });
         };

@@ -6,7 +6,7 @@
  * @description 공지사항
  */
 angular.module('Elidom.Core')
-    .controller('NoticeCtrl', function($scope, $http, $ionicPopup, API_ENDPOINT, MenuService, ApiService) {
+    .controller('NoticeCtrl', function($scope, $http, $ionicPopup, API_ENDPOINT, MenuService, RestApiService) {
 
         /**
          * 메뉴 리스트
@@ -43,7 +43,7 @@ angular.module('Elidom.Core')
         /**
          * service url
          */
-        $scope.serviceUrl = '/data/default/noticeList.json';
+        var serviceUrl = '/data/default/noticeList.json';
 
         /**
          * [toggleItem Acordian 구현]
@@ -74,14 +74,23 @@ angular.module('Elidom.Core')
         });
 
         /**
+         * Search Full URL
+         */
+        $scope.searchFullUrl = function(url) {
+            var contextPath = RestApiService.getContextPathUrl();
+            return RestApiService.makeFullUrl(contextPath, url);
+        },
+
+        /**
          * 검색
          */
         $scope.search = function() {
             $scope.searching = true;
             $scope.currentPage = 1;
             var params = { limit : $scope.pageDataCnt, searchKey : $scope.search.key };
+            var url = $scope.searchFullUrl(serviceUrl);
 
-            ApiService.search($scope.serviceUrl, params, function(dataSet) {
+            RestApiService.search(url, params, function(dataSet) {
                 $scope.totalCount = dataSet.total;
                 $scope.hasMoreItems = ($scope.currentPage < dataSet.totalPage);
                 angular.forEach(dataSet.items, function(item) {
@@ -99,6 +108,7 @@ angular.module('Elidom.Core')
         $scope.searchMore = function() {
             $scope.currentPage = $scope.currentPage + 1;
             var skip = ($scope.currentPage - 1) * $scope.pageDataCnt;
+            var url = $scope.searchFullUrl(serviceUrl);
             var params = {
                 page : $scope.currentPage,
                 start : skip,
@@ -106,7 +116,7 @@ angular.module('Elidom.Core')
                 searchKey : $scope.search.key
             };
 
-            ApiService.search($scope.serviceUrl, params, function(dataSet) {
+            RestApiService.search(url, params, function(dataSet) {
                 $scope.hasMoreItems = ($scope.currentPage < dataSet.totalPage);
                 angular.forEach(dataSet.list, function(item) {
                     item.active = false;
@@ -133,12 +143,12 @@ angular.module('Elidom.Core')
          * @param  Object params [검색 조건]
          */
         $scope.showItemData = function(item) {
-            var url = "/data/default/notice.json";
+            var url = $scope.searchFullUrl('/data/default/notice.json');
             var params = { s_no : item.s_no };
             item.searching = true;
             $scope.itemDetail = "";
             
-            ApiService.get(url, params, 
+            RestApiService.get(url, params, 
                 function(dataSet) {
                     item.active = true;
                     // 공지사항 상세 조회 진행 중 여부 - For Spinner show / hide

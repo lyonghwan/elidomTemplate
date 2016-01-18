@@ -16,22 +16,69 @@ angular.module('Elidom.Core')
 
     // public api
     return {
+
+      /**
+       * context path까지의 Full URL
+       */
+      getServerUrl: function() {
+        return API_ENDPOINT.port ? 
+                (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + ':' + API_ENDPOINT.port) :
+                (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host);
+      },
+
+      /**
+       * context path까지의 Full URL
+       */
+      getContextPathUrl: function() {
+        if(!API_ENDPOINT.path || API_ENDPOINT.path == '' || API_ENDPOINT.path == '/') {
+          return this.getServerUrl();
+        } else {
+          var firstChar = API_ENDPOINT.path[0];
+          if(firstChar == '/') {
+            return this.getServerUrl() + API_ENDPOINT.path;
+          } else {
+            return this.getServerUrl() + '/' + API_ENDPOINT.path;
+          }
+        }
+      },
+
       /**
        * endpoint
        */
-      getEndpoint: function() { 
-        return API_ENDPOINT.port ? (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + ':' + API_ENDPOINT.port + API_ENDPOINT.path) : (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + API_ENDPOINT.path); 
+      getEndpoint: function() {
+        var firstChar = (API_ENDPOINT.urlPrefix && API_ENDPOINT.urlPrefix.length > 0) ? API_ENDPOINT.urlPrefix[0] : '';
+        if(firstChar == '/') {
+          return this.getContextPathUrl() + API_ENDPOINT.urlPrefix;
+        } else {
+          return this.getContextPathUrl() + '/' + API_ENDPOINT.urlPrefix;
+        }
       },
 
       /**
        * return full url
        */
-      getFullUrl : function(url) {
+      getFullUrl: function(url) {
+        if(url.indexOf('http://') >= 0) {
+          return url;
+        } else {
+          var firstChar = url[0];
+          if(firstChar == '/') {
+            return this.getEndpoint() + url;
+          } else {
+            return this.getEndpoint() + '/' + url;
+          }          
+        }
+      },
+
+      /**
+       * Full URL(contextPath + url)을 리턴.
+       */
+      makeFullUrl : function(contextPath, url) {
         var firstChar = url[0];
         if(firstChar == '/') {
-          return this.getEndpoint() + url;
+          return contextPath + url;
         } else {
-          return this.getEndpoint() + '/' + url;
+          return contextPath + '/' + url;
         }
       },
 

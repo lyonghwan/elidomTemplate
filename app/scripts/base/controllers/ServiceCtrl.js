@@ -39,11 +39,11 @@ angular.module('Elidom.Base')
         /**
          * get module list url
          */
-        $scope.moduleListUrl = '/core/service/module/moduleNames.json';        
+        var moduleListUrl = '/module/moduleNames.json';        
         /**
          * service url
          */
-        $scope.serviceUrl = '/core/service/api/list.json';
+        var serviceUrl = '/api/list.json';
         /**
          * Module List
          */
@@ -53,7 +53,7 @@ angular.module('Elidom.Base')
          * Module List 조회 
          */
         $scope.getModuleList = function() {
-            RestApiService.get($scope.moduleListUrl, null, function(dataSet) {
+            RestApiService.get(moduleListUrl, null, function(dataSet) {
                 if(dataSet.items) {
                     $scope.modules = [];
                     for(var i = 0 ; i < dataSet.items.length ; i++) {
@@ -71,7 +71,7 @@ angular.module('Elidom.Base')
          */
         $scope.search = function() {
             $scope.searching = true;
-            RestApiService.searchBypost($scope.serviceUrl, $scope.searchData, function(dataSet) {
+            RestApiService.searchBypost(serviceUrl, $scope.searchData, function(dataSet) {
                 $scope.items = dataSet.items;
             });
         };

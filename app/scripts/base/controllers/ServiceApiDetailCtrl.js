@@ -7,7 +7,7 @@
  * # Service API Detail Controller
  */
 angular.module('Elidom.Base')
-	.controller('ServiceApiDetailCtrl', function($rootScope, $scope, $state, $stateParams, $ionicPopup, API_ENDPOINT, MenuService, ApiService, RestApiService, WebSocketService, StompWebSocketService) {
+	.controller('ServiceApiDetailCtrl', function($rootScope, $scope, $state, $stateParams, $ionicPopup, API_ENDPOINT, MenuService, RestApiService, WebSocketService, StompWebSocketService) {
 
 		/**
 		 * 서비스 상세 
@@ -16,18 +16,18 @@ angular.module('Elidom.Base')
 		/**
 		 * 서비스 상세 조회 URL
 		 */
-		var serviceUrl = '/core/service/api/findApi.json';
+		var serviceUrl = '/api/findApi.json';
 		/**
 		 * 실행 중 여부 - For Spinner
 		 */
-		var processing = false;
+		$scope.processing = false;
 
 		/**
 		 * 서비스 찾기 
 		 */
 		$scope.findServiceApiDetail = function() {
 			var params = {id : $stateParams.id };
-			this.processing = true;
+			$scope.processing = true;
 
 			RestApiService.get(serviceUrl, params,
 				function(dataSet) {
@@ -115,6 +115,17 @@ angular.module('Elidom.Base')
 		};
 
 		/**
+		 * Replace Invoke URL 
+		 */
+		$scope.makeInvokeUrl = function(url) {
+			if(url[0] == '/') {
+				return RestApiService.getContextPathUrl() + url;
+			} else {
+				return RestApiService.getContextPathUrl() + '/' + url;
+			}
+		};
+
+		/**
 		 * API Invoke (Stomp)
 		 */
 		$scope.invokeStomp = function() {
@@ -146,14 +157,14 @@ angular.module('Elidom.Base')
 			if(false !== params) {
 				$scope.item.outputParams = '';
 				var method = item.method;
-				var url = '/' + item.url;
+				var url = $scope.makeInvokeUrl(item.url);
 				
 				if(method == 'POST') {
 					RestApiService.post(url, params, $scope.invokeSuccess, $scope.invokeFailure);
 				} else if(method == 'PUT' || method == 'PATCH') {
-					RestApiService.post(url, params, $scope.invokeSuccess, $scope.invokeFailure);
+					RestApiService.put(url, params, $scope.invokeSuccess, $scope.invokeFailure);
 				} else if(method == 'DELETE') {
-					RestApiService.post(url, params, $scope.invokeSuccess, $scope.invokeFailure);
+					RestApiService.delete(url, params, $scope.invokeSuccess, $scope.invokeFailure);
 				} else {
 					RestApiService.get(url, params, $scope.invokeSuccess, $scope.invokeFailure);
 				}

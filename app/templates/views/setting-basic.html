@@ -14,6 +14,14 @@
                 <span class="input-label">접속 서버 Port</span>
                 <input type="number" placeholder="접속 서버 Port" ng-model="settings.serverPort">
             </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Context Path</span>
+                <input type="text" placeholder="Context Path" ng-model="settings.contextPath">
+            </label>            
+            <label class="item item-input item-floating-label">
+                <span class="input-label">URL Prefix</span>
+                <input type="text" placeholder="URL Prefix" ng-model="settings.urlPrefix">
+            </label>
             <ion-toggle ng-model="settings.autosignin" toggle-class="toggle-calm" ng-click="toggleAutosignin()">자동 로그인</ion-toggle>
             <ion-toggle ng-model="settings.allowPush" toggle-class="toggle-calm" ng-click="toggleReceivePush()">Push 허용</ion-toggle>
         </div>

@@ -20,7 +20,9 @@ angular.module('Elidom.Core')
        * endpoint
        */
       getEndpoint: function() { 
-        return API_ENDPOINT.port ? (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + ':' + API_ENDPOINT.port + API_ENDPOINT.path) : (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + API_ENDPOINT.path); 
+        return API_ENDPOINT.port ? 
+                (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + ':' + API_ENDPOINT.port + API_ENDPOINT.path + API_ENDPOINT.urlPrefix) : 
+                (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + API_ENDPOINT.path + API_ENDPOINT.urlPrefix); 
       },
 
       /**

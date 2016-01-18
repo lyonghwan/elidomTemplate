@@ -20,34 +20,34 @@ angular.module('Elidom.Base')
 		/**
 		 * 채널 조회 URL
 		 */
-		var findUrl = '/core/service/channel/find.json';
+		var findUrl = '/channel/find.json';
 		/**
 		 * 채널 생성 URL
 		 */
-		var createUrl = '/core/service/channel/create.json';
+		var createUrl = '/channel/create.json';
 		/**
 		 * 채널 업데이트 URL
 		 */
-		var updateUrl = '/core/service/channel/update.json';
+		var updateUrl = '/channel/update.json';
 		/**
 		 * 채널 삭제 URL
 		 */
-		var deleteUrl = '/core/service/channel/delete.json';
+		var deleteUrl = '/channel/delete.json';
 		/**
 		 * 채널 삭제 URL
 		 */
-		var applyUrl = '/core/service/channel/applyListener.json';
+		var applyUrl = '/channel/applyListener.json';
 		/**
 		 * 실행 중 여부 - For Spinner
 		 */
-		var processing = false;
+		$scope.processing = false;
 
 		/**
 		 * 서비스 찾기 
 		 */
 		$scope.findChannelDetail = function() {
 			var params = {id : $stateParams.id };
-			this.processing = true;
+			$scope.processing = true;
 
 			RestApiService.get(findUrl, params,
 				function(dataSet) {
@@ -59,7 +59,7 @@ angular.module('Elidom.Base')
 		 * 채널 생성 
 		 */
 		$scope.createChannel = function() {
-			this.processing = true;
+			$scope.processing = true;
 			RestApiService.post(createUrl, $scope.item,
 				function(dataSet) {
 					$scope.item = dataSet.item;
@@ -70,7 +70,7 @@ angular.module('Elidom.Base')
 		 * 채널 업데이트 
 		 */
 		$scope.updateChannel = function() {
-			this.processing = true;
+			$scope.processing = true;
 			RestApiService.put(updateUrl, $scope.item,
 				function(dataSet) {
 					$scope.item = dataSet.item;
@@ -81,7 +81,7 @@ angular.module('Elidom.Base')
 		 * 채널 삭제  
 		 */
 		$scope.deleteChannel = function() {
-			this.processing = true;
+			$scope.processing = true;
 			RestApiService.delete(deleteUrl + '?id=' + $scope.item.id, null,
 				function(dataSet) {
 					$state.go('app.channel');
@@ -92,7 +92,7 @@ angular.module('Elidom.Base')
 		 * 채널 적용  
 		 */
 		$scope.applyChannel = function() {
-			this.processing = true;
+			$scope.processing = true;
 			RestApiService.post(applyUrl, $scope.item,
 				function(dataSet) {
 					$ionicPopup.alert({ title : 'Success', template : 'Succeeded to binding Listener and Topic' });
