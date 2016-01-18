@@ -1,0 +1,200 @@
+product_id,product_name,customer_id,customer_name,country,phone,unit,currency,unit_price,quantity,order_date,ship_date
+primis,mattis,curabitur,nunc purus,Venezuela,6-(330)118-1978,amet,VEF,738.94,534,2015/05/30,2014-12-01T19:50:22Z
+sapien,pede,diam,posuere,Iceland,5-(824)596-5295,at,ISK,333.25,853,2015/07/18,2014-09-23T23:09:01Z
+vivamus,vestibulum ante,cum,etiam justo,Panama,0-(465)962-4766,vulputate,PAB,446.14,407,2015/06/11,2015-03-29T10:20:22Z
+aliquam,quam,lacus,curabitur,Indonesia,5-(409)152-1939,odio,IDR,821.4,298,2014/09/22,2015-03-16T13:07:15Z
+sed,vestibulum,libero,sit amet,Portugal,1-(929)310-2296,aliquet,EUR,210.4,707,2015/03/25,2014-09-20T19:09:33Z
+amet,ut,nulla,amet sem,Tunisia,4-(933)693-7665,leo,TND,150.27,575,2014/12/05,2015-03-15T12:50:28Z
+dui,pretium,ut,molestie sed,Indonesia,9-(756)122-6539,tristique,IDR,773.14,39,2015/02/05,2015-04-23T09:22:56Z
+lorem,vel,metus,ornare,Poland,7-(954)646-9892,mauris,PLN,563.45,848,2015/05/09,2015-05-11T08:48:43Z
+luctus,donec ut,posuere,sagittis,Russia,5-(373)498-0078,nunc,RUB,880.48,350,2014/12/17,2015-06-10T01:40:44Z
+amet,libero quis,suspendisse,eget,Sweden,0-(106)737-1124,turpis,SEK,815.2,702,2015/03/21,2015-04-24T18:14:49Z
+quis,maecenas tincidunt,sed,integer non,Ukraine,3-(944)589-8137,et,UAH,743.49,372,2014/10/08,2015-03-20T09:29:03Z
+non,penatibus et,lacus,nisl aenean,Nigeria,6-(376)982-2757,et,NGN,573.31,705,2014/08/24,2014-10-02T08:14:45Z
+pellentesque,nullam,vestibulum,velit eu,Russia,4-(930)927-2692,nibh,RUB,519.93,599,2015/02/09,2015-02-07T17:15:52Z
+ut,dapibus,volutpat,urna,Honduras,1-(347)633-8825,erat,HNL,729.44,232,2014/10/05,2014-09-16T15:19:50Z
+in,ante,sed,in,Somalia,3-(782)457-0825,parturient,SOS,338.77,780,2015/06/06,2014-10-10T12:46:07Z
+sapien,elit proin,lorem,pretium,Thailand,8-(856)214-0849,dolor,THB,803.36,950,2015/04/24,2014-09-04T23:41:48Z
+mi,aliquam non,amet,convallis tortor,Panama,4-(880)045-7556,vestibulum,PAB,180.09,806,2015/03/16,2015-01-14T03:15:19Z
+est,convallis nulla,suscipit,aenean,Argentina,6-(077)533-7619,fusce,ARS,703.81,351,2015/01/01,2015-06-25T23:01:23Z
+odio,sed,amet,sapien non,China,4-(231)592-4832,quisque,CNY,150.71,328,2014/12/18,2015-06-11T16:40:44Z
+nulla,mauris,lorem,eget,Brazil,3-(647)281-7855,tincidunt,BRL,895.99,542,2015/07/02,2015-03-20T23:01:50Z
+ligula,dolor morbi,vestibulum,consequat ut,China,4-(901)264-2592,donec,CNY,454.12,330,2015/01/01,2015-01-27T07:13:09Z
+phasellus,nisi eu,luctus,curae mauris,Czech Republic,9-(688)613-9944,fusce,CZK,310.59,111,2015/02/18,2015-03-29T17:13:31Z
+amet,morbi odio,tincidunt,blandit non,Iran,4-(322)888-9131,est,IRR,444.86,289,2014/08/29,2014-11-30T16:29:32Z
+laoreet,donec,nulla,nisl nunc,Philippines,7-(336)775-1650,ac,PHP,909.01,130,2015/05/03,2014-08-16T06:57:31Z
+faucibus,duis,luctus,odio,Japan,4-(005)193-2334,tempus,JPY,629.31,83,2014/09/15,2015-03-03T01:07:26Z
+justo,ut odio,imperdiet,maecenas rhoncus,China,1-(805)371-7314,tempus,CNY,659.54,813,2014/10/07,2015-04-03T13:40:00Z
+integer,tristique fusce,massa,eu mi,Russia,2-(378)681-1946,vestibulum,RUB,477.39,874,2014/11/13,2015-05-08T14:55:33Z
+ipsum,justo in,accumsan,quam nec,Poland,7-(204)819-8820,nibh,PLN,944.81,52,2015/03/05,2014-08-20T09:13:23Z
+ultrices,ut,turpis,convallis,Russia,2-(610)704-0534,sapien,RUB,518.97,460,2015/02/24,2015-02-19T17:38:07Z
+quam,et eros,orci,ipsum,China,6-(972)337-6065,at,CNY,739.89,490,2014/10/11,2015-05-12T20:49:41Z
+in,nibh,enim,ultrices,Venezuela,2-(249)053-8791,tellus,VEF,411.09,316,2015/04/25,2014-10-03T20:45:36Z
+lacus,quam,tempor,faucibus orci,Bangladesh,1-(596)786-9074,lacinia,BDT,359.25,141,2015/01/09,2015-04-05T11:44:41Z
+massa,semper sapien,felis,massa,South Korea,9-(722)739-5913,consequat,KRW,355.77,753,2014/12/09,2014-08-27T13:51:12Z
+erat,turpis adipiscing,nonummy,ut blandit,Sweden,3-(448)812-0137,magnis,SEK,297.06,297,2015/02/04,2014-11-13T03:46:19Z
+morbi,suspendisse potenti,libero,montes,Russia,5-(440)358-4182,nisl,RUB,695.36,448,2014/11/11,2015-01-31T00:12:43Z
+consequat,donec semper,at,platea,South Africa,6-(557)468-4708,aliquam,ZAR,948.21,742,2014/10/04,2015-06-05T03:35:35Z
+laoreet,ultrices,iaculis,aliquam,Poland,2-(498)179-1407,in,PLN,163.62,866,2014/09/26,2014-12-23T11:26:20Z
+sapien,non velit,purus,diam id,Israel,7-(720)553-3872,tortor,ILS,427.4,482,2015/02/08,2015-03-04T08:30:02Z
+ante,ullamcorper purus,aenean,donec,Belarus,8-(306)662-4281,vel,BYR,471.54,34,2014/12/23,2015-05-30T04:28:17Z
+mauris,molestie,massa,vel est,Kenya,0-(684)644-1672,erat,KES,966.42,713,2014/12/01,2014-08-29T19:28:33Z
+lacus,massa,integer,sit amet,Russia,3-(814)401-8457,massa,RUB,628.3,242,2015/07/23,2015-07-05T14:39:12Z
+arcu,consectetuer,dapibus,tortor sollicitudin,Indonesia,2-(871)230-1041,curae,IDR,732.62,21,2015/06/03,2015-02-19T19:45:25Z
+luctus,duis,lacus,morbi quis,China,8-(672)039-6793,velit,CNY,151.44,384,2014/09/27,2015-04-16T11:09:27Z
+massa,justo aliquam,orci,morbi,Bulgaria,6-(886)521-2150,quam,BGN,435.61,667,2014/08/30,2014-09-10T07:31:41Z
+luctus,arcu,natoque,suspendisse,Russia,1-(778)618-7142,pede,RUB,687.78,334,2014/09/21,2015-05-09T22:58:09Z
+dapibus,viverra,vulputate,cras,China,1-(152)258-5477,eget,CNY,332.37,388,2015/06/11,2015-08-03T02:45:14Z
+dui,pellentesque,volutpat,consectetuer,Germany,8-(700)169-5993,id,EUR,437.28,935,2014/12/27,2014-10-01T12:09:52Z
+dolor,tristique est,metus,at,Italy,4-(363)515-4218,massa,EUR,629.94,782,2014/08/31,2014-08-16T10:03:16Z
+convallis,et ultrices,integer,nisl,Denmark,9-(316)808-8366,luctus,DKK,589.05,659,2015/01/30,2015-07-29T23:39:40Z
+curabitur,orci,volutpat,lorem quisque,Serbia,7-(291)234-3184,iaculis,RSD,945.06,887,2015/03/27,2015-06-12T21:52:40Z
+amet,lorem,sapien,duis bibendum,Indonesia,5-(129)359-1062,turpis,IDR,225.61,680,2015/07/08,2014-11-10T12:31:06Z
+ut,nunc donec,montes,leo,Indonesia,3-(401)400-8871,in,IDR,709.09,759,2014/10/30,2014-08-09T08:17:03Z
+in,augue vestibulum,faucibus,ac,Philippines,8-(319)981-0140,phasellus,PHP,152.12,551,2015/03/26,2015-04-02T04:18:31Z
+volutpat,quis tortor,donec,convallis tortor,Brazil,9-(187)699-9432,ut,BRL,341.05,881,2015/01/08,2014-12-28T02:15:00Z
+suscipit,dapibus,arcu,eget tempus,Brazil,4-(145)974-4942,proin,BRL,614.99,82,2015/05/31,2015-04-03T14:54:44Z
+eu,justo,tellus,aliquet,Philippines,3-(052)298-3650,eget,PHP,501.04,788,2014/10/27,2014-11-12T08:40:40Z
+platea,mi nulla,blandit,elementum eu,Guinea,0-(704)686-2845,non,GNF,410.38,183,2015/05/27,2015-06-18T17:24:03Z
+sed,dolor vel,id,est,Ivory Coast,6-(371)249-6468,ultrices,XOF,967.64,567,2015/02/14,2015-07-06T04:34:45Z
+at,ante,fusce,duis,Egypt,0-(953)308-2979,at,EGP,157.15,43,2015/06/09,2014-10-09T09:18:10Z
+a,molestie nibh,curae,volutpat,Cameroon,0-(546)360-1816,varius,XAF,177.63,769,2015/06/15,2015-03-02T15:38:57Z
+curae,elementum nullam,euismod,in eleifend,Bulgaria,4-(261)255-6621,vel,BGN,138.82,627,2015/08/03,2014-10-07T15:12:54Z
+tortor,ut,ante,volutpat,China,8-(747)784-6333,ridiculus,CNY,841.07,494,2015/04/24,2015-04-13T12:56:58Z
+ut,viverra,massa,nulla ac,South Korea,9-(891)191-7188,sapien,KRW,822.95,616,2015/02/28,2014-12-25T20:42:57Z
+dolor,ultrices,in,ut dolor,Finland,7-(416)796-1630,accumsan,EUR,960.93,590,2015/05/11,2014-09-07T19:27:55Z
+convallis,consectetuer adipiscing,ante,vestibulum rutrum,Sweden,7-(670)620-8643,tincidunt,SEK,599.0,659,2014/11/24,2015-05-19T07:14:17Z
+at,nibh in,vel,nunc vestibulum,Portugal,8-(207)891-3162,at,EUR,418.74,122,2014/08/08,2015-06-10T22:13:56Z
+metus,vestibulum,morbi,aenean,France,1-(258)363-4489,suspendisse,EUR,215.15,689,2015/07/05,2015-01-03T17:12:25Z
+libero,sit amet,nulla,lobortis vel,Syria,2-(575)438-5231,libero,SYP,178.5,475,2014/10/27,2014-12-05T07:23:18Z
+sit,libero convallis,sagittis,vel augue,Poland,3-(484)816-7255,molestie,PLN,322.31,375,2014/08/12,2015-01-04T13:43:31Z
+lacus,mauris,morbi,libero convallis,Bulgaria,2-(513)692-4659,erat,BGN,813.67,770,2015/04/11,2015-05-08T01:06:28Z
+ut,nulla mollis,convallis,at turpis,Poland,0-(494)022-6656,donec,PLN,299.74,53,2015/05/05,2015-06-13T12:41:09Z
+id,interdum eu,eget,rhoncus,Thailand,0-(219)171-0351,eros,THB,752.25,316,2015/06/12,2015-03-17T12:04:23Z
+dapibus,libero nullam,nulla,quisque,China,9-(435)826-2269,nunc,CNY,164.14,522,2014/09/19,2014-11-18T23:31:51Z
+erat,turpis,elit,neque,Ethiopia,7-(677)612-5831,in,ETB,426.7,26,2015/03/27,2015-03-24T06:37:08Z
+nulla,vel nisl,et,dui,Vietnam,8-(620)780-7750,vel,VND,843.96,682,2015/07/02,2015-02-06T13:47:18Z
+morbi,nonummy integer,volutpat,purus aliquet,Ecuador,5-(775)772-0614,convallis,USD,123.02,781,2015/07/07,2015-07-18T09:58:00Z
+curabitur,id,volutpat,tellus in,Poland,7-(051)386-0648,libero,PLN,271.51,50,2015/02/13,2014-12-31T10:26:44Z
+sit,praesent id,vel,libero,Spain,0-(109)876-7933,donec,EUR,626.44,559,2015/02/26,2014-10-19T13:58:47Z
+risus,vestibulum,bibendum,fermentum,Brazil,4-(469)151-8899,duis,BRL,430.57,183,2015/03/01,2014-08-07T06:59:26Z
+urna,congue elementum,vel,integer,Guadeloupe,5-(026)035-7271,duis,EUR,153.06,64,2015/03/31,2015-02-02T22:32:25Z
+feugiat,ligula sit,libero,ante vel,Czech Republic,1-(378)661-9356,lacus,CZK,521.53,208,2015/03/26,2015-02-24T01:56:48Z
+convallis,rutrum,est,vel,Colombia,5-(357)858-5277,sed,COP,715.89,272,2015/01/20,2014-08-25T22:18:32Z
+ut,habitasse,risus,semper porta,Mongolia,4-(339)980-4179,a,MNT,576.48,652,2015/03/10,2014-12-10T01:34:43Z
+tincidunt,ullamcorper,amet,et,Philippines,1-(742)655-6401,eleifend,PHP,528.92,665,2015/03/28,2015-06-17T21:01:42Z
+nam,eget,nec,libero nam,Morocco,6-(690)941-3583,sociis,MAD,836.32,89,2014/09/21,2015-05-12T19:49:24Z
+ac,eleifend,sapien,turpis,China,4-(112)065-4990,ac,CNY,523.64,712,2015/05/21,2015-04-14T15:26:45Z
+donec,nulla facilisi,cras,fusce,Ukraine,1-(949)127-9017,erat,UAH,368.46,78,2014/11/09,2014-10-30T06:37:23Z
+dolor,aliquam,vel,nonummy,Poland,6-(586)390-0627,lacus,PLN,427.05,172,2015/02/16,2014-10-06T17:30:43Z
+eget,in tempus,morbi,sed,Mexico,5-(841)413-2895,at,MXN,156.95,303,2015/04/01,2015-07-11T04:46:31Z
+nullam,duis aliquam,pellentesque,eget vulputate,Philippines,7-(207)574-9289,quis,PHP,534.28,550,2014/09/20,2015-01-25T23:46:26Z
+in,ultrices,suspendisse,potenti,Indonesia,2-(233)190-1235,eget,IDR,784.82,671,2014/08/06,2014-08-26T07:27:04Z
+sapien,semper interdum,id,aliquam,China,2-(029)591-2657,volutpat,CNY,105.04,583,2015/06/13,2015-05-09T22:50:28Z
+in,sociis natoque,curae,arcu,Greece,5-(230)479-5706,vel,EUR,562.01,601,2014/09/18,2015-06-24T16:44:23Z
+duis,a ipsum,aliquet,sapien,Indonesia,4-(033)640-6286,nascetur,IDR,237.23,193,2014/11/26,2015-03-15T19:19:23Z
+id,integer ac,ornare,aenean lectus,Sweden,8-(235)137-8728,sem,SEK,442.25,814,2015/01/12,2015-03-25T20:52:22Z
+ac,erat vestibulum,tincidunt,ac leo,Russia,5-(139)267-2654,dapibus,RUB,958.92,592,2015/04/10,2015-02-11T00:33:53Z
+cubilia,vivamus,elit,dapibus,Brazil,6-(959)635-5201,vitae,BRL,186.81,574,2014/12/16,2015-02-16T01:17:49Z
+sed,venenatis,mus,aliquam,China,0-(210)080-5947,odio,CNY,803.69,620,2015/04/01,2015-05-26T00:14:53Z
+sapien,faucibus,gravida,cursus vestibulum,Philippines,7-(206)110-5377,felis,PHP,814.37,819,2015/04/22,2015-06-25T21:50:38Z
+bibendum,dapibus augue,dolor,sed vel,Canada,0-(753)571-6109,eget,CAD,274.53,475,2015/07/05,2015-06-05T01:45:34Z
+nisi,lorem quisque,habitasse,in libero,Sweden,6-(020)367-8412,id,SEK,664.11,297,2015/03/19,2015-03-31T00:00:59Z
+vestibulum,elit,mollis,integer aliquet,Argentina,4-(378)900-1897,ut,ARS,964.02,702,2015/03/03,2015-07-20T04:38:17Z
+eros,nulla ultrices,a,at velit,United Kingdom,0-(572)434-5190,nulla,GBP,893.37,96,2015/05/27,2015-06-30T11:07:27Z
+proin,pulvinar,vestibulum,tristique in,Haiti,7-(268)944-6650,fusce,HTG,151.97,575,2015/05/19,2015-05-11T07:06:18Z
+mi,enim,fusce,quam,China,1-(691)839-4174,consectetuer,CNY,677.48,573,2014/11/16,2014-12-26T06:33:13Z
+turpis,sit,sem,vestibulum,Sweden,7-(453)134-4214,vestibulum,SEK,601.63,96,2014/10/08,2015-01-19T23:19:08Z
+quam,eget,libero,lectus,Canada,6-(287)062-8528,vestibulum,CAD,395.83,858,2014/11/14,2014-11-21T01:12:17Z
+mi,molestie hendrerit,natoque,nulla,Portugal,7-(772)136-9580,rhoncus,EUR,788.87,720,2014/08/25,2015-07-16T04:47:19Z
+erat,posuere,praesent,primis in,Philippines,2-(195)090-0593,nunc,PHP,440.07,723,2015/02/15,2015-06-19T15:09:10Z
+ante,justo,pellentesque,amet cursus,Peru,8-(118)376-6836,ligula,PEN,510.0,809,2015/07/27,2015-08-02T08:12:50Z
+arcu,ut at,nulla,pretium nisl,Indonesia,8-(520)718-3351,pede,IDR,285.8,149,2015/03/14,2015-08-01T21:46:57Z
+nulla,vestibulum,sapien,metus arcu,China,5-(919)807-2352,scelerisque,CNY,139.95,968,2015/05/04,2014-12-10T11:28:53Z
+placerat,mi,eu,in purus,China,5-(174)329-5018,nunc,CNY,902.03,208,2015/07/29,2014-10-31T07:12:09Z
+nulla,purus,augue,nisl nunc,United States,9-(557)061-4278,consectetuer,USD,981.51,807,2014/10/18,2015-05-06T02:59:14Z
+lorem,vel,ac,ut erat,Poland,1-(034)766-9144,diam,PLN,722.11,420,2014/10/30,2014-10-06T06:42:56Z
+dolor,mauris vulputate,ante,nec,Greece,0-(289)590-1550,vulputate,EUR,874.79,312,2015/03/11,2014-11-09T19:49:37Z
+erat,aliquet pulvinar,vestibulum,id lobortis,Sudan,4-(763)914-4041,blandit,SDG,557.42,458,2015/02/04,2014-09-12T15:31:49Z
+lacus,nisl,morbi,at,Indonesia,3-(224)455-7201,sollicitudin,IDR,156.05,245,2015/04/27,2014-08-12T20:03:38Z
+turpis,vitae,fusce,primis in,Indonesia,4-(552)738-2705,id,IDR,196.7,144,2015/07/05,2014-08-14T14:26:48Z
+erat,vitae,consectetuer,vestibulum,Saint Kitts and Nevis,0-(355)147-3949,eget,XCD,972.01,219,2014/08/06,2014-10-06T22:44:52Z
+venenatis,eu,eleifend,leo odio,China,3-(498)247-5185,quisque,CNY,190.45,525,2014/11/08,2014-08-25T02:45:08Z
+quis,eu orci,montes,in tempus,Thailand,7-(760)983-7909,ut,THB,852.04,576,2015/06/03,2015-03-20T13:06:08Z
+cursus,aliquam quis,nibh,augue vestibulum,Argentina,2-(625)172-6134,sapien,ARS,391.46,722,2015/05/14,2014-09-23T12:26:42Z
+massa,congue,vulputate,tortor eu,Brazil,4-(980)608-8004,hac,BRL,362.1,764,2015/02/25,2014-09-02T09:24:31Z
+vestibulum,placerat,cursus,metus aenean,Chile,4-(752)702-7389,dolor,CLP,212.77,703,2015/06/24,2014-10-25T11:14:05Z
+proin,nullam varius,nulla,at,Venezuela,6-(778)916-8113,vehicula,VEF,712.56,867,2015/06/19,2014-12-23T01:59:09Z
+diam,suspendisse potenti,ante,eget rutrum,China,7-(240)078-3963,cursus,CNY,509.95,169,2015/07/30,2015-01-07T15:28:04Z
+at,id massa,est,lacus purus,Kazakhstan,3-(305)933-3981,pharetra,KZT,847.29,719,2014/10/07,2015-06-19T01:56:39Z
+elementum,mauris,sit,id nulla,Indonesia,1-(542)458-1748,magna,IDR,292.05,450,2015/07/25,2014-10-20T18:01:53Z
+vestibulum,venenatis,lacinia,libero,China,9-(403)337-7539,sed,CNY,890.86,287,2015/03/12,2014-11-02T15:58:55Z
+lectus,arcu,duis,eget,Brazil,7-(252)236-3850,nec,BRL,319.18,371,2015/05/26,2015-03-13T09:45:48Z
+donec,rhoncus,massa,cum,Portugal,8-(045)636-1126,risus,EUR,310.87,98,2015/06/29,2015-05-14T09:44:12Z
+nullam,justo in,ut,sed vel,Vietnam,3-(165)087-8684,arcu,VND,505.31,134,2015/03/10,2014-11-06T13:39:05Z
+eros,volutpat,luctus,dapibus dolor,Vietnam,0-(584)585-1600,purus,VND,922.79,983,2014/12/05,2014-11-17T16:55:59Z
+feugiat,sapien,leo,pulvinar nulla,Albania,1-(146)899-9206,accumsan,ALL,178.68,168,2015/01/12,2014-08-17T03:25:34Z
+vehicula,bibendum morbi,nunc,penatibus et,Czech Republic,2-(002)092-0940,elit,CZK,503.9,254,2015/01/05,2015-02-26T17:25:23Z
+vestibulum,porttitor id,pellentesque,et ultrices,Greece,1-(740)672-0643,nulla,EUR,972.41,860,2015/04/29,2015-07-13T12:05:28Z
+rutrum,eu tincidunt,mi,pede ac,Philippines,0-(768)984-4952,lobortis,PHP,489.74,847,2015/05/24,2015-04-17T20:22:30Z
+eros,sociis natoque,dolor,justo,Greece,1-(355)222-0735,tortor,EUR,1000.0,229,2015/07/22,2014-08-26T18:32:17Z
+nulla,vestibulum,pede,egestas,Poland,1-(793)923-6801,dolor,PLN,111.15,413,2015/04/26,2014-12-30T11:16:06Z
+ac,ultrices,enim,in,China,6-(665)918-6814,non,CNY,639.96,289,2015/05/01,2015-07-13T18:37:48Z
+tempus,duis consequat,ante,neque,Honduras,2-(805)815-2020,sapien,HNL,923.73,445,2015/05/12,2015-06-11T12:00:05Z
+posuere,dolor quis,at,vel augue,China,8-(994)779-3349,nulla,CNY,338.92,407,2015/01/13,2015-01-15T19:45:35Z
+sollicitudin,porttitor,eget,molestie lorem,China,0-(129)604-8608,vivamus,CNY,885.04,321,2015/01/04,2015-05-25T18:48:32Z
+adipiscing,lacinia,lectus,curabitur gravida,China,7-(243)708-0083,hac,CNY,685.78,342,2014/08/14,2014-10-11T21:25:37Z
+nulla,eu est,felis,faucibus,Syria,6-(721)363-5360,sed,SYP,396.76,523,2015/07/09,2015-01-28T11:55:51Z
+nulla,sem fusce,ante,risus auctor,Mongolia,6-(193)477-0208,in,MNT,174.35,336,2015/04/27,2014-12-01T21:27:17Z
+est,in congue,integer,dictumst maecenas,Philippines,8-(577)469-4899,ut,PHP,655.39,548,2015/07/02,2015-02-20T10:08:25Z
+eu,congue,quisque,magna bibendum,China,2-(098)859-2939,pede,CNY,940.09,327,2015/01/15,2015-05-26T11:52:55Z
+molestie,cursus vestibulum,sapien,vestibulum,Angola,1-(241)869-9324,erat,AOA,936.34,598,2015/03/01,2015-01-25T18:35:39Z
+odio,ipsum primis,penatibus,purus,Thailand,1-(556)035-1199,sollicitudin,THB,423.0,987,2015/06/08,2014-11-23T18:29:03Z
+elit,nulla,erat,libero,Egypt,2-(589)716-6582,odio,EGP,785.99,885,2014/08/15,2014-12-21T00:32:19Z
+cras,nulla tellus,turpis,eget,China,2-(156)620-9011,suscipit,CNY,170.82,710,2015/01/30,2015-04-20T21:29:39Z
+amet,at,sit,sit amet,United States,2-(308)470-1496,imperdiet,USD,258.66,273,2014/10/25,2014-08-31T04:27:14Z
+augue,rhoncus sed,iaculis,id,Kazakhstan,5-(451)914-0891,velit,KZT,664.26,260,2015/03/24,2014-12-08T01:27:51Z
+orci,eleifend,magna,est et,Philippines,6-(631)083-3219,vel,PHP,737.29,905,2015/05/13,2014-09-17T15:24:11Z
+augue,ac nibh,id,viverra,Nigeria,2-(220)238-1686,tincidunt,NGN,100.26,508,2015/03/08,2015-05-28T05:30:48Z
+varius,cras,et,vestibulum,United States,0-(426)735-4528,a,USD,407.46,384,2015/01/14,2015-03-16T07:10:30Z
+pede,tortor quis,eget,sociis natoque,France,3-(971)944-4577,vestibulum,EUR,757.42,340,2014/08/30,2015-05-02T18:40:32Z
+nam,ut,dui,semper sapien,Czech Republic,4-(732)124-0088,vestibulum,CZK,811.34,33,2014/09/23,2015-04-27T10:54:51Z
+aliquam,congue elementum,ultrices,odio,Indonesia,1-(724)872-4549,feugiat,IDR,453.73,12,2014/10/14,2015-06-15T12:38:34Z
+mollis,cursus,in,nam,Ukraine,2-(339)686-1508,condimentum,UAH,709.03,234,2015/07/14,2015-02-24T19:10:21Z
+nec,lobortis,orci,sodales,Philippines,6-(917)920-4462,aliquam,PHP,845.58,723,2015/07/10,2015-01-01T01:20:30Z
+justo,vitae nisi,integer,erat eros,North Korea,7-(855)559-7796,etiam,KPW,125.35,337,2015/03/15,2014-12-30T03:56:23Z
+purus,phasellus sit,malesuada,aliquam,China,1-(118)497-1559,eget,CNY,582.68,508,2015/04/30,2015-02-05T06:39:53Z
+id,ante,in,nisl,Japan,6-(780)679-4581,platea,JPY,854.39,700,2015/05/18,2015-03-06T17:14:58Z
+a,at,nec,amet,Finland,0-(462)308-0396,massa,EUR,568.82,592,2015/02/10,2015-06-27T06:29:29Z
+justo,volutpat quam,tellus,porttitor pede,China,8-(042)715-4166,lacinia,CNY,451.08,885,2015/06/21,2014-10-26T05:49:30Z
+risus,eu felis,nunc,mi integer,Senegal,8-(171)445-9620,proin,XOF,260.17,490,2014/08/09,2015-08-01T01:11:33Z
+nibh,eget,cubilia,molestie,Afghanistan,4-(070)095-1169,ipsum,AFN,486.73,762,2015/01/05,2014-10-30T06:24:19Z
+justo,luctus rutrum,augue,consequat,Iran,8-(984)683-7726,luctus,IRR,393.99,126,2015/07/29,2015-03-21T12:17:18Z
+sit,et,enim,erat,Burkina Faso,9-(631)236-5813,amet,XOF,419.54,323,2015/02/22,2014-11-05T17:29:56Z
+nibh,primis in,ipsum,tincidunt nulla,Russia,9-(608)988-5331,sagittis,RUB,633.05,275,2015/06/28,2015-04-18T14:53:33Z
+posuere,consequat,elit,maecenas ut,China,1-(748)142-8922,nibh,CNY,614.53,63,2015/02/14,2015-05-24T21:46:55Z
+nisi,cum,vestibulum,eu,Norway,3-(556)545-3967,sit,NOK,463.87,110,2014/09/19,2014-10-25T07:54:24Z
+ut,auctor,dis,primis,Nigeria,9-(340)048-3611,nibh,NGN,331.25,421,2015/07/12,2015-03-01T10:35:06Z
+eu,nullam orci,vel,sapien,Serbia,5-(886)040-0203,dolor,RSD,340.49,369,2015/07/04,2015-03-13T01:46:28Z
+dui,integer aliquet,morbi,vestibulum aliquet,Indonesia,3-(670)693-8458,quam,IDR,894.76,702,2014/08/08,2015-05-13T09:14:00Z
+nisl,mauris enim,ultrices,feugiat non,Russia,5-(428)746-1597,mauris,RUB,392.4,65,2014/11/02,2015-04-16T16:19:46Z
+suscipit,vestibulum ac,lorem,elementum in,Peru,0-(551)121-1302,posuere,PEN,297.43,652,2014/10/19,2015-03-21T12:56:16Z
+tempus,in,et,mauris,Poland,0-(382)152-3839,venenatis,PLN,747.39,437,2015/04/03,2015-07-06T22:01:07Z
+sit,ut,sem,dui nec,China,6-(431)310-4237,eu,CNY,927.29,471,2014/08/31,2015-02-28T04:46:34Z
+pede,ipsum,auctor,sed,France,8-(337)738-5191,pulvinar,EUR,269.52,250,2015/03/26,2015-07-11T14:57:34Z
+scelerisque,mattis pulvinar,nibh,pellentesque,Portugal,0-(966)648-4561,maecenas,EUR,697.54,129,2015/01/22,2014-10-11T00:14:31Z
+a,mauris,libero,ultrices,Peru,5-(423)321-1582,leo,PEN,768.34,668,2015/07/23,2015-05-05T17:30:28Z
+nam,venenatis,bibendum,vestibulum,Indonesia,8-(798)811-8056,in,IDR,139.87,344,2014/10/07,2015-05-27T03:58:00Z
+lacinia,nisi eu,vehicula,enim sit,Thailand,4-(545)116-9137,ut,THB,635.61,933,2015/07/21,2014-12-22T12:03:33Z
+faucibus,integer ac,erat,rutrum rutrum,China,2-(792)691-3441,vivamus,CNY,324.95,153,2014/08/13,2015-07-13T14:42:50Z
+viverra,luctus,dui,at,Ghana,0-(005)814-0418,odio,GHS,437.46,108,2015/03/24,2014-09-04T12:48:53Z
+turpis,erat volutpat,odio,blandit ultrices,Poland,5-(985)677-7160,duis,PLN,236.31,745,2015/07/01,2015-04-25T05:56:02Z
+sed,condimentum id,magnis,quam,China,9-(320)022-1438,interdum,CNY,563.37,776,2014/12/25,2014-10-21T07:07:25Z
+integer,integer,morbi,luctus,Philippines,0-(579)113-1147,est,PHP,324.72,734,2015/05/02,2015-06-24T15:45:24Z
+elementum,diam vitae,magna,vestibulum,Cuba,4-(681)030-2865,neque,CUP,792.19,752,2014/12/18,2015-02-28T05:58:07Z
+sagittis,at lorem,metus,phasellus,Brazil,9-(191)487-3463,luctus,BRL,159.71,508,2014/09/30,2015-04-24T23:25:58Z
+et,ut massa,justo,lacinia sapien,Japan,6-(548)214-2816,vehicula,JPY,984.12,512,2014/10/04,2015-05-01T14:49:30Z
+enim,primis in,vestibulum,velit,Japan,4-(151)079-2917,ac,JPY,305.18,999,2015/02/15,2015-08-03T18:22:36Z
+luctus,sed,luctus,in,Russia,1-(037)752-1870,sed,RUB,115.45,167,2014/12/27,2015-03-14T04:17:30Z
+nulla,sodales,sapien,sit,Peru,6-(545)726-7630,sed,PEN,798.15,852,2015/03/14,2014-11-19T04:26:50Z
+duis,eros,nisl,maecenas,China,3-(730)604-9037,donec,CNY,481.27,263,2015/04/30,2014-11-04T18:13:42Z

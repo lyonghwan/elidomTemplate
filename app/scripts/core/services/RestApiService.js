@@ -28,7 +28,7 @@ angular.module('Elidom.Core')
        */
       getFullUrl : function(url) { 
         //return this.getEndpoint() + url;
-        return 'http://localhost:8080' + url;
+        return 'http://localhost:9001' + url;
       },
 
       /**

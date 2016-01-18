@@ -28,7 +28,7 @@ angular.module('Elidom.Core')
        */
       getFullUrl : function(url) { 
         //return this.getEndpoint() + url;
-        return 'http://localhost:8080' + url;
+        return 'http://localhost:9001' + url;
       },
 
       /**
@@ -211,7 +211,7 @@ angular.module('Elidom.Core')
         var me = this;
         params = me.addCommonParams(params);
         var rsc = $resource(me.getFullUrl(url), params, {get : {method : 'GET', headers : me.getHeaders()}});
-
+        console.log(url);
         rsc.get(
           function(dataSet, response) {
             // 1. good

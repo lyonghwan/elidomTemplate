@@ -29,6 +29,9 @@ angular.module('Elidom.Core')
 					'<a class="tab-item active" ui-sref="app.preference" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
 						'<i class="icon ion-gear-b"></i>설정' + 
 					'</a>' + 
+					'<a class="tab-item active" ui-sref="app.dataludi" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
+						'<i class="icon ion-gear-b"></i>데이터루디테스트' + 
+					'</a>' + 
 				'</div>' + 
 			'</ion-footer-bar>'
 		};

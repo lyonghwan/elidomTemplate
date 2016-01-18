@@ -187,6 +187,21 @@ gulp.task('jsons', function() {
     .on('error', errorHandler);
 });
 
+// copy plugin
+gulp.task('customePlugins', function() {
+  return gulp.src('app/plugins/**/*.*')
+    .pipe(gulp.dest(path.join(targetDir, 'plugins')))
+
+    .on('error', errorHandler);
+});
+
+// copy plugin
+gulp.task('grid', function() {
+  return gulp.src('app/grid/**/*.*')
+    .pipe(gulp.dest(path.join(targetDir, '.')))
+
+    .on('error', errorHandler);
+});
 
 // lint js sources based on .jshintrc ruleset
 gulp.task('jsHint', function(done) {
@@ -311,6 +326,8 @@ gulp.task('watchers', function() {
   gulp.watch('app/icons/**', ['iconfont']);
   gulp.watch('app/images/**', ['images']);
   gulp.watch('app/data/**', ['jsons']);
+  gulp.watch('app/plugins/**', ['customePlugins']);
+  gulp.watch('app/grid/**', ['grid']);
   gulp.watch('app/scripts/**/*.js', ['index']);
   gulp.watch('./vendor.json', ['vendor']);
   gulp.watch('app/templates/**/*.html', ['index']);
@@ -334,6 +351,8 @@ gulp.task('default', function(done) {
       'styles',
       'images',
       'jsons',
+      'customePlugins',
+      'grid',
       'vendor'
     ],
     'index',

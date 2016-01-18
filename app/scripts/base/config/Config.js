@@ -59,6 +59,15 @@ angular.module('Elidom.Base')
           }
         }
       })
+      .state('app.dataludi', {
+        url: '/dataludi',
+        views: {
+          'viewContent': {
+            templateUrl: 'templates/views/dataludi-example.html',
+            controller: 'DataldExampleCtrl'
+          }
+        }
+      })
 
       .state('app.setting-basic', {
         url: '/setting-basic',
