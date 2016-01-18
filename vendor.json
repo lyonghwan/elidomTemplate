@@ -12,7 +12,6 @@
     "bower_components/oclazyload/dist/ocLazyLoad.min.js",
     "bower_components/grid/dataludi.lic.eval.min.js",
     "bower_components/grid/dataludi.eval.min.js",
-    "bower_components/grid/dataludi.angular.min.js",
     "bower_components/sockjs/sockjs.js",
     "bower_components/stomp-websocket/lib/stomp.js"
 ]
