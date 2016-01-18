@@ -1,11 +1,10 @@
 <ion-view view-title="서비스">
 
-    <ion-content ng-init="search()" class="scroll-content ionic-scroll">
+    <ion-content ng-init="init()" class="scroll-content ionic-scroll">
+        <h4 class="content double-padding-x">Module</h4>
+
         <div class="item item-input-inset search-line">
-            <label class="item-input-wrapper">
-                <input type="text" placeholder="모듈" ng-enter="search()" ng-model="search.key" />
-            </label>
-            <button class="button button-small button-calm" ng-click="search()">조회</button>
+            <ion-checkbox ng-repeat="module in modules" ng-model="module.checked" ng-checked="module.checked" ng-click="searchByModule(module)">{{ module.text }}</ion-checkbox>
         </div>
 
         <div class="loader" ng-if="searching">
@@ -16,6 +15,7 @@
 
         <div class="list">
             <a class="item item-avatar item-icon-right" ng-repeat="item in items" ng-click="goDetail(item)">
+                <p>{{item.id}}</p>
                 <h2>{{item.name}}</h2>
                 <p>{{item.description}}</p>
                 <span class="badge badge-assertive">{{item.module}}</span>

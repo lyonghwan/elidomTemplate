@@ -7,7 +7,7 @@
  * # Profile Controller
  */
 angular.module('Elidom.Core')
-	.controller('ProfileCtrl', function($rootScope, $scope, $timeout, ionicMaterialInk, ionicMaterialMotion, AuthService, MenuService, ApiService, API_ENDPOINT, localStorageService) {
+	.controller('ProfileCtrl', function($rootScope, $scope, $timeout, ionicMaterialInk, ionicMaterialMotion, AuthService, MenuService, RestApiService, API_ENDPOINT, localStorageService, StompWebSocketService) {
 
 	    /**
 	     * 사이드 메뉴 구성 
@@ -47,8 +47,10 @@ angular.module('Elidom.Core')
 	     */
 	    $scope.getMyInfo = function() {
 	        $scope.searching = true;
-	        var url = '/my/myInfo.json';
-	        ApiService.get(url, null, function(dataSet) {
+	        var contextUrl = RestApiService.getContextPathUrl();
+	        var url = RestApiService.makeFullUrl(contextUrl, '/my/myInfo.json');
+	        
+	        RestApiService.get(url, null, function(dataSet) {
 	            $scope.item = dataSet;
 	        });
 	    };
@@ -73,7 +75,7 @@ angular.module('Elidom.Core')
 	     * Initializer
 	     */
 	    $scope.init = function() {
-	        $scope.getMyInfo();
+	        //$scope.getMyInfo();
 	    };
 
 	});

@@ -1,0 +1,36 @@
+<ion-view view-title="채널 관리">
+
+    <ion-content ng-init="search()" class="padding scroll-content ionic-scroll">
+        <div class="item item-input-inset search-line">
+            <label class="item-input-wrapper">
+                <input type="text" placeholder="채널 이름" ng-enter="search()" ng-model="searchData.queryList[0].value"/>
+            </label>
+
+            <button class="button button-small button-calm" ng-click="search()">조회</button>
+        </div>
+
+        <div class="loader" ng-if="searching">
+            <ion-spinner></ion-spinner>
+        </div>
+
+        <div class="search-result inset-shadow" ng-if="!searching && totalCount >= 0">검색 결과 : <strong>총 {{totalCount | number}} 건</strong></div>
+
+        <div class="list">
+            <a class="item item-avatar item-icon-right" ng-repeat="item in items" ng-click="goDetail(item)">
+                <img ng-src="images/run.png" ng-if="item.status == 'RUN'">
+                <h2>{{item.name}} {{item.status | bracket}}</h2>
+                <p>{{item.description}}</p>
+                <h2>Channel : {{item.topic}}</h2>
+                <p>Listener : {{item.listener}}</p>
+                <span class="badge badge-{{item.topicType == 'ChannelTopic' ? 'calm' : 'positive'}}">{{item.topicType}}</span>
+            </a>
+        </div>
+
+        <button class="button button-block button-assertive" ng-click="goDetail()">Create</button>
+
+        <ion-infinite-scroll ng-if="hasMoreItems" on-infinite="loadMore()" distance="20%"/>
+    </ion-content>
+
+    <elidom-footer-bar></elidom-footer-bar>
+
+</ion-view>

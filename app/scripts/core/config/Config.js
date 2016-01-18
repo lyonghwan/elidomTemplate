@@ -12,6 +12,7 @@ angular.module('Elidom.Core')
   .constant('API_ENDPOINT', {
     isApp: false,
     mode: 'DEV',
+    protocol: 'http',
     host: '',
     port: 0,
     path: '',
@@ -20,8 +21,9 @@ angular.module('Elidom.Core')
   })
 
   .config(function($httpProvider) {
-    // $httpProvider.defaults.withCredentials = true;
+    $httpProvider.defaults.withCredentials = true;
     $httpProvider.defaults.headers.post['Accept'] = 'application/json;charset=euc-kr';
+    $httpProvider.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';
   })
 
   .config(function(localStorageServiceProvider) {

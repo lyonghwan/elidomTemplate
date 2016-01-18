@@ -17,15 +17,15 @@ angular.module('Elidom.Core')
 					'<a class="tab-item active" ui-sref="app.home" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
 						'<i class="icon ion-home"></i>홈' +
 					'</a>' +
-					'<a class="tab-item active" ui-sref="app.print" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
-						'<i class="icon ion-printer"></i>프린트' + 
-					'</a>' +
 					'<a class="tab-item active" ui-sref="app.service" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
 						'<i class="icon ion-speakerphone"></i>서비스' +
 					'</a>' +
-					'<a class="tab-item active" ui-sref="app.profile" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
-						'<i class="icon ion-android-people"></i>프로필' + 
+					'<a class="tab-item active" ui-sref="app.channel" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
+						'<i class="icon ion-social-rss"></i>채널 관리' + 
 					'</a>' + 
+					'<a class="tab-item active" ui-sref="app.print" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
+						'<i class="icon ion-printer"></i>프린트' + 
+					'</a>' +					
 					'<a class="tab-item active" ui-sref="app.preference" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
 						'<i class="icon ion-gear-b"></i>설정' + 
 					'</a>' + 

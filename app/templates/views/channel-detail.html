@@ -1,0 +1,50 @@
+<ion-view view-title="{{viewTitle}}" cache-view="false">
+
+    <ion-content ng-init="init()" class="padding">
+        <div class="list"> 
+            <label class="item item-input item-floating-label">
+                <span class="input-label">채널 명</span>
+                <input type="text" placeholder="채널 명" ng-model="item.name">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">채널 설명</span>
+                <input type="text" placeholder="채널 설명" ng-model="item.description">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">상태</span>
+                <input type="text" placeholder="상태" ng-model="item.status">
+            </label>            
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">토픽 타입</span>
+                <ion-radio ng-model="item.topicType" ng-value="'ChannelTopic'" icon="ion-closed-captioning">Channel Topic</ion-radio>
+                <ion-radio ng-model="item.topicType" ng-value="'PatternTopic'" icon="ion-nuclear">Pattern Topic</ion-radio>                
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">토픽</span>
+                <input type="text" placeholder="토픽" ng-model="item.topic">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">리스너 클래스</span>
+                <input type="text" placeholder="리스너 클래스" ng-model="item.listener">
+            </label>
+            
+            <div class="loader" ng-if="processing">
+                <ion-spinner></ion-spinner>
+            </div>
+        </div>
+
+        <div class="button-bar">
+            <button class="button button-block button-assertive" ng-click="deleteChannel()" ng-if="item.id">delete</button>
+            <button class="button button-block button-calm" ng-click="save()">Save</button>
+            <button class="button button-block button-positive" ng-click="applyChannel()" ng-if="item.id">Apply</button>
+        </div>
+    </ion-content>    
+
+    <elidom-footer-bar></elidom-footer-bar>
+    
+</ion-view>
