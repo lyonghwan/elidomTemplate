@@ -20,15 +20,21 @@ angular.module('Elidom.Core')
        * endpoint
        */
       getEndpoint: function() { 
-        return API_ENDPOINT.port ? (API_ENDPOINT.host + ':' + API_ENDPOINT.port + API_ENDPOINT.path) : (API_ENDPOINT.host + API_ENDPOINT.path); 
+        return API_ENDPOINT.port ? 
+                (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + ':' + API_ENDPOINT.port + API_ENDPOINT.path + API_ENDPOINT.urlPrefix) : 
+                (API_ENDPOINT.protocol + '://' + API_ENDPOINT.host + API_ENDPOINT.path + API_ENDPOINT.urlPrefix); 
       },
 
       /**
        * return full url
        */
       getFullUrl : function(url) { 
-        //return this.getEndpoint() + url;
-        return 'http://localhost:9001' + url;
+        var firstChar = url[0];
+        if(firstChar == '/') {
+          return this.getEndpoint() + url;
+        } else {
+          return this.getEndpoint() + '/' + url;
+        }
       },
 
       /**
@@ -211,7 +217,7 @@ angular.module('Elidom.Core')
         var me = this;
         params = me.addCommonParams(params);
         var rsc = $resource(me.getFullUrl(url), params, {get : {method : 'GET', headers : me.getHeaders()}});
-        console.log(url);
+
         rsc.get(
           function(dataSet, response) {
             // 1. good
