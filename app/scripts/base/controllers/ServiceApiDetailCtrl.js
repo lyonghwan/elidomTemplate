@@ -118,6 +118,8 @@ angular.module('Elidom.Base')
 		 * Replace Invoke URL 
 		 */
 		$scope.makeInvokeUrl = function(url) {
+			// FIXME 임시코드 
+			url = url.substr(url.indexOf('/'));
 			if(url[0] == '/') {
 				return RestApiService.getContextPathUrl() + url;
 			} else {
