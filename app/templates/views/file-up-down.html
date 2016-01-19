@@ -1,0 +1,30 @@
+<ion-view view-title="파일 업/다운 로드">
+
+    <ion-content ng-init="init()" class="padding">
+      <h4>Upload on file select</h4>
+
+      <div class = "button" ngf-select="showfile($files)" multiple accept="*/*">Select Files</div>
+      <br>
+      <br>Files:
+      <ion-list show-delete="true" show-reorder="false">
+      <ul>
+        <ion-item ng-repeat="f in files" class="item-remove-animate">
+          File Name : {{ f.name}}
+          <ion-delete-button class="ion-minus-circled" 
+                             ng-click="onItemDelete(item)">
+          </ion-delete-button>
+        </ion-item>
+        </ul>
+      </ion-list>
+      <span class="progress" ng-show="progress >= 0">
+          <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+      </span>
+      {{errorMsg}}
+      <div class = "button" ng-click="uploadFiles(files)">Upload File</div>
+
+      <div class = "button" ng-download="{{urlToPublicFile}}" params="downfile">Download</div>
+    </ion-content>
+
+    <elidom-footer-bar></elidom-footer-bar>
+    
+</ion-view>

@@ -32,6 +32,9 @@ angular.module('Elidom.Core')
 					'<a class="tab-item active" ui-sref="app.dataludi" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
 						'<i class="icon ion-gear-b"></i>데이터루디테스트' + 
 					'</a>' + 
+					'<a class="tab-item active" ui-sref="app.file-up-down" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
+						'<i class="icon ion-gear-b"></i>파일업다운운' + 
+					'</a>' + 
 				'</div>' + 
 			'</ion-footer-bar>'
 		};

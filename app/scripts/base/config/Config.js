@@ -80,12 +80,23 @@ angular.module('Elidom.Base')
           }
         }
       })
+
       .state('app.dataludi', {
         url: '/dataludi',
         views: {
           'viewContent': {
             templateUrl: 'templates/views/dataludi-example.html',
             controller: 'DataldExampleCtrl'
+          }
+        }
+      })
+
+      .state('app.file-up-down', {
+        url: '/file-up-down',
+        views: {
+          'viewContent': {
+            templateUrl: 'templates/views/file-up-down.html',
+            controller: 'FileUpDownCtrl'
           }
         }
       })

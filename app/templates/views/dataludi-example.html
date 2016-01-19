@@ -1,10 +1,10 @@
 <ion-view view-title="그리드뷰">
     <ion-content ng-init="init()" class="scroll-content ionic-scroll">
-        <button class="button button-small button-calm" ng-click="triggerAPI()">Trigger API</button>
-        <dl-grid-view style="display:block;width:740px;height:350px;margin-left:22px;margin-bottom:8px;" row-source="rs" dom="{{dom}}">
+        <button class="button button-small button-calm" ng-click="triggerAPI(datasource)">Trigger API</button>
+        <dl-grid-view style="display:block;width:1100px;height:350px;margin-left:22px;margin-bottom:8px;" row-source="rs" dom="{{dom}}">
             <dl-grid-columns>
 
-                <dl-column-group name="ProductGroup"width="100" layout="vertical" header="제품" hidden-child-footers="true">
+<!--                 <dl-column-group name="ProductGroup"width="100" layout="vertical" header="제품" hidden-child-footers="true">
                     <dl-data-column name="ProductID" field-name="product_id" header="제품코드" width="120" grid-styles="{textAlignment:'center'}">
                     </dl-data-column>
 
@@ -12,47 +12,21 @@
                         <dl-column-header text="제품명">
                         </dl-column-header>
                     </dl-data-column>
-                </dl-column-group>
-
-                <dl-data-column name="CustomerID" field-name="customer_id" width="70" header="고객아이디" grid-styles="{textAlignment:'center'}">
+                </dl-column-group> -->
+                <dl-data-column name="module" field-name="module" width="150" header="모듈" grid-styles="{textAlignment:'center'}">
+                </dl-data-column>
+                
+                <dl-data-column name="name" field-name="name" width="150" header="모듈 서비스명" grid-styles="{textAlignment:'center'}">
                 </dl-data-column>
 
-                <dl-data-column name="CustomerName" field-name="customer_name" width="70" header="고객명" grid-styles="{textAlignment:'center'}">
+                <dl-data-column name="id" field-name="id" width="150" header="아이디" grid-styles="{textAlignment:'center'}">
                 </dl-data-column>
 
-                <dl-column-group name="LocationGroup" width="120" layout="vertical" hidden-child-footers="true">
-                    <dl-column-header visible="false">
-                    </dl-column-header>
-
-                    <dl-data-column name="Country" field-name="country" width="100" header="국가">
-                    </dl-data-column>
-
-                    <dl-data-column name="Phone" field-name="phone" width="100" header="전화번호">
-                    </dl-data-column>
-
-                </dl-column-group>
-
-                <dl-data-column name="Unit" field-name="unit" width="55" header="단위">
-                    <dl-grid-styles text-alignment="center">
-                    </dl-grid-styles>
+                <dl-data-column name="beanClassName" field-name="beanClassName" width="300" header="클라스명" grid-styles="{textAlignment:'center'}">
                 </dl-data-column>
 
-                <dl-data-column name="UnitPrice" field-name="unit_price" width="50" header="단가">
-                    <dl-grid-styles number-format="#,##0" text-alignment="far" padding-right="5" font-family="Arial" font-size="11" font-bold="true">
-                    </dl-grid-styles>
+                <dl-data-column name="description" field-name="description" width="300" header="설명" grid-styles="{textAlignment:'center'}">
                 </dl-data-column>
-
-                <dl-data-column name="Quantity" field-name="quantity" width="80" header="수량">
-                    <dl-grid-styles number-format="#,##0.0" text-alignment="far" padding-right="5" background="#110000ff" font-family="Arial" font-size="11" font-bold="true"></dl-grid-styles>
-                    <dl-column-footer expression="sum">
-                    <dl-grid-styles number-format="#,##0" text-alignment="far" padding-right="5" font-family="Arial" font-size="11" font-bold="true" suffix=" $" background="#000080" color="#fff"></dl-grid-styles>
-                    </dl-column-footer>
-                </dl-data-column>
-
-                <dl-column-group name="DateGroup" width="160" header="날짜" hidden-child-footers="true">
-                    <dl-data-column name="OrderDate" header="발주일" field-name="order_date" width="100" grid-styles="{textAlignment:'center'}"></dl-data-column>
-                    <dl-data-column name="ShipDate" header="선적일" field-name="ship_date" width="100" grid-styles="{textAlignment:'center'}"></dl-data-column>
-                </dl-column-group>
 
             </dl-grid-columns>
 

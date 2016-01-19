@@ -13,5 +13,8 @@
     "bower_components/grid/dataludi.lic.eval.min.js",
     "bower_components/grid/dataludi.eval.min.js",
     "bower_components/sockjs/sockjs.js",
-    "bower_components/stomp-websocket/lib/stomp.js"
+    "bower_components/stomp-websocket/lib/stomp.js",
+    "bower_components/dataludi.angular.min.js",
+    "bower_components/ng-file-upload/ng-file-upload-all.js",
+    "bower_components/ng-download/ng-download.js"
 ]
