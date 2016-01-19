@@ -6,16 +6,12 @@
       <div class = "button" ngf-select="showfile($files)" multiple accept="*/*">Select Files</div>
       <br>
       <br>Files:
-      <ion-list show-delete="true" show-reorder="false">
-      <ul>
-        <ion-item ng-repeat="f in files" class="item-remove-animate">
-          File Name : {{ f.name}}
-          <ion-delete-button class="ion-minus-circled" 
-                             ng-click="onItemDelete(item)">
-          </ion-delete-button>
-        </ion-item>
-        </ul>
-      </ion-list>
+      <div class="list">
+        <div class="item item-icon-right" ng-repeat="file in files">
+          File Name : {{file.name}}
+                <i class="ion-minus-circled" ng-click="files.splice($index, 1)"></i>
+        </div>
+      </div>
       <span class="progress" ng-show="progress >= 0">
           <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
       </span>
