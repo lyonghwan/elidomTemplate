@@ -14,7 +14,7 @@
 
             <label class="item item-input item-floating-label">
                 <span class="input-label">Method</span>
-                <input type="text" placeholder="Method" ng-model="item.method">
+                <input type="text" placeholder="Method" ng-model="item.httpMethod">
             </label>
 
             <label class="item item-input item-floating-label">
@@ -54,7 +54,7 @@
         <h4 class="content double-padding-x">Input List</h4>
 
         <div class="list">
-            <a class="item item-avatar item-icon-right" ng-repeat="item in item.inputList">
+            <a class="item item-avatar item-icon-right" ng-repeat="item in item.inputTypeList">
                 <h2>{{item.name}}</h2>
                 <span class="badge badge-calm">{{item.type}}</span>
             </a>
@@ -63,7 +63,7 @@
         <h4 class="content double-padding-x">Output List</h4>
 
         <div class="list">
-            <a class="item item-avatar item-icon-right" ng-repeat="item in item.outputList">
+            <a class="item item-avatar item-icon-right" ng-repeat="item in item.outputTypeList">
                 <h2>{{item.name}}</h2>
                 <span class="badge badge-positive">{{item.type}}</span>
             </a>

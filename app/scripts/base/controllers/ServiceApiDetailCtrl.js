@@ -32,7 +32,7 @@ angular.module('Elidom.Base')
 			RestApiService.get(serviceUrl, params,
 				function(dataSet) {
 					$scope.item = dataSet.item;
-					$scope.item.inputParams = $scope.makeInputParams($scope.item.inputList);
+					$scope.item.inputParams = $scope.makeInputParams($scope.item.inputTypeList);
 				});
 		};
 
@@ -118,12 +118,10 @@ angular.module('Elidom.Base')
 		 * Replace Invoke URL 
 		 */
 		$scope.makeInvokeUrl = function(url) {
-			// FIXME 임시코드 
-			url = url.substr(url.indexOf('/'));
 			if(url[0] == '/') {
-				return RestApiService.getContextPathUrl() + url;
+				return RestApiService.getContextPathUrl() + url + '.json';
 			} else {
-				return RestApiService.getContextPathUrl() + '/' + url;
+				return RestApiService.getContextPathUrl() + '/' + url + '.json';
 			}
 		};
 
