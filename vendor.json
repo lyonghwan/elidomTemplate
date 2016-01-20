@@ -20,5 +20,7 @@
     "bower_components/react/react-dom.js",
     "bower_components/react/react-with-addons.js",
     "bower_components/ngReact/ngReact.js",
-    "bower_components/angular-bindonce/bindonce.min.js"
+    "bower_components/angular-bindonce/bindonce.min.js",
+    "lib/dataludi.angular.min.js",
+    "lib/JSXTransformer-0.13.0.js"
 ]
