@@ -28,6 +28,9 @@ angular.module('Elidom.Core')
                 '<ion-item nav-clear menu-close ui-sref="app.print">' + 
                     '<i class="icon ion-printer"></i> 프린트' + 
                 '</ion-item>' + 
+                '<ion-item nav-clear menu-close ui-sref="app.dataludi">' + 
+                    '<i class="icon ion-grid"></i> 그리드' + 
+                '</ion-item>' + 
                 '<ion-item nav-clear menu-close ui-sref="app.notice">' + 
                     '<i class="icon ion-email-unread"></i> 공지사항' + 
                 '</ion-item>' + 

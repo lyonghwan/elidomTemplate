@@ -25,15 +25,12 @@ angular.module('Elidom.Core')
 					'</a>' + 
 					'<a class="tab-item active" ui-sref="app.print" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
 						'<i class="icon ion-printer"></i>프린트' + 
-					'</a>' +					
+					'</a>' +
+					'<a class="tab-item active" ui-sref="app.file-up-down" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
+						'<i class="icon ion-paperclip"></i>파일 업로드' + 
+					'</a>' + 
 					'<a class="tab-item active" ui-sref="app.preference" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
 						'<i class="icon ion-gear-b"></i>설정' + 
-					'</a>' + 
-					'<a class="tab-item active" ui-sref="app.dataludi" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
-						'<i class="icon ion-gear-b"></i>데이터루디테스트' + 
-					'</a>' + 
-					'<a class="tab-item active" ui-sref="app.file-up-down" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
-						'<i class="icon ion-gear-b"></i>파일업다운운' + 
 					'</a>' + 
 				'</div>' + 
 			'</ion-footer-bar>'
