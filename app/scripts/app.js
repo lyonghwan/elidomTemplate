@@ -1,7 +1,7 @@
 'use strict';
 
 // 1. Core Module
-angular.module('Elidom.Core', ['ionic', 'ngCordova', 'ngResource', 'oc.lazyLoad', 'LocalStorageModule', 'ionic-datepicker', 'ionic-material', 'ionMdInput', 'chart.js', 'dataludi','ngFileUpload','ngDownload']);
+angular.module('Elidom.Core', ['ionic', 'ngCordova', 'ngResource', 'oc.lazyLoad', 'LocalStorageModule', 'ionic-datepicker', 'ionic-material', 'ionMdInput', 'chart.js', 'dataludi','ngFileUpload','ngDownload','react','pasvaz.bindonce']);
 
 // 2. Base Module
 angular.module('Elidom.Base', ['Elidom.Core']);
