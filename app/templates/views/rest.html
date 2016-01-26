@@ -1,0 +1,31 @@
+<ion-view view-title="Restful 서비스">
+
+    <ion-content ng-init="init()" class="scroll-content ionic-scroll">
+        <h4 class="content double-padding-x">Module</h4>
+
+        <div class="item item-input-inset search-line">
+            <ion-checkbox ng-repeat="module in modules" ng-model="module.checked" ng-checked="module.checked" ng-click="searchByModule(module)">{{ module.text }}</ion-checkbox>
+        </div>
+
+        <div class="loader" ng-if="searching">
+            <ion-spinner></ion-spinner>
+        </div>
+
+        <div class="search-result inset-shadow" ng-if="!searching && totalCount >= 0">검색 결과 : <strong>총 {{totalCount | number}} 건</strong></div>
+
+        <div class="list">
+            <a class="item item-avatar item-icon-right" ng-repeat="item in items" ng-click="goDetail(item)">
+                <p>{{item.id}}</p>
+                <h2>{{item.name}}</h2>
+                <p>{{item.description}}</p>
+                <span class="badge badge-assertive">{{item.module}}</span>
+            </a>
+        </div>
+
+        <ion-infinite-scroll ng-if="hasMoreItems" on-infinite="loadMore()" distance="20%"/>
+
+    </ion-content>
+
+    <elidom-footer-bar></elidom-footer-bar>
+
+</ion-view>

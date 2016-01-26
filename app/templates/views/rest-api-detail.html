@@ -1,0 +1,75 @@
+<ion-view view-title="Restful 서비스 API 상세">
+
+    <ion-content ng-init="init()" class="padding">
+        <div class="list"> 
+            <label class="item item-input item-floating-label">
+                <span class="input-label">API 명</span>
+                <input type="text" placeholder="API 명" ng-model="item.name">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">API 설명</span>
+                <input type="text" placeholder="API 설명" ng-model="item.description">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Method</span>
+                <input type="text" placeholder="Method" ng-model="item.httpMethod">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Http URL</span>
+                <input type="text" placeholder="Http URL" ng-model="item.url">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">WebSocket URL</span>
+                <input type="text" placeholder="WebSocket URL" ng-model="item.wsUrl">
+            </label>
+            
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Parameter</span>
+                <textarea placeholder="Input" ng-model="item.inputParams" rows="4"></textarea>
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Return</span>
+                <textarea placeholder="Return" ng-model="item.outputParams" rows="4"></textarea>
+            </label>            
+
+            <div class="loader" ng-if="processing">
+                <ion-spinner></ion-spinner>
+            </div>
+        </div>
+        
+        <h4 class="content double-padding-x">Invoke</h4>
+
+        <div class="button-bar">
+            <button class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="invokeHttp()">Http</button>
+            <!--button class="button button-block button-positive ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="invokeWebSocket()">Web Socket</button>
+            <button class="button button-block button-assertive ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="invokeStomp()">Stomp</button-->
+        </div>
+
+
+        <h4 class="content double-padding-x">Input List</h4>
+
+        <div class="list">
+            <a class="item item-avatar item-icon-right" ng-repeat="item in item.inputTypeList">
+                <h2>{{item.name}}</h2>
+                <span class="badge badge-calm">{{item.type}}</span>
+            </a>
+        </div>
+
+        <h4 class="content double-padding-x">Output List</h4>
+
+        <div class="list">
+            <a class="item item-avatar item-icon-right" ng-repeat="item in item.outputTypeList">
+                <h2>{{item.name}}</h2>
+                <span class="badge badge-positive">{{item.type}}</span>
+            </a>
+        </div>
+    </ion-content>    
+
+    <elidom-footer-bar></elidom-footer-bar>
+    
+</ion-view>

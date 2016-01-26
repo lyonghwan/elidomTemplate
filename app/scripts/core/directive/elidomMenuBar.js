@@ -16,6 +16,9 @@ angular.module('Elidom.Core')
                 '<ion-item nav-clear menu-close ui-sref="app.home">' + 
                     '<i class="icon ion-home"></i> 홈' + 
                 '</ion-item>' + 
+                '<ion-item nav-clear menu-close ui-sref="app.rest">' + 
+                    '<i class="icon ion-ios-briefcase"></i> REST' + 
+                '</ion-item>' +                 
                 '<ion-item nav-clear menu-close ui-sref="app.service">' + 
                     '<i class="icon ion-speakerphone"></i> 서비스' + 
                 '</ion-item>' + 

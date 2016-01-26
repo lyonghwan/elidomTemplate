@@ -81,6 +81,38 @@ angular.module('Elidom.Base')
         }
       })
 
+      .state('app.rest', {
+        url: '/rest',
+        views: {
+          'viewContent': {
+            templateUrl: 'templates/views/rest.html',
+            controller: 'RestCtrl'
+          }
+        }
+      })
+
+      .state('app.rest-detail', {
+        url: '/rest-detail',
+        params : { id : '' },
+        views: {
+          'viewContent': {
+            templateUrl: 'templates/views/rest-detail.html',
+            controller: 'RestDetailCtrl'
+          }
+        }
+      })
+
+      .state('app.rest-api-detail', {
+        url: '/rest-api-detail',
+        params : { id : '' },
+        views: {
+          'viewContent': {
+            templateUrl: 'templates/views/rest-api-detail.html',
+            controller: 'RestApiDetailCtrl'
+          }
+        }
+      })      
+
       .state('app.dataludi', {
         url: '/dataludi',
         views: {

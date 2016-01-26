@@ -17,6 +17,9 @@ angular.module('Elidom.Core')
 					'<a class="tab-item active" ui-sref="app.home" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
 						'<i class="icon ion-home"></i>홈' +
 					'</a>' +
+					'<a class="tab-item active" ui-sref="app.rest" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
+						'<i class="icon ion-ios-briefcase"></i>REST' +
+					'</a>' +					
 					'<a class="tab-item active" ui-sref="app.service" ui-sref-active="active" ui-sref-opts="{reload : true}">' +
 						'<i class="icon ion-speakerphone"></i>서비스' +
 					'</a>' +
