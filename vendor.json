@@ -15,7 +15,6 @@
     "bower_components/sockjs/sockjs.js",
     "bower_components/stomp-websocket/lib/stomp.js",
     "bower_components/ng-file-upload/ng-file-upload-all.js",
-    "bower_components/ng-download/ng-download.js",
     "bower_components/react/react.js",
     "bower_components/react/react-dom.js",
     "bower_components/react/react-with-addons.js",
