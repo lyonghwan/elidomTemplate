@@ -156,7 +156,7 @@ angular.module('Elidom.Base')
 
 			if(false !== params) {
 				$scope.item.outputParams = '';
-				var method = item.method;
+				var method = item.httpMethod;
 				var url = $scope.makeInvokeUrl(item.url);
 				
 				if(method == 'POST') {

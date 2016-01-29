@@ -123,7 +123,7 @@ angular.module('Elidom.Base')
 
 			if(false !== params) {
 				$scope.item.outputParams = '';
-				var method = item.method;
+				var method = item.httpMethod;
 				var url = RestApiService.makeFullUrl(RestApiService.getContextPathUrl(), item.url);
 				
 				if(method == 'POST') {

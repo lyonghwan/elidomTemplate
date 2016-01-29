@@ -12,13 +12,13 @@ angular.module('Elidom.Core')
       'fileName' : 'Nice.xlsx'
     };
 
-    $scope.urlToPublicFile = 'http://192.168.35.227:9001/downlaod';
+    $scope.urlToPublicFile = 'http://localhost:9002/rest/menus/export/xls';
 
     $scope.uploadFiles = function (files) {
         // $scope.files = files;
         if (files && files.length) {
             Upload.upload({
-                url: 'http://192.168.35.227:9001/upload',
+                url: 'http://192.168.35.227:9002/upload',
                 data: {
                     file: files
                 },
