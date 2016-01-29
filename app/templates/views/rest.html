@@ -15,9 +15,9 @@
 
         <div class="list">
             <a class="item item-avatar item-icon-right" ng-repeat="item in items" ng-click="goDetail(item)">
+                <h2>{{item.description}}</h2>
+                <p>{{item.name}}</p>
                 <p>{{item.id}}</p>
-                <h2>{{item.name}}</h2>
-                <p>{{item.description}}</p>
                 <span class="badge badge-assertive">{{item.module}}</span>
             </a>
         </div>

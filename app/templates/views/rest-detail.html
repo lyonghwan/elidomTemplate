@@ -1,21 +1,21 @@
 <ion-view view-title="Restful 서비스 상세">
 
     <ion-content ng-init="init()" class="padding">
-        <div class="list"> 
-            <label class="item item-input item-floating-label">
-                <span class="input-label">서비스 명</span>
-                <input type="text" placeholder="서비스 명" ng-model="item.name">
-            </label>
-
+        <div class="list">
             <label class="item item-input item-floating-label">
                 <span class="input-label">서비스 설명</span>
                 <input type="text" placeholder="서비스 설명" ng-model="item.description">
             </label>
 
             <label class="item item-input item-floating-label">
+                <span class="input-label">Basic Service URL</span>
+                <input type="text" placeholder="Basic Service URL" ng-model="item.name">
+            </label>
+
+            <!--label class="item item-input item-floating-label">
                 <span class="input-label">서비스 ID</span>
                 <input type="text" placeholder="서비스 ID" ng-model="item.id">
-            </label>
+            </label-->
 
             <label class="item item-input item-floating-label">
                 <span class="input-label">서비스 클래스</span>
@@ -32,8 +32,8 @@
         <div class="list">
             <a class="item item-avatar item-icon-right" ng-repeat="item in item.apiList" ng-click="goApiDetail(item)">
                 <h2>{{item.name}}</h2>
-                <p>{{item.description}}</p>
                 <p>{{item.url}}</p>
+                <p>{{item.description}}</p>
                 <span class="badge badge-{{item.httpMethod | method_color}}">{{item.httpMethod}}</span>
             </a>
         </div>

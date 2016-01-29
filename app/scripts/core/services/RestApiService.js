@@ -194,12 +194,14 @@ angular.module('Elidom.Core')
       invokeSuccess : function(dataSet, callback, badcallback) {
         var me = this;
         // 1. good
-        if(dataSet.success) {
+        /*if(dataSet.success) {
           me.handleSuccess(dataSet, callback);
         // 2. bad
         } else {
           me.handleFailure(dataSet, badcallback);
-        }
+        }*/
+
+        me.handleSuccess(dataSet, callback);
       },
 
       /**

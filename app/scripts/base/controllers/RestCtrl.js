@@ -20,14 +20,7 @@ angular.module('Elidom.Base')
         /**
          * 검색 조건
          */
-        $scope.searchData = {
-            queryList : [{
-                name : 'module',
-                type : 'string',
-                operator : 'eq',
-                value : ''
-            }]
-        };        
+        $scope.searchData = 'core';        
         /**
          * 검색 진행 중 여부 - For Spinner show / hide
          */
@@ -39,11 +32,11 @@ angular.module('Elidom.Base')
         /**
          * get module list url
          */
-        var moduleListUrl = '/module/moduleNames.json';        
+        var moduleListUrl = '/rest/modules';        
         /**
          * service url
          */
-        var serviceUrl = '/rest/list.json';
+        var serviceUrl = '/rest';
         /**
          * Module List
          */
@@ -53,12 +46,14 @@ angular.module('Elidom.Base')
          * Module List 조회 
          */
         $scope.getModuleList = function() {
-            RestApiService.get(moduleListUrl, null, function(dataSet) {
-                if(dataSet.items) {
+            var url = RestApiService.getContextPathUrl() + moduleListUrl;
+
+            RestApiService.get(url, null, function(items) {
+                if(items) {
                     $scope.modules = [];
-                    for(var i = 0 ; i < dataSet.items.length ; i++) {
+                    for(var i = 0 ; i < items.length ; i++) {
                         $scope.modules.push({
-                            text : dataSet.items[i],
+                            text : items[i],
                             checked : false
                         });
                     }
@@ -71,8 +66,10 @@ angular.module('Elidom.Base')
          */
         $scope.search = function() {
             $scope.searching = true;
-            RestApiService.searchBypost(serviceUrl, $scope.searchData, function(dataSet) {
-                $scope.items = dataSet.items;
+            var url = RestApiService.getContextPathUrl() + serviceUrl;
+
+            RestApiService.get(url, { module : $scope.searchData }, function(dataSet) {
+                $scope.items = dataSet;
             });
         };
 
@@ -101,7 +98,7 @@ angular.module('Elidom.Base')
                 value = '';
             }
 
-            $scope.searchData.queryList[0].value = item.text;
+            $scope.searchData = item.text;
             $scope.search();
         };
 

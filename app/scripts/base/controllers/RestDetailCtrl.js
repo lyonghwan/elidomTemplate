@@ -16,7 +16,7 @@ angular.module('Elidom.Base')
 		/**
 		 * 서비스 상세 조회 URL
 		 */
-		var serviceUrl = '/rest/findService.json';
+		var serviceUrl = '/rest/service';
 		/**
 		 * 실행 중 여부 - For Spinner
 		 */
@@ -26,12 +26,13 @@ angular.module('Elidom.Base')
 		 * 서비스 찾기 
 		 */
 		$scope.findServiceDetail = function() {
-			var params = {id : $stateParams.id };
+			var params = { id : $stateParams.id };
+			var url = RestApiService.getContextPathUrl() + serviceUrl;
 			$scope.processing = true;
 
-			RestApiService.get(serviceUrl, params,
+			RestApiService.get(url, params,
 				function(dataSet) {
-					$scope.item = dataSet.item;
+					$scope.item = dataSet;
 				});
 		};
 
