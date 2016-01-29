@@ -29,7 +29,9 @@ angular.module('Elidom.Core')
 
                     e.stopPropagation();
                     e.preventDefault();
+                    
                     url = RestApiService.makeFullUrl(RestApiService.getContextPathUrl(), url);
+
                     form = angular.element('<form id="ngDownloadForm" style="display:none" method="GET" action="' + url + '"></form>');
 
                     if (angular.isObject($scope.params)) {
