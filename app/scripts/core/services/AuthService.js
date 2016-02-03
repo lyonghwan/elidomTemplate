@@ -4,10 +4,11 @@
  * @ngdoc service
  * @name core.services.AuthService
  * @description 인증 서비스
- *  TODO Token Based 인증으로 수정 필요
  */
 angular.module('Elidom.Core')
   .factory('AuthService', function($rootScope, $http, $ionicPopup, localStorageService, API_ENDPOINT) {
+
+    var authenticated = false;
 
     return {
 
@@ -23,9 +24,9 @@ angular.module('Elidom.Core')
        */
       getSigininEndpoint : function() {
         if(API_ENDPOINT.mode == 'PRODUCTION') {
-          return 'https://newclip.nicednb.com:458/mobile/login/clipLogin.json';
+          return 'https' + '://' + API_ENDPOINT.host + ':' + API_ENDPOINT.port + API_ENDPOINT.path;
         } else {
-          return this.getEndpoint() + '/login'; 
+          return this.getEndpoint() + 'login';
         }
       },
       
@@ -69,66 +70,43 @@ angular.module('Elidom.Core')
        * signin
        */
       signin : function(userId, passwd, autosignin, goodCallback, badCallback) {
-        var me = this;
-        var url = this.getSigininEndpoint();
-        //var params = "username=" + userId + "&password=" + passwd;
-        var params = "username=" + userId;
-        //var params = { email : userId, password: passwd };
-        $http.defaults.headers.common['Accept'] = '*/*';
-        $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-        //$http.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8';
+          var me = this;
+          var authParams = 'email=' + encodeURIComponent(userId) + '&password=' + encodeURIComponent(passwd);
+          $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+          $http.defaults.headers.common['Accept'] = '*/*';
+          var url = me.getSigininEndpoint();
 
-        $http.post(url, params).
-          success(function(data, status, headers, config) {
-            if(data.success) {
-              if(localStorageService.isSupported) {
-                localStorageService.set('user_id', userId);
-                localStorageService.set('autosignin', autosignin);
+          $http.post(url, authParams).
+            success(function(data) {
+              if (data.name) {
+                me.authenticated = true;
+              } else {
+                me.authenticated = false;
               }
-
-              if(goodCallback) {
-                goodCallback(data);
-              }
-            } else {
-              if(badCallback) {
-                badCallback(data);
-              }
-            }
-          })
-          .error(function(data, status, headers, config) {
-            me.handleError(data, status, headers, config);
-          });
+            
+              goodCallback && goodCallback(me.authenticated);
+            
+            }).error(function(data, status, headers, config) {
+              me.authenticated = false;
+              badCallback && badCallback(me.authenticated);
+            });
       },
 
       /**
        * signout
        */
       signout : function(goodCallback, badCallback) {
-        var url = this.getEndpoint() + '/logout.json';
         $http.defaults.headers.common['Accept'] = '*/*';
         $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+        var me = this;
 
-        $http.post(url, null).
+        $http.post('http://localhost:9003/logout', null).
           success(function(data, status, headers, config) {
-            if(data.success) {
-              if(localStorageService.isSupported) {
-                localStorageService.remove('user_id');
-                localStorageService.remove('autosignin');
-              }
-
-              if(goodCallback) {
-                goodCallback(data);
-              }
-            } else {
-              if(badCallback) {
-                badCallback(data);
-              }
-            }
+            me.authenticated = false;
+            goodCallback && goodCallback(data);
           })
           .error(function(data, status, headers, config) {
-            if(badCallback) {
-              badCallback(data);
-            }
+            badCallback && badCallback(data);
           });
       },
 
@@ -136,8 +114,9 @@ angular.module('Elidom.Core')
        * signin 상태인지 체크 
        */
       isSigned : function() {
-        var userId = localStorageService.get('user_id');
-        return (userId === null || userId === '') ? false : true;
+        //var userId = localStorageService.get('user_id');
+        //return (userId === null || userId === '') ? false : true;
+        return this.authenticated;
       }
     };
   });
