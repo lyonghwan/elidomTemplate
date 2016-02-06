@@ -36,7 +36,7 @@ angular.module('Elidom.Base')
         /**
          * service url
          */
-        var serviceUrl = '/rest';
+        var serviceUrl = '/rest/rests';
         /**
          * Module List
          */
